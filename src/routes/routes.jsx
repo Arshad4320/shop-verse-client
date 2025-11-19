@@ -6,6 +6,8 @@ import About from "../pages/About";
 import Products from "../pages/Products";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MainLayout from "../Root/MainLayout";
+import Register from "./../pages/Register";
+import Login from "../pages/Login";
 
 const routes = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const routes = createBrowserRouter([
         element: <DashboardLayout />,
       },
     ],
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
