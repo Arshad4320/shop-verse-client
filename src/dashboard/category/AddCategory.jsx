@@ -10,61 +10,64 @@ const AddCategory = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
+    console.log("Category Data:", data);
   };
 
   const inputClass =
-    "w-full border border-accent p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none";
+    "w-full border border-accent p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none text-text";
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-bg px-4">
+    <div className="min-h-screen flex justify-center items-start bg-bg px-4 pt-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-card shadow-lg rounded-xl p-6 w-full max-w-xl"
       >
         <h2 className="text-3xl font-bold text-center mb-6 text-primary">
-          Login
+          Add Category
         </h2>
 
-        {/* Email */}
+        {/* Category Name */}
         <div className="mb-4">
-          <label className="block font-semibold mb-1 text-text">Email</label>
+          <label className="block font-semibold mb-1 text-text">Name</label>
           <input
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Invalid email format",
-              },
-            })}
+            {...register("name", { required: "Category name is required" })}
             className={inputClass}
-            placeholder="Enter your email"
+            placeholder="Enter category name"
           />
-          {errors.email && (
-            <p className="text-danger text-sm mt-1">{errors.email.message}</p>
+          {errors.name && (
+            <p className="text-danger text-sm mt-1">{errors.name.message}</p>
           )}
         </div>
 
-        {/* Password */}
+        {/* Description */}
         <div className="mb-4">
-          <label className="block font-semibold mb-1 text-text">Password</label>
-          <input
-            type="password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
+          <label className="block font-semibold mb-1 text-text">
+            Description
+          </label>
+          <textarea
+            {...register("description", {
+              required: "Description is required",
             })}
-            className={inputClass}
-            placeholder="Enter your password"
+            className={inputClass + " h-24 resize-none"}
+            placeholder="Enter category description"
           />
-          {errors.password && (
+          {errors.description && (
             <p className="text-danger text-sm mt-1">
-              {errors.password.message}
+              {errors.description.message}
             </p>
           )}
+        </div>
+
+        {/* Image URL */}
+        <div className="mb-4">
+          <label className="block font-semibold mb-1 text-text">
+            Image URL
+          </label>
+          <input
+            {...register("image")}
+            className={inputClass}
+            placeholder="Enter image URL (optional)"
+          />
         </div>
 
         {/* Submit Button */}
@@ -72,16 +75,16 @@ const AddCategory = () => {
           type="submit"
           className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition-all"
         >
-          Login
+          Add Category
         </button>
 
         <p className="text-center mt-4 text-sm text-text">
-          Don’t have an account?{" "}
+          View all categories?{" "}
           <Link
-            to="/register"
+            to="/dashboard/category"
             className="text-secondary font-semibold underline hover:text-primary"
           >
-            Register
+            Category List
           </Link>
         </p>
       </form>
