@@ -14,34 +14,34 @@ const Register = () => {
   };
 
   const inputClass =
-    "w-full border border-green-300 p-2 rounded transition-all focus:border-green-500 focus:ring-2 focus:ring-green-300 focus:outline-none";
+    "w-full border border-accent p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none";
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4">
+    <div className="min-h-screen flex justify-center items-center bg-bg px-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-md rounded-lg p-6 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4"
+        className="bg-card shadow-md rounded-lg p-6 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4"
       >
-        <h2 className="text-3xl font-bold col-span-1 md:col-span-2 text-center mb-2">
-          Create User
+        <h2 className="text-3xl font-bold col-span-1 md:col-span-2 text-center mb-2 text-primary">
+          Register
         </h2>
 
         {/* Name */}
         <div>
-          <label className="block font-semibold mb-1">Name</label>
+          <label className="block font-semibold mb-1 text-text">Name</label>
           <input
             {...register("name", { required: "Name is required" })}
             className={inputClass}
             placeholder="Enter your name"
           />
           {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
+            <p className="text-danger text-sm">{errors.name.message}</p>
           )}
         </div>
 
         {/* Email */}
         <div>
-          <label className="block font-semibold mb-1">Email</label>
+          <label className="block font-semibold mb-1 text-text">Email</label>
           <input
             {...register("email", {
               required: "Email is required",
@@ -54,13 +54,13 @@ const Register = () => {
             placeholder="Enter your email"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
+            <p className="text-danger text-sm">{errors.email.message}</p>
           )}
         </div>
 
         {/* Password */}
         <div>
-          <label className="block font-semibold mb-1">Password</label>
+          <label className="block font-semibold mb-1 text-text">Password</label>
           <input
             type="password"
             {...register("password", {
@@ -74,13 +74,13 @@ const Register = () => {
             placeholder="Enter your password"
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password.message}</p>
+            <p className="text-danger text-sm">{errors.password.message}</p>
           )}
         </div>
 
         {/* Phone */}
         <div>
-          <label className="block font-semibold mb-1">Phone</label>
+          <label className="block font-semibold mb-1 text-text">Phone</label>
           <input
             {...register("address.phone")}
             className={inputClass}
@@ -90,7 +90,7 @@ const Register = () => {
 
         {/* Upozilla */}
         <div>
-          <label className="block font-semibold mb-1">Upozilla</label>
+          <label className="block font-semibold mb-1 text-text">Upozilla</label>
           <input
             {...register("address.upozilla")}
             className={inputClass}
@@ -100,7 +100,7 @@ const Register = () => {
 
         {/* City */}
         <div>
-          <label className="block font-semibold mb-1">City</label>
+          <label className="block font-semibold mb-1 text-text">City</label>
           <input
             {...register("address.city")}
             className={inputClass}
@@ -110,7 +110,9 @@ const Register = () => {
 
         {/* User Type */}
         <div>
-          <label className="block font-semibold mb-1">User Type</label>
+          <label className="block font-semibold mb-1 text-text">
+            User Type
+          </label>
           <select {...register("userType")} className={inputClass}>
             <option value="User">User</option>
             <option value="Admin">Admin</option>
@@ -121,14 +123,17 @@ const Register = () => {
         <div className="col-span-1 md:col-span-2 mt-2">
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition"
+            className="w-full bg-primary text-white py-2 rounded hover:bg-secondary transition"
           >
             Register
           </button>
 
-          <p className="text-center mt-3 text-sm">
+          <p className="text-center mt-3 text-sm text-text">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 font-semibold underline">
+            <Link
+              to="/login"
+              className="text-secondary font-semibold underline hover:text-primary"
+            >
               Login
             </Link>
           </p>

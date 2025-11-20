@@ -10,28 +10,28 @@ const Navbar = () => {
       <Link
         onClick={() => setIsOpen(false)}
         to="/"
-        className="hover:text-green-600 text-green-500"
+        className="text-primary hover:text-secondary"
       >
         Home
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/about"
-        className="hover:text-green-600 text-green-500"
+        className="text-primary hover:text-secondary"
       >
         About
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/products"
-        className="hover:text-green-600 text-green-500"
+        className="text-primary hover:text-secondary"
       >
         Products
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/dashboard"
-        className="hover:text-green-600 text-green-500"
+        className="text-primary hover:text-secondary"
       >
         Dashboard
       </Link>
@@ -39,25 +39,25 @@ const Navbar = () => {
       <Link
         onClick={() => setIsOpen(false)}
         to="/login"
-        className="hover:text-green-600 text-green-500"
+        className="text-primary hover:text-secondary"
       >
         Login
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/register"
-        className="hover:text-green-600 text-green-500"
+        className="text-primary hover:text-secondary"
       >
         Register
       </Link>
-      <button className="bg-red-600 px-3 py-1 w-24 rounded hover:bg-red-700">
+      <button className="bg-danger px-3 text-white py-1 w-24 rounded hover:bg-danger/90">
         Logout
       </button>
     </>
   );
 
   return (
-    <nav className="bg-white fixed w-full top-0 left-0 z-50 shadow">
+    <nav className=" fixed w-full top-0 left-0 z-50 shadow text-lg">
       <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center h-16">
         {/* Logo */}
         <div className="text-xl font-bold">
@@ -70,14 +70,14 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center text-white">
           <Hamburger toggled={isOpen} toggle={setIsOpen} />
         </div>
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-white overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`md:hidden bg-primary overflow-hidden transition-all duration-300 ease-in-out ${
           isOpen ? "max-h-96 py-4" : "max-h-0"
         }`}
       >

@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
-const Login = () => {
+const AddCategory = () => {
   const {
     register,
     handleSubmit,
@@ -20,7 +20,7 @@ const Login = () => {
     <div className="min-h-screen flex justify-center items-center bg-bg px-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-card shadow-lg rounded-xl p-6 w-full max-w-md"
+        className="bg-card shadow-lg rounded-xl p-6 w-full max-w-xl"
       >
         <h2 className="text-3xl font-bold text-center mb-6 text-primary">
           Login
@@ -89,4 +89,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AddCategory;
