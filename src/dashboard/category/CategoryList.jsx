@@ -1,9 +1,34 @@
-import React from "react";
-import { useGetCategoryQuery } from "../../redux/features/category/categoryApi";
+import React, { useState } from "react";
+import {
+  useDeleteCategoryMutation,
+  useGetCategoryQuery,
+} from "../../redux/features/category/categoryApi";
+import { Link } from "react-router";
+import DeleteModal from "../../components/DeleteModal";
+import { toast } from "react-toastify";
 
 const CategoryList = () => {
   const { data } = useGetCategoryQuery();
-  console.log(data);
+  const [deleteCategory] = useDeleteCategoryMutation();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(null);
+
+  const openModal = (item) => {
+    setDeleteItem(item);
+    setIsOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      const result = await deleteCategory(deleteItem).unwrap();
+      toast.success(result.message);
+      setIsOpen(false);
+    } catch (err) {
+      toast.error(err?.data?.message || "Something went wrong");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-8">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">
@@ -12,7 +37,7 @@ const CategoryList = () => {
 
       <div className="overflow-x-auto bg-white shadow rounded-lg">
         <table className="min-w-full text-left">
-          {/* Table Head */}
+          {/* Head */}
           <thead className="bg-gray-200">
             <tr>
               <th className="px-4 py-3 text-sm font-medium text-gray-700">
@@ -30,10 +55,10 @@ const CategoryList = () => {
             </tr>
           </thead>
 
-          {/* Table Body */}
-          {data?.data?.map((item) => (
-            <tbody key={item._id}>
-              <tr className="border-b hover:bg-gray-50">
+          {/* Body */}
+          <tbody>
+            {data?.data?.map((item) => (
+              <tr key={item._id} className="border-b hover:bg-gray-50">
                 <td className="px-4 py-1 font-medium text-gray-900">
                   {item.name}
                 </td>
@@ -51,18 +76,32 @@ const CategoryList = () => {
                 </td>
 
                 <td className="px-4 py-2 flex justify-center items-center gap-2">
-                  <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
-                    Update
-                  </button>
-                  <button className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700">
+                  <Link to={`/dashboard/edit-category/${item._id}`}>
+                    <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
+                      Update
+                    </button>
+                  </Link>
+
+                  <button
+                    onClick={() => openModal(item._id)}
+                    className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+                  >
                     Delete
                   </button>
                 </td>
               </tr>
-            </tbody>
-          ))}
+            ))}
+          </tbody>
         </table>
       </div>
+
+      <DeleteModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={confirmDelete}
+        title="Delete Confirmation"
+        message={`Are you sure you want to delete "${deleteItem?.name}"?`}
+      />
     </div>
   );
 };

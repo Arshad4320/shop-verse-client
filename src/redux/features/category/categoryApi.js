@@ -18,7 +18,7 @@ export const categoryApi = apiSlice.injectEndpoints({
       query: (id) => `/category/${id}`,
     }),
     updateCategory: builder.mutation({
-      query: ({ data, id }) => ({
+      query: ({ id, data }) => ({
         url: `/category-update/${id}`,
         method: "PATCH",
         body: data,
