@@ -1,16 +1,36 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { useCreateCategoryMutation } from "../../redux/features/category/categoryApi";
+import { toast } from "react-toastify";
 
 const AddCategory = () => {
+  const [createCategory, { isLoading, isSuccess, isError }] =
+    useCreateCategoryMutation();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Category Data:", data);
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    if (data.image && data.image[0]) {
+      formData.append("image", data.image[0]);
+    }
+    try {
+      const result = await createCategory(formData).unwrap();
+      console.log(result);
+      toast.success(result.message);
+      reset();
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.data?.message || "Failed to create category");
+    }
   };
 
   const inputClass =
@@ -60,14 +80,8 @@ const AddCategory = () => {
 
         {/* Image URL */}
         <div className="mb-4">
-          <label className="block font-semibold mb-1 text-text">
-            Image URL
-          </label>
-          <input
-            {...register("image")}
-            className={inputClass}
-            placeholder="Enter image URL (optional)"
-          />
+          <label className="block font-semibold mb-1 text-text">Image</label>
+          <input {...register("image")} className={inputClass} type="file" />
         </div>
 
         {/* Submit Button */}
