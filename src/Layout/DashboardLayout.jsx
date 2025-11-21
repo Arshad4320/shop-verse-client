@@ -92,7 +92,7 @@ const DashboardLayout = ({ children }) => {
                 <li>
                   <Link
                     onClick={() => setOpen(false)}
-                    to="/dashboard/products/add"
+                    to="/dashboard/add-product"
                     className="block px-3 py-1 rounded hover:bg-secondary/20"
                   >
                     Add Product

@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 const CategoryList = () => {
   const { data } = useGetCategoryQuery();
-  const [deleteCategory] = useDeleteCategoryMutation();
+  const [deleteCategory, { isLoading }] = useDeleteCategoryMutation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
@@ -29,6 +29,14 @@ const CategoryList = () => {
     }
   };
 
+  if (!data?.data || data?.data.length === 0) {
+    return (
+      <Link to="/dashboard/add-category" className="text-primary underline">
+        Back To Add Category
+      </Link>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-8">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">
@@ -36,46 +44,46 @@ const CategoryList = () => {
       </h2>
 
       <div className="overflow-x-auto bg-white shadow rounded-lg">
-        <table className="min-w-full text-left">
-          {/* Head */}
-          <thead className="bg-gray-200">
+        <table className="min-w-full  border border-gray-300 text-left">
+          {/* Table Head */}
+          <thead className="bg-gray-200 text-center">
             <tr>
-              <th className="px-4 py-3 text-sm font-medium text-gray-700">
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Name
               </th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-700">
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Description
               </th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-700">
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Image
               </th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-700 text-center">
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300 text-center">
                 Action
               </th>
             </tr>
           </thead>
 
-          {/* Body */}
+          {/* Table Body */}
           <tbody>
-            {data?.data?.map((item) => (
-              <tr key={item._id} className="border-b hover:bg-gray-50">
-                <td className="px-4 py-1 font-medium text-gray-900">
+            {data.data.map((item) => (
+              <tr
+                key={item._id}
+                className="hover:bg-gray-50 border border-gray-300 text-center"
+              >
+                <td className="px-4 py-2 text-gray-900 border border-gray-300">
                   {item.name}
                 </td>
-
-                <td className="px-4 py-1 text-gray-600 text-sm">
+                <td className="px-4 py-2 text-gray-600 text-sm border border-gray-300">
                   {item.description}
                 </td>
-
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 border border-gray-300">
                   <img
                     src={item.image}
                     alt="category"
                     className="h-10 w-10 rounded object-cover border"
                   />
                 </td>
-
-                <td className="px-4 py-2 flex justify-center items-center gap-2">
+                <td className="px-4 py-2 flex justify-center items-center gap-2 ">
                   <Link to={`/dashboard/edit-category/${item._id}`}>
                     <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
                       Update
