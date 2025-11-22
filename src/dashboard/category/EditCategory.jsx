@@ -85,7 +85,7 @@ const EditCategory = () => {
 
         <button
           type="submit"
-          className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition-all"
+          className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-all"
         >
           Update Category
         </button>
@@ -94,7 +94,7 @@ const EditCategory = () => {
           View all categories?{" "}
           <Link
             to="/dashboard/category"
-            className="text-secondary font-semibold underline hover:text-primary"
+            className=" font-semibold underline text-primary"
           >
             Category List
           </Link>

@@ -14,7 +14,7 @@ const Login = () => {
   };
 
   const inputClass =
-    "w-full border border-accent p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none";
+    "w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none";
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-bg px-4">
@@ -70,17 +70,14 @@ const Login = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition-all"
+          className="w-full bg-primary hover:bg-purple-700 text-white py-2 rounded-lg font-semibold  transition-all"
         >
           Login
         </button>
 
         <p className="text-center mt-4 text-sm text-text">
           Don’t have an account?{" "}
-          <Link
-            to="/register"
-            className="text-secondary font-semibold underline hover:text-primary"
-          >
+          <Link to="/register" className="text-primary font-semibold underline">
             Register
           </Link>
         </p>

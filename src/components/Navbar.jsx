@@ -10,28 +10,28 @@ const Navbar = () => {
       <Link
         onClick={() => setIsOpen(false)}
         to="/"
-        className="text-primary hover:text-secondary"
+        className="text-text hover:text-primary"
       >
         Home
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/about"
-        className="text-primary hover:text-secondary"
+        className="text-text hover:text-primary"
       >
         About
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/products"
-        className="text-primary hover:text-secondary"
+        className="text-text hover:text-primary"
       >
         Products
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/dashboard"
-        className="text-primary hover:text-secondary"
+        className="text-text hover:text-primary"
       >
         Dashboard
       </Link>
@@ -39,14 +39,14 @@ const Navbar = () => {
       <Link
         onClick={() => setIsOpen(false)}
         to="/login"
-        className="text-primary hover:text-secondary"
+        className="text-text hover:text-primary"
       >
         Login
       </Link>
       <Link
         onClick={() => setIsOpen(false)}
         to="/register"
-        className="text-primary hover:text-secondary"
+        className="text-text hover:text-primary"
       >
         Register
       </Link>
@@ -57,7 +57,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className=" fixed w-full top-0 left-0 z-60 shadow text-lg bg-white">
+    <nav className=" fixed w-full top-0 left-0 z-60 shadow text-md font-medium bg-white">
       <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center h-16">
         {/* Logo */}
         <div className="text-xl font-bold">

@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
   const { name, description, price, image, quantity } = product;
 
   return (
-    <div className="bg-white shadow-md rounded-xl overflow-hidden cursor-pointer    duration-300 h-[420px] md:h-[480px] flex flex-col">
+    <div className="bg-white shadow-md rounded-xl overflow-hidden cursor-pointer    duration-300 h-[420px] md:h-[450px] flex flex-col">
       {/* Image */}
       <div className="w-full h-56 md:h-64 overflow-hidden">
         <img
@@ -19,24 +19,17 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="text-md font-bold text-text">{name}</h3>
-        <p className="text-md text-gray-500 mt-1 line-clamp-3 md:line-clamp-4 flex-1">
-          {description}
-        </p>
+      <div className="p-4 ">
+        <h3 className="text-sm font-bold text-text text-center">{name}</h3>
 
         {/* Price & Quantity */}
-        <div className="flex justify-between mt-4">
-          <span className="flex gap-1 items-center text-success font-semibold">
-            <FaBangladeshiTakaSign /> {price}
-          </span>
-          <span className="flex gap-1 items-center text-warning font-medium">
-            <MdOutlineProductionQuantityLimits className="text-lg" /> {quantity}
-          </span>
-        </div>
+
+        <span className="flex gap-1 justify-center space-y-2 items-center text-text hover hover:text-primary font-bold">
+          <FaBangladeshiTakaSign /> {price}
+        </span>
 
         {/* Buttons */}
-        <div className="mt-4 flex gap-3 flex-col lg:flex-row md:justify-center items-center">
+        <div className="mt-2   space-y-2">
           <Button text={"Details"} />
           <SecondaryButton text={"Add To Cart"} />
         </div>

@@ -140,7 +140,7 @@ const EditProduct = () => {
         {/* Submit */}
         <button
           type="submit"
-          className="w-full md:col-span-2 bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition-all"
+          className="w-full md:col-span-2 bg-primary text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-all"
         >
           Edit Product
         </button>
@@ -150,7 +150,7 @@ const EditProduct = () => {
           View all Products?{" "}
           <Link
             to="/dashboard/products"
-            className="text-blue-600 font-semibold underline hover:text-primary"
+            className="font-semibold underline text-primary"
           >
             Product List
           </Link>

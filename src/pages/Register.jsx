@@ -14,7 +14,7 @@ const Register = () => {
   };
 
   const inputClass =
-    "w-full border border-accent p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none";
+    "w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none";
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-bg px-4">
@@ -123,7 +123,7 @@ const Register = () => {
         <div className="col-span-1 md:col-span-2 mt-2">
           <button
             type="submit"
-            className="w-full bg-primary text-white py-2 rounded hover:bg-secondary transition"
+            className="w-full bg-primary text-white py-2 rounded hover:bg-purple-700 transition"
           >
             Register
           </button>
@@ -132,7 +132,7 @@ const Register = () => {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-secondary font-semibold underline hover:text-primary"
+              className="text-primary font-semibold underline   "
             >
               Login
             </Link>

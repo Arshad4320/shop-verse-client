@@ -104,7 +104,7 @@ const ProductList = () => {
                 </td>
                 <td className="px-4 py-2 flex justify-center items-center gap-2 ">
                   <Link to={`/dashboard/edit-product/${item._id}`}>
-                    <button className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700">
+                    <button className="px-3 py-1 text-sm bg-primary text-white rounded hover:bg-purple-700">
                       Update
                     </button>
                   </Link>
