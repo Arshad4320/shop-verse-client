@@ -28,7 +28,6 @@ const EditCategory = () => {
   const onSubmit = async (form) => {
     const formData = new FormData();
     formData.append("name", form.name);
-    formData.append("description", form.description);
 
     if (form.image && form.image[0]) {
       formData.append("image", form.image[0]);
@@ -37,7 +36,6 @@ const EditCategory = () => {
     try {
       const result = await updateCategory({ id, data: formData }).unwrap();
       toast.success(result.message);
-      console.log(result);
     } catch (err) {
       toast.error(err?.data?.message || "Failed to update category");
     }
@@ -64,17 +62,6 @@ const EditCategory = () => {
             {...register("name")}
             className={inputClass}
             placeholder="Enter category name"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block font-semibold mb-1 text-text">
-            Description
-          </label>
-          <textarea
-            {...register("description")}
-            className={inputClass + " h-24 resize-none"}
-            placeholder="Enter category description"
           />
         </div>
 

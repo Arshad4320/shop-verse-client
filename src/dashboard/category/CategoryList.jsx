@@ -51,9 +51,7 @@ const CategoryList = () => {
               <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Name
               </th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
-                Description
-              </th>
+
               <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Image
               </th>
@@ -73,17 +71,15 @@ const CategoryList = () => {
                 <td className="px-4 py-2 text-gray-900 border border-gray-300">
                   {item.name}
                 </td>
-                <td className="px-4 py-2 text-gray-600 text-sm border border-gray-300">
-                  {item.description}
-                </td>
-                <td className="px-4 py-2 border border-gray-300">
+
+                <td className="px-4 py-2 flex justify-center items-center border border-gray-300">
                   <img
                     src={item.image}
                     alt="category"
                     className="h-10 w-10 rounded object-cover border"
                   />
                 </td>
-                <td className="px-4 py-2 flex justify-center items-center gap-2 ">
+                <td className="space-x-2 ">
                   <Link to={`/dashboard/edit-category/${item._id}`}>
                     <button className="px-3 py-1 text-sm bg-primary text-white rounded hover:bg-purple-700">
                       Update

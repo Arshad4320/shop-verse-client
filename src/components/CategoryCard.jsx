@@ -2,6 +2,7 @@ import React from "react";
 import Heading from "./Heading";
 import { useGetCategoryQuery } from "../redux/features/category/categoryApi";
 import Button from "./Button";
+import { Link } from "react-router";
 
 const CategoryCard = () => {
   const { data } = useGetCategoryQuery();
@@ -35,7 +36,10 @@ const CategoryCard = () => {
 
             {/* Hover Button */}
             <div className="absolute inset-0 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
-              <Button text={"View Collection"} />
+              <Link to={`/category/details/${item._id}`}>
+                {" "}
+                <Button text={"View Collection"} />
+              </Link>
             </div>
 
             {/* Bottom Name (Optional Extra Title) */}

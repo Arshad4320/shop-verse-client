@@ -81,7 +81,7 @@ const ProductList = () => {
                 className="hover:bg-gray-50 border border-gray-300 text-center"
               >
                 <td className="px-4 py-2 text-gray-900 border border-gray-300">
-                  {item.name}
+                  {item.name.slice(0, 40)}
                 </td>
                 <td className="px-4 py-2 text-gray-900 border border-gray-300">
                   {item.price}
@@ -93,7 +93,7 @@ const ProductList = () => {
                   {item?.categoryId?.name}
                 </td>
                 <td className="px-4 py-2 text-gray-600 text-sm border border-gray-300">
-                  {item.description}
+                  {item.description.slice(0, 80) + "...."}
                 </td>
                 <td className="px-4 py-2 border border-gray-300">
                   <img

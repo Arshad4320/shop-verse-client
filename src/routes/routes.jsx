@@ -15,6 +15,7 @@ import Dashboard from "../dashboard/Dashboard";
 import AddProduct from "../dashboard/product/AddProduct";
 import EditProduct from "../dashboard/product/EditProduct";
 import ProductList from "../dashboard/product/ProductList";
+import CategoryDetails from "../pages/CategoryDetails";
 
 const routes = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "category/details/:id",
+        element: <CategoryDetails />,
       },
     ],
   },
@@ -59,6 +64,7 @@ const routes = createBrowserRouter([
         path: "category",
         element: <CategoryList />,
       },
+
       {
         path: "edit-category/:id",
         element: <EditCategory />,
