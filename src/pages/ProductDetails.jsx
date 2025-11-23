@@ -7,13 +7,18 @@ import {
 import Button from "../components/Button";
 import { useGetCategoryQuery } from "../redux/features/category/categoryApi";
 import CategoryCard from "../components/CategoryCard";
+import ProductCard from "./../components/ProductCard";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetSingleProductQuery(id);
   const { data: category } = useGetCategoryQuery();
   const { data: products } = useGetProductQuery();
-  const filteredData = products?.data?.filter((item) => item._id !== id);
+  const filteredData = products?.data?.filter(
+    (item) =>
+      item._id !== id && item.categoryId._id === data?.data?.categoryId._id
+  );
+
   const filterCategory = category?.data?.filter(
     (item) => item._id !== data?.data.categoryId._id
   );
@@ -113,44 +118,31 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        {/* ================= Product Description ================= */}
         <h2 className="text-2xl font-semibold mt-10 mb-3">
           Product Description
         </h2>
         <p className="text-gray-700 leading-relaxed">{product?.description}</p>
 
-        {/* ================= Category Section Below ================= */}
-        <h2 className="text-2xl font-semibold mt-10 mb-4">
-          Browse More Categories
-        </h2>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-4">
-          {filterCategory?.map((item) => (
-            <CategoryCard key={item._id} item={item} />
+        {/* ================= Product Section Below ================= */}
+        <h2 className="text-xl font-semibold my-4">Related Products</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6  lg:mx-0 mt-6">
+          {filteredData?.map((item) => (
+            <Link key={item._id} to={`/product/details/${item._id}`}>
+              <ProductCard product={item} />
+            </Link>
           ))}
         </div>
       </div>
 
       {/* ================= Right Sidebar ================= */}
-      <div className="lg:col-span-3 bg-white rounded-xl shadow-md p-4 h-fit">
-        <h2 className="text-xl font-semibold mb-4">Related Products</h2>
+      <div className="lg:col-span-3 bg-white rounded shadow-md py-2 px-4 h-fit">
+        <p className="text-xl font-bold  mb-4">Browse More Categories</p>
 
-        {filteredData?.map((item) => (
-          <Link key={item._id} to={`/product/details/${item._id}`}>
-            <div className="flex gap-3 mb-4 border-b pb-4">
-              <img
-                src={item?.image}
-                className="w-20 h-20 object-cover rounded"
-                alt=""
-              />
-              <div>
-                <p className="font-medium">{item?.name}</p>
-                <p className="text-primary">৳ {item?.price}</p>
-                ⭐⭐⭐⭐⭐
-              </div>
-            </div>
-          </Link>
-        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 mt-4">
+          {filterCategory?.map((item) => (
+            <CategoryCard key={item._id} item={item} />
+          ))}
+        </div>
       </div>
     </div>
   );

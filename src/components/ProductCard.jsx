@@ -21,13 +21,13 @@ const ProductCard = ({ product }) => {
 
       {/* Content */}
       <div className="p-4 ">
-        <h3 className="text-sm font-bold text-text text-center">{name}</h3>
+        <div className="h-15">
+          <h3 className="text-sm font-bold text-text text-center">{name}</h3>
 
-        {/* Price & Quantity */}
-
-        <span className="flex gap-1 justify-center space-y-2 items-center text-text hover hover:text-primary font-bold">
-          <FaBangladeshiTakaSign /> {price}
-        </span>
+          <span className="flex gap-1 justify-center space-y-2 items-center text-text hover hover:text-primary font-bold">
+            <FaBangladeshiTakaSign /> {price}
+          </span>
+        </div>
 
         {/* Buttons */}
         <div className="mt-2 space-y-2">
