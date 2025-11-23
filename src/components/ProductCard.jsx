@@ -3,14 +3,15 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import Button from "./Button";
 import SecondaryButton from "./SecondaryButton";
+import { Link } from "react-router";
 
 const ProductCard = ({ product }) => {
-  const { name, description, price, image, quantity } = product;
+  const { name, description, price, image, quantity, _id } = product;
 
   return (
-    <div className="bg-white shadow-md rounded-xl overflow-hidden cursor-pointer    duration-300 h-[420px] md:h-[450px] flex flex-col">
+    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer    duration-300 h-[400px] flex flex-col">
       {/* Image */}
-      <div className="w-full h-56 md:h-64 overflow-hidden">
+      <div className="w-full h-52 md:h-52 overflow-hidden">
         <img
           src={image}
           alt={name}
@@ -29,9 +30,12 @@ const ProductCard = ({ product }) => {
         </span>
 
         {/* Buttons */}
-        <div className="mt-2   space-y-2">
-          <Button text={"Details"} />
-          <SecondaryButton text={"Add To Cart"} />
+        <div className="mt-2 space-y-2">
+          <Link to={`/product/details/${_id}`} className="block">
+            <Button text="Details" />
+          </Link>
+
+          <SecondaryButton text="Add To Cart" />
         </div>
       </div>
     </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import HomeHeader from "../components/HomeHeader";
 import Products from "../components/Products";
-import CategoryCard from "./../components/CategoryCard";
+
+import Category from "./Category";
 
 const Home = () => {
   return (
@@ -11,10 +12,10 @@ const Home = () => {
       </section>
       <div className="max-w-7xl mx-auto">
         <section>
-          <Products />
+          <Category />
         </section>
         <section>
-          <CategoryCard />
+          <Products />
         </section>
       </div>
     </div>

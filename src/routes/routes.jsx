@@ -16,6 +16,7 @@ import AddProduct from "../dashboard/product/AddProduct";
 import EditProduct from "../dashboard/product/EditProduct";
 import ProductList from "../dashboard/product/ProductList";
 import CategoryDetails from "../pages/CategoryDetails";
+import ProductDetails from "../pages/ProductDetails";
 
 const routes = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "product/details/:id",
+        element: <ProductDetails />,
       },
       {
         path: "category/details/:id",

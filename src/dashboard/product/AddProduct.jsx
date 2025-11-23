@@ -25,6 +25,9 @@ const AddProduct = () => {
       formData.append("name", data.name);
       formData.append("price", data.price);
       formData.append("quantity", data.quantity);
+      formData.append("discount", data.discount);
+      formData.append("tags", data.tags);
+      formData.append("brand", data.brand);
       formData.append("description", data.description);
       formData.append("categoryId", data.categoryId);
       if (data?.image && data.image[0]) formData.append("image", data.image[0]);
@@ -54,7 +57,7 @@ const AddProduct = () => {
         {/* Category */}
         <div>
           <label className="block font-semibold mb-1 text-gray-700">
-            Category
+            Category*
           </label>
           <select
             {...register("categoryId", { required: "Category is required" })}
@@ -76,7 +79,9 @@ const AddProduct = () => {
 
         {/* Product Name */}
         <div>
-          <label className="block font-semibold mb-1 text-gray-700">Name</label>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Name*
+          </label>
           <input
             {...register("name", { required: "Product name is required" })}
             className={inputClass}
@@ -90,7 +95,7 @@ const AddProduct = () => {
         {/* Price */}
         <div>
           <label className="block font-semibold mb-1 text-gray-700">
-            Price
+            Price*
           </label>
           <input
             type="number"
@@ -102,11 +107,23 @@ const AddProduct = () => {
             <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
           )}
         </div>
+        {/* Price */}
+        <div>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Discount
+          </label>
+          <input
+            type="number"
+            {...register("discount")}
+            className={inputClass}
+            placeholder="Enter discount"
+          />
+        </div>
 
         {/* Quantity */}
         <div>
           <label className="block font-semibold mb-1 text-gray-700">
-            Quantity
+            Quantity*
           </label>
           <input
             type="number"
@@ -120,11 +137,54 @@ const AddProduct = () => {
             </p>
           )}
         </div>
-
+        {/* Tags */}
+        <div>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Tags*
+          </label>
+          <input
+            type="string"
+            {...register("tags", { required: "tags is required" })}
+            className={inputClass}
+            placeholder="Enter tags"
+          />
+          {errors.tags && (
+            <p className="text-red-500 text-sm mt-1">{errors.tags.message}</p>
+          )}
+        </div>
+        {/* Brand */}
+        <div>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Brand*
+          </label>
+          <input
+            type="text"
+            {...register("brand", { required: "brand is required" })}
+            className={inputClass}
+            placeholder="Enter brand"
+          />
+          {errors.brand && (
+            <p className="text-red-500 text-sm mt-1">{errors.brand.message}</p>
+          )}
+        </div>
+        {/* Image */}
+        <div className="">
+          <label className="block font-semibold mb-1 text-gray-700">
+            Image*
+          </label>
+          <input
+            type="file"
+            {...register("image", { required: "Image is required" })}
+            className={inputClass}
+          />
+          {errors.image && (
+            <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>
+          )}
+        </div>
         {/* Description */}
         <div className="md:col-span-2">
           <label className="block font-semibold mb-1 text-gray-700">
-            Description
+            Description*
           </label>
           <textarea
             {...register("description", {
@@ -137,21 +197,6 @@ const AddProduct = () => {
             <p className="text-red-500 text-sm mt-1">
               {errors.description.message}
             </p>
-          )}
-        </div>
-
-        {/* Image */}
-        <div className="md:col-span-2">
-          <label className="block font-semibold mb-1 text-gray-700">
-            Image
-          </label>
-          <input
-            type="file"
-            {...register("image", { required: "Image is required" })}
-            className={inputClass}
-          />
-          {errors.image && (
-            <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>
           )}
         </div>
 
