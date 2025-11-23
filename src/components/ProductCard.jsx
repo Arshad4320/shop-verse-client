@@ -4,8 +4,22 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import Button from "./Button";
 import SecondaryButton from "./SecondaryButton";
 import { Link } from "react-router";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/features/cart/cart";
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    const cartItem = {
+      _id: product?._id,
+      name: product?.name,
+      price: product?.price,
+      discountPrice: product?.discountPrice,
+      image: product?.image,
+      qty: 1,
+    };
+
+    dispatch(addToCart(cartItem));
+  };
   const { name, description, price, image, quantity, _id } = product;
 
   return (
@@ -35,7 +49,7 @@ const ProductCard = ({ product }) => {
             <Button text="Details" />
           </Link>
 
-          <SecondaryButton text="Add To Cart" />
+          <SecondaryButton onClick={handleAddToCart} text="Add To Cart" />
         </div>
       </div>
     </div>

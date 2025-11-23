@@ -4,13 +4,16 @@ import {
   useGetProductQuery,
   useGetSingleProductQuery,
 } from "../redux/features/product/productApi";
+import { useDispatch } from "react-redux";
 import Button from "../components/Button";
 import { useGetCategoryQuery } from "../redux/features/category/categoryApi";
 import CategoryCard from "../components/CategoryCard";
 import ProductCard from "./../components/ProductCard";
 
+import { addToCart } from "../redux/features/cart/cart";
 const ProductDetails = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { data, isLoading, isError } = useGetSingleProductQuery(id);
   const { data: category } = useGetCategoryQuery();
   const { data: products } = useGetProductQuery();
@@ -32,7 +35,18 @@ const ProductDetails = () => {
     );
 
   const product = data?.data;
-  console.log(product);
+  const handleAddToCart = () => {
+    const cartItem = {
+      _id: product?._id,
+      name: product?.name,
+      price: product?.price,
+      discountPrice: product?.discountPrice,
+      image: product?.image,
+      qty: qty,
+    };
+
+    dispatch(addToCart(cartItem));
+  };
   return (
     <div className="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* ================= Left Main Section ================= */}
@@ -110,7 +124,7 @@ const ProductDetails = () => {
 
             {/* Buttons */}
             <div className="flex flex-col md:flex-row gap-4 mt-6">
-              <Button text={"Add To Cart"} />
+              <Button onClick={handleAddToCart} text={"Add To Cart"} />
               <button className="px-6 py-1 bg-success text-white rounded hover:bg-green-700">
                 Buy Now
               </button>

@@ -5,13 +5,13 @@ import ProductCard from "./ProductCard";
 
 const Products = () => {
   const { data } = useGetProductQuery();
-  console.log(data?.data);
+
   return (
-    <div>
-      <Heading text={"Products"} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-6 lg:mx-0">
+    <div className="max-w-7xl w-full mx-auto px-4">
+      <Heading text="Products" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
         {data?.data?.map((product) => (
-          <ProductCard product={product} key={product._id} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>

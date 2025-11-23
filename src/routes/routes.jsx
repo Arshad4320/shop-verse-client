@@ -17,6 +17,7 @@ import EditProduct from "../dashboard/product/EditProduct";
 import ProductList from "../dashboard/product/ProductList";
 import CategoryDetails from "../pages/CategoryDetails";
 import ProductDetails from "../pages/ProductDetails";
+import Cart from "../pages/Cart";
 
 const routes = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const routes = createBrowserRouter([
       {
         path: "category/details/:id",
         element: <CategoryDetails />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },
