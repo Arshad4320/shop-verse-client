@@ -46,11 +46,11 @@ const Navbar = () => {
       <Link
         to="/cart"
         onClick={() => setIsOpen(false)}
-        className="relative flex items-center text-text hover:text-primary"
+        className="relative  text-text hover:text-primary"
       >
         <IoCartOutline size={20} />
 
-        <span className="absolute -top-1 -right-2 sm:-top-2 sm:-right-3 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+        <span className="absolute -top-1 left-3 sm:-top-2  bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
           {totalQty}
         </span>
       </Link>

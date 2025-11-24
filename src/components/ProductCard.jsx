@@ -20,10 +20,11 @@ const ProductCard = ({ product }) => {
 
     dispatch(addToCart(cartItem));
   };
-  const { name, description, price, image, quantity, _id } = product;
+  const { name, discount, price, image, quantity, _id, discountPrice } =
+    product;
 
   return (
-    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer    duration-300 h-[400px] flex flex-col">
+    <div className="bg-white shadow rounded-md overflow-hidden  cursor-pointer  relative  duration-300 h-[400px] flex flex-col">
       {/* Image */}
       <div className="w-full h-52 md:h-52 overflow-hidden">
         <img
@@ -32,15 +33,32 @@ const ProductCard = ({ product }) => {
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>
-
+      {discount > 0 && (
+        <div className="bg-success absolute w-10 left-2 top-1 h-10 rounded-full flex items-center justify-center text-white font-semibold">
+          {discount}%
+        </div>
+      )}
       {/* Content */}
       <div className="p-4 ">
-        <div className="h-15">
+        <div>
           <h3 className="text-sm font-bold text-text text-center">{name}</h3>
 
-          <span className="flex gap-1 justify-center space-y-2 items-center text-text hover hover:text-primary font-bold">
-            <FaBangladeshiTakaSign /> {price}
-          </span>
+          <div className="flex gap-2 justify-center">
+            <span
+              className={` ${
+                discountPrice > 0 && discount > 0
+                  ? "line-through text-text flex gap-1 justify-center items-center"
+                  : "flex gap-1 justify-center space-y-2 items-center text-success hover:text-primary font-bold"
+              }`}
+            >
+              <FaBangladeshiTakaSign /> {price}
+            </span>
+            {discountPrice > 0 && (
+              <span className="flex gap-1 justify-center space-y-2 items-center text-green  hover:text-primary font-bold text-success">
+                <FaBangladeshiTakaSign /> {discountPrice}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Buttons */}

@@ -47,9 +47,30 @@ const AddCategory = () => {
           Add Category
         </h2>
 
+        {/* Product Name */}
+        <div>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Name*
+          </label>
+          <input
+            {...register("name", { required: "category name is required" })}
+            className={inputClass}
+            placeholder="Enter category name"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
         <div className="mb-4">
-          <label className="block font-semibold mb-1 text-text">Image</label>
-          <input {...register("image")} className={inputClass} type="file" />
+          <label className="block font-semibold mb-1 text-text">Image*</label>
+          <input
+            {...register("image", { required: "category image is required" })}
+            className={inputClass}
+            type="file"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
         </div>
 
         {/* Submit Button */}

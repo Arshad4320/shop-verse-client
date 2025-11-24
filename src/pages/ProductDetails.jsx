@@ -75,11 +75,11 @@ const ProductDetails = () => {
                 <p className="text-xl text-primary">৳ {product?.price}</p>
               ) : (
                 <>
-                  <p className="line-through text-gray-400 text-xl">
-                    ৳ {product?.price}
-                  </p>
                   <p className="text-xl font-semibold text-primary">
                     ৳ {product?.discountPrice}
+                  </p>
+                  <p className="line-through text-gray-400 text-xl">
+                    ৳ {product?.price}
                   </p>
                 </>
               )}
@@ -138,14 +138,19 @@ const ProductDetails = () => {
         <p className="text-gray-700 leading-relaxed">{product?.description}</p>
 
         {/* ================= Product Section Below ================= */}
-        <h2 className="text-xl font-semibold my-4">Related Products</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6  lg:mx-0 mt-6">
-          {filteredData?.map((item) => (
-            <Link key={item._id} to={`/product/details/${item._id}`}>
-              <ProductCard product={item} />
-            </Link>
-          ))}
-        </div>
+        {filteredData.length > 0 && (
+          <>
+            {" "}
+            <h2 className="text-xl font-semibold my-4">Related Products</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6  lg:mx-0 mt-6">
+              {filteredData?.map((item) => (
+                <Link key={item._id} to={`/product/details/${item._id}`}>
+                  <ProductCard product={item} />
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
       {/* ================= Right Sidebar ================= */}

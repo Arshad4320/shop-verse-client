@@ -1,55 +1,84 @@
-"use client";
+import { apiSlice } from "../../api/apiSlice";
 
-import { apiSlice } from "../../RootApi/apiSlice";
-
-export const authApi = apiSlice.injectEndpoints({
+export const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    register: builder.mutation({
+    createUser: builder.mutation({
       query: (data) => ({
-        url: "auth/register",
         method: "POST",
+        url: "/register-user",
         body: data,
       }),
-      invalidatesTags: ["Auth", "User"],
+      invalidatesTags: ["User"],
     }),
 
-    login: builder.mutation({
+    loginUser: builder.mutation({
       query: (data) => ({
-        url: "auth/login",
         method: "POST",
+        url: "/login-user",
         body: data,
       }),
-      invalidatesTags: ["Auth", "User"],
+      invalidatesTags: ["User"],
     }),
 
-    logout: builder.mutation({
+    getAllUser: builder.query({
       query: () => ({
-        url: "auth/logout",
-        method: "POST",
-      }),
-      invalidatesTags: ["Auth", "User", "Dashboard"],
-    }),
-
-    getVideos: builder.query({
-      query: () => ({
-        url: "auth/videos",
+        method: "GET",
+        url: "/get-users",
       }),
       providesTags: ["User"],
     }),
 
-    getAdminDashboard: builder.query({
-      query: () => ({
-        url: "auth/admin/dashboard",
+    getSingleUser: builder.query({
+      query: (id) => ({
+        method: "GET",
+        url: `/get-user/${id}`,
       }),
-      providesTags: ["Dashboard"],
+      providesTags: ["User"],
+    }),
+
+    selfGetUser: builder.query({
+      query: () => ({
+        method: "GET",
+        url: "/self-user",
+      }),
+      providesTags: ["User"],
+    }),
+
+    selfUserUpdate: builder.mutation({
+      query: (data) => ({
+        method: "PATCH",
+        url: "/self-user/update",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
+    updateUser: builder.mutation({
+      query: ({ id, data }) => ({
+        method: "PATCH",
+        url: `/update-user/${id}`,
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
+
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        method: "DELETE",
+        url: `/delete-user/${id}`,
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
 export const {
-  useRegisterMutation,
-  useLoginMutation,
-  useLogoutMutation,
-  useGetVideosQuery,
-  useGetAdminDashboardQuery,
-} = authApi;
+  useGetAllUserQuery,
+  useGetSingleUserQuery,
+  useSelfGetUserQuery,
+  useSelfUserUpdateMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+  useCreateUserMutation,
+  useLoginUserMutation,
+} = userApi;
