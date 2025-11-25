@@ -1,13 +1,21 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 import { Divide as Hamburger } from "hamburger-react";
+import { useDispatch } from "react-redux";
+import { logOut } from "../redux/features/auth/authSlice";
+import LogoutButton from "../components/LogoutButton";
 
 const DashboardLayout = ({ children }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [userDrop, setUserDrop] = useState(false);
   const [productDrop, setProductDrop] = useState(false);
   const [categoryDrop, setCategoryDrop] = useState(false);
-
+  const handleLogOut = () => {
+    dispatch(logOut());
+    navigate("/");
+  };
   const dropdownIcon = (open) => (open ? "▾" : "▸"); // modern arrow
 
   return (
@@ -156,9 +164,7 @@ const DashboardLayout = ({ children }) => {
 
           <h1 className="text-xl font-semibold text-primary">Admin Panel</h1>
 
-          <button className="bg-danger text-white px-4 py-1 rounded">
-            Logout
-          </button>
+          <LogoutButton text={"Logout"} />
         </div>
 
         <div className="p-6">

@@ -45,7 +45,6 @@ const cartSlice = createSlice({
       state.cartItems = [];
       state.totalQty = 0;
       state.totalPrice = 0;
-      toast.warn("clear your cart");
     },
   },
 });

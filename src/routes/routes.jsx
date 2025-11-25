@@ -19,6 +19,8 @@ import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
 import PrivetRoute from "../utilitis/privetRoute";
+import OrderSuccess from "../pages/OrderSuccess";
+import OrderPage from "../pages/Order";
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +43,18 @@ const routes = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "order",
+        element: (
+          <PrivetRoute>
+            <OrderPage />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "success",
+        element: <OrderSuccess />,
       },
       {
         path: "product/details/:id",

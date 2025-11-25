@@ -1,14 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, clearCart } from "../redux/features/cart/cart";
-import { Link } from "react-router";
+import { useNavigate, Link } from "react-router-dom";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cartItems, totalPrice, totalQty } = useSelector(
     (state) => state.cart
   );
-  console.log("form cart", cartItems, totalPrice, totalQty);
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) return;
+    navigate("/order", { state: { cartItems, totalPrice } });
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-4 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
@@ -79,7 +85,10 @@ const Cart = () => {
               Clear Cart
             </button>
 
-            <button className="w-full py-2 bg-success text-white rounded hover:bg-green-700 mt-4">
+            <button
+              onClick={handleCheckout}
+              className="w-full py-2 bg-success text-white rounded hover:bg-green-700 mt-4"
+            >
               Checkout
             </button>
           </div>

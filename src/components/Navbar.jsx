@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Fade as Hamburger } from "hamburger-react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoCartOutline } from "react-icons/io5";
 import { logOut } from "../redux/features/auth/authSlice";
+import LogoutButton from "./LogoutButton";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { totalQty } = useSelector((state) => state.cart);
   const { user, token, isAuthenticated } = useSelector((state) => state.auth);
 
-  const dispatch = useDispatch();
   const routeLinks = (
     <>
       <Link
@@ -70,12 +70,7 @@ const Navbar = () => {
       </Link>
 
       {isAuthenticated ? (
-        <button
-          onClick={() => dispatch(logOut())}
-          className="bg-danger px-3 text-white py-1 w-24 rounded hover:bg-danger/90"
-        >
-          Logout
-        </button>
+        <LogoutButton text={"Logout"} />
       ) : (
         <Link
           onClick={() => setIsOpen(false)}

@@ -1,11 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useCreateUserMutation } from "../redux/features/auth/authApi";
 import { toast } from "react-toastify";
 
 const Register = () => {
   const [createUser] = useCreateUserMutation();
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ const Register = () => {
       const result = await createUser(data).unwrap();
       console.log(result);
       toast.success(result.message || "user created successfully");
+      navigate(location?.state || "/");
       reset();
     } catch (err) {
       console.log(err);

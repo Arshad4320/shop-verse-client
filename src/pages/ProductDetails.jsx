@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import {
   useGetProductQuery,
   useGetSingleProductQuery,
@@ -14,6 +14,7 @@ import { addToCart } from "../redux/features/cart/cart";
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, isLoading, isError } = useGetSingleProductQuery(id);
   const { data: category } = useGetCategoryQuery();
   const { data: products } = useGetProductQuery();
@@ -125,9 +126,12 @@ const ProductDetails = () => {
             {/* Buttons */}
             <div className="flex flex-col md:flex-row gap-4 mt-6">
               <Button onClick={handleAddToCart} text={"Add To Cart"} />
-              <button className="px-6 py-1 bg-success text-white rounded hover:bg-green-700">
-                Buy Now
-              </button>
+              <Link
+                className="px-6 py-1 bg-success text-white cursor-pointer flex items-center justify-center rounded hover:bg-green-700"
+                to="/create-order"
+              >
+                <button>Checkout</button>
+              </Link>
             </div>
           </div>
         </div>
