@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
 import { Fade as Hamburger } from "hamburger-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoCartOutline } from "react-icons/io5";
+import { logOut } from "../redux/features/auth/authSlice";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { totalQty } = useSelector((state) => state.cart);
-
+  const { user, token, isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const routeLinks = (
     <>
       <Link
@@ -34,13 +36,15 @@ const Navbar = () => {
         Products
       </Link>
 
-      <Link
-        onClick={() => setIsOpen(false)}
-        to="/dashboard"
-        className="text-text hover:text-primary"
-      >
-        Dashboard
-      </Link>
+      {isAuthenticated && (
+        <Link
+          onClick={() => setIsOpen(false)}
+          to="/dashboard"
+          className="text-text hover:text-primary"
+        >
+          Dashboard
+        </Link>
+      )}
 
       {/* Cart Icon (Desktop + Mobile both) */}
       <Link
@@ -55,25 +59,30 @@ const Navbar = () => {
         </span>
       </Link>
 
-      <Link
-        onClick={() => setIsOpen(false)}
-        to="/login"
-        className="text-text hover:text-primary"
-      >
-        Login
-      </Link>
+      {isAuthenticated ? (
+        <button
+          onClick={() => dispatch(logOut())}
+          className="bg-danger px-3 text-white py-1 w-24 rounded hover:bg-danger/90"
+        >
+          Logout
+        </button>
+      ) : (
+        <Link
+          onClick={() => setIsOpen(false)}
+          to="/login"
+          className="text-text hover:text-primary"
+        >
+          Login
+        </Link>
+      )}
 
-      <Link
+      {/* <Link
         onClick={() => setIsOpen(false)}
         to="/register"
         className="text-text hover:text-primary"
       >
         Register
-      </Link>
-
-      <button className="bg-danger px-3 text-white py-1 w-24 rounded hover:bg-danger/90">
-        Logout
-      </button>
+      </Link> */}
     </>
   );
 

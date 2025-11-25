@@ -1,16 +1,38 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { toast } from "react-toastify";
+import { useLoginUserMutation } from "../redux/features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { setCredential } from "../redux/features/auth/authSlice";
 
 const Login = () => {
+  const [loginUser] = useLoginUserMutation();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data) => {
+    try {
+      const result = await loginUser(data).unwrap();
+      console.log(result, result?.data?.token);
+      dispatch(
+        setCredential({
+          user: result?.data?.user,
+          token: result?.data?.token,
+        })
+      );
+      toast.success(result.message || "user logged successfully");
+      reset();
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message || "something went wrong");
+    }
   };
 
   const inputClass =

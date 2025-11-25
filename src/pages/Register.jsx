@@ -1,16 +1,28 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { useCreateUserMutation } from "../redux/features/auth/authApi";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const [createUser] = useCreateUserMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data) => {
+    try {
+      const result = await createUser(data).unwrap();
+      console.log(result);
+      toast.success(result.message || "user created successfully");
+      reset();
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message || "something went wrong");
+    }
   };
 
   const inputClass =
