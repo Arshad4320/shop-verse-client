@@ -4,7 +4,7 @@ import {
   useGetProductQuery,
   useGetSingleProductQuery,
 } from "../redux/features/product/productApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../components/Button";
 import { useGetCategoryQuery } from "../redux/features/category/categoryApi";
 import CategoryCard from "../components/CategoryCard";
@@ -18,6 +18,15 @@ const ProductDetails = () => {
   const { data, isLoading, isError } = useGetSingleProductQuery(id);
   const { data: category } = useGetCategoryQuery();
   const { data: products } = useGetProductQuery();
+  const { cartItems, totalPrice, totalQty } = useSelector(
+    (state) => state.cart
+  );
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) return;
+    navigate("/order", { state: { cartItems, totalPrice } });
+  };
+
   const filteredData = products?.data?.filter(
     (item) =>
       item._id !== id && item.categoryId._id === data?.data?.categoryId._id
@@ -126,12 +135,13 @@ const ProductDetails = () => {
             {/* Buttons */}
             <div className="flex flex-col md:flex-row gap-4 mt-6">
               <Button onClick={handleAddToCart} text={"Add To Cart"} />
-              <Link
+
+              <button
+                onClick={handleCheckout}
                 className="px-6 py-1 bg-success text-white cursor-pointer flex items-center justify-center rounded hover:bg-green-700"
-                to="/create-order"
               >
-                <button>Checkout</button>
-              </Link>
+                Checkout
+              </button>
             </div>
           </div>
         </div>

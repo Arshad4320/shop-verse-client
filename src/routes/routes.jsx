@@ -21,6 +21,7 @@ import Profile from "../pages/Profile";
 import PrivetRoute from "../utilitis/privetRoute";
 import OrderSuccess from "../pages/OrderSuccess";
 import OrderPage from "../pages/Order";
+import Electronics from "../components/categoryProduct/Electronics";
 
 const routes = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const routes = createBrowserRouter([
       {
         path: "category/details/:id",
         element: <CategoryDetails />,
+      },
+      {
+        path: "category/electronics/:id",
+        element: <Electronics />,
       },
       {
         path: "cart",

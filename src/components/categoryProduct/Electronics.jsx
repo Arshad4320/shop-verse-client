@@ -1,0 +1,26 @@
+import React from "react";
+import { useParams } from "react-router";
+import { useGetProductQuery } from "../../redux/features/product/productApi";
+import ProductCard from "../ProductCard";
+import Heading from "../Heading";
+
+const Electronics = () => {
+  const { data } = useGetProductQuery();
+
+  const filteredData = data?.data.filter(
+    (product) => product.categoryId.name === "Electronics & Gadgets"
+  );
+
+  return (
+    <div className="max-w-7xl w-full mx-auto px-4">
+      <Heading text={"Electronics & Gadgets"} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+        {filteredData?.map((product) => (
+          <ProductCard product={product} key={product._id} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Electronics;
