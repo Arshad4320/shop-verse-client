@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useLoginUserMutation } from "../redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,8 @@ import { setCredential } from "../redux/features/auth/authSlice";
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,6 +30,7 @@ const Login = () => {
       );
       toast.success(result.message || "user logged successfully");
       reset();
+      navigate(location.state || "/");
       console.log(result);
     } catch (err) {
       console.log(err);

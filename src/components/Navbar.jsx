@@ -9,6 +9,7 @@ const Navbar = () => {
 
   const { totalQty } = useSelector((state) => state.cart);
   const { user, token, isAuthenticated } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const routeLinks = (
     <>
@@ -20,13 +21,13 @@ const Navbar = () => {
         Home
       </Link>
 
-      <Link
+      {/* <Link
         onClick={() => setIsOpen(false)}
         to="/about"
         className="text-text hover:text-primary"
       >
         About
-      </Link>
+      </Link> */}
 
       <Link
         onClick={() => setIsOpen(false)}
@@ -36,7 +37,16 @@ const Navbar = () => {
         Products
       </Link>
 
-      {isAuthenticated && (
+      {isAuthenticated && token && (
+        <Link
+          onClick={() => setIsOpen(false)}
+          to="/profile"
+          className="text-text hover:text-primary"
+        >
+          Profile
+        </Link>
+      )}
+      {user?.userType === "Admin" && (
         <Link
           onClick={() => setIsOpen(false)}
           to="/dashboard"

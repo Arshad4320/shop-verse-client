@@ -2,7 +2,6 @@ import React from "react";
 import { createBrowserRouter } from "react-router";
 
 import Home from "../pages/Home";
-import About from "../pages/About";
 import Products from "../pages/Products";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MainLayout from "../Root/MainLayout";
@@ -18,6 +17,8 @@ import ProductList from "../dashboard/product/ProductList";
 import CategoryDetails from "../pages/CategoryDetails";
 import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
+import Profile from "../pages/Profile";
+import PrivetRoute from "../utilitis/privetRoute";
 
 const routes = createBrowserRouter([
   {
@@ -29,8 +30,13 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "about",
-        element: <About />,
+        path: "profile",
+        element: (
+          <PrivetRoute>
+            {" "}
+            <Profile />
+          </PrivetRoute>
+        ),
       },
       {
         path: "products",
@@ -60,7 +66,11 @@ const routes = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivetRoute>
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
     children: [
       {
         index: true,
