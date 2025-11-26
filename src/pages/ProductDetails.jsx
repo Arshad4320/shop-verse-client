@@ -164,7 +164,7 @@ const ProductDetails = () => {
         <p className="text-gray-700 leading-relaxed">{product?.description}</p>
 
         {/* Related Products */}
-        {filteredData.length > 0 && (
+        {filteredData?.length > 0 && (
           <>
             <h2 className="text-xl font-semibold my-4">Related Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-6">

@@ -8,6 +8,7 @@ import img3 from "../assets/img3.jpg";
 import img4 from "../assets/img4.jpg";
 import Button from "./Button";
 import SecondaryButton from "./SecondaryButton";
+import { Link } from "react-router";
 
 const HomeHeader = () => {
   const slides = [
@@ -71,12 +72,15 @@ const HomeHeader = () => {
               </p>
 
               {/* Responsive Buttons */}
-              <div className="flex flex-col md:flex-row gap-4 mt-6 w-full max-w-xs md:max-w-sm mx-auto">
+              <Link
+                to="/products"
+                className="flex flex-col md:flex-row gap-4 mt-6 w-full max-w-xs md:max-w-sm mx-auto"
+              >
                 <Button text={" Shop Now"} />
                 <button className="w-full md:w-auto px-3 sm:px-4 md:px-8 py-2 border border-white text-white rounded font-semibold hover:bg-primary hover:text-white transition hover:border-primary cursor-pointer">
                   View Collections
                 </button>
-              </div>
+              </Link>
             </div>
           </div>
         ))}
