@@ -1,12 +1,11 @@
 const ProductViewModal = ({ isOpen, onClose, order }) => {
   if (!isOpen || !order) return null;
 
-  console.log(order);
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-0">
+    <div className="fixed inset-0 z-50 flex items-center justify-center  px-4 sm:px-0">
       <div className="absolute inset-0 bg-black/40" onClick={onClose}></div>
 
-      <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg p-6">
+      <div className="relative bg-white rounded shadow w-full max-w-lg p-6 mt-24">
         <h2 className="text-xl font-semibold mb-4">Order Items</h2>
 
         <div className="space-y-3 max-h-80 overflow-y-auto">
@@ -17,7 +16,9 @@ const ProductViewModal = ({ isOpen, onClose, order }) => {
                 className="w-16 h-16 rounded object-cover"
               />
               <div>
-                <p className="font-semibold">{product?.product?.name}</p>
+                <p className="font-semibold text-sm">
+                  {product?.product?.name}
+                </p>
                 <p>Qty: {product?.quantity}</p>
                 <p>Price: ৳ {product.price}</p>
               </div>
