@@ -22,6 +22,7 @@ import PrivetRoute from "../utilitis/privetRoute";
 import OrderSuccess from "../pages/OrderSuccess";
 import OrderPage from "../pages/Order";
 import Electronics from "../components/categoryProduct/Electronics";
+import UserList from "../dashboard/user/userList";
 
 const routes = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ const routes = createBrowserRouter([
       {
         path: "products",
         element: <ProductList />,
+      },
+      {
+        path: "users",
+        element: <UserList />,
       },
     ],
   },
