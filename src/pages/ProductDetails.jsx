@@ -11,6 +11,7 @@ import CategoryCard from "../components/CategoryCard";
 import ProductCard from "./../components/ProductCard";
 
 import { addToCart } from "../redux/features/cart/cart";
+
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -18,14 +19,7 @@ const ProductDetails = () => {
   const { data, isLoading, isError } = useGetSingleProductQuery(id);
   const { data: category } = useGetCategoryQuery();
   const { data: products } = useGetProductQuery();
-  const { cartItems, totalPrice, totalQty } = useSelector(
-    (state) => state.cart
-  );
-
-  const handleCheckout = () => {
-    if (cartItems.length === 0) return;
-    navigate("/order", { state: { cartItems, totalPrice } });
-  };
+  const { cartItems } = useSelector((state) => state.cart);
 
   const filteredData = products?.data?.filter(
     (item) =>
@@ -45,6 +39,7 @@ const ProductDetails = () => {
     );
 
   const product = data?.data;
+
   const handleAddToCart = () => {
     const cartItem = {
       _id: product?._id,
@@ -57,11 +52,28 @@ const ProductDetails = () => {
 
     dispatch(addToCart(cartItem));
   };
+
+  const handleCheckout = () => {
+    const existingItem = cartItems.find((item) => item._id === product?._id);
+
+    if (!existingItem) {
+      const cartItem = {
+        _id: product?._id,
+        name: product?.name,
+        price: product?.price,
+        discountPrice: product?.discountPrice,
+        image: product?.image,
+        qty: qty,
+      };
+      dispatch(addToCart(cartItem));
+    }
+    navigate("/order");
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* ================= Left Main Section ================= */}
+      {/* Left Section */}
       <div className="lg:col-span-9">
-        {/* Product Image + Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="relative">
             <img
@@ -118,7 +130,7 @@ const ProductDetails = () => {
               </button>
             </div>
 
-            {/* Extra Product Info */}
+            {/* Product Info */}
             <div className="mt-6 space-y-2">
               <p>
                 <span className="font-semibold">Category:</span>{" "}
@@ -140,7 +152,7 @@ const ProductDetails = () => {
                 onClick={handleCheckout}
                 className="px-6 py-1 bg-success text-white cursor-pointer flex items-center justify-center rounded hover:bg-green-700"
               >
-                Checkout
+                Buy Now
               </button>
             </div>
           </div>
@@ -151,12 +163,11 @@ const ProductDetails = () => {
         </h2>
         <p className="text-gray-700 leading-relaxed">{product?.description}</p>
 
-        {/* ================= Product Section Below ================= */}
+        {/* Related Products */}
         {filteredData.length > 0 && (
           <>
-            {" "}
             <h2 className="text-xl font-semibold my-4">Related Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6  lg:mx-0 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-6">
               {filteredData?.map((item) => (
                 <Link key={item._id} to={`/product/details/${item._id}`}>
                   <ProductCard product={item} />
@@ -167,9 +178,9 @@ const ProductDetails = () => {
         )}
       </div>
 
-      {/* ================= Right Sidebar ================= */}
+      {/* Right Sidebar */}
       <div className="lg:col-span-3 bg-white rounded shadow-md py-2 px-4 h-fit">
-        <p className="text-xl font-bold  mb-4">Browse More Categories</p>
+        <p className="text-xl font-bold mb-4">Browse More Categories</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 mt-4">
           {filterCategory?.map((item) => (
