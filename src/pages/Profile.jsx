@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGetAllOrdersQuery } from "../redux/features/order/order";
 import ProductViewModal from "../components/ProductViewModal";
+import { FaRegEyeSlash } from "react-icons/fa6";
 
 const Profile = () => {
   const { data, isLoading } = useGetAllOrdersQuery();
@@ -54,7 +55,7 @@ const Profile = () => {
         <h2 className="text-xl font-semibold mb-4">Your Orders</h2>
 
         {orders.length > 0 ? (
-          <div className="space-y-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {orders.map((order, index) => (
               <div
                 key={index}
@@ -102,9 +103,9 @@ const Profile = () => {
                   {/* View Button */}
                   <button
                     onClick={() => openModal(order)}
-                    className="px-2 py-1  bg-primary text-white rounded-md hover:bg-purple-700 transition"
+                    className="px-2 py-1  text-primary text-2xl rounded-md hover:text-purple-700 transition"
                   >
-                    Details
+                    <FaRegEyeSlash />
                   </button>
                 </div>
               </div>

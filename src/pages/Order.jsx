@@ -10,11 +10,9 @@ const OrderPage = () => {
   const [createOrder] = useCreateOrderMutation();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-
   const { cartItems, totalPrice, totalQty } = useSelector(
     (state) => state.cart
   );
-
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm({
@@ -45,52 +43,53 @@ const OrderPage = () => {
       };
 
       const result = await createOrder(orderData).unwrap();
-      console.log(result);
-      toast.success(result.message || "order created successfully");
+      toast.success(result.message || "Order created successfully");
       dispatch(clearCart());
       navigate("/success");
     } catch (err) {
       console.log(err);
-      toast.error(err.message || "something went wrong");
+      toast.error(err.message || "Something went wrong");
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Checkout</h1>
+    <div className="max-w-7xl mx-auto p-6 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-center lg:text-left">
+        Checkout
+      </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Cart Summary */}
-        <div className="lg:col-span-2 bg-white p-4 rounded-xl shadow">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Left Side - Cart Summary */}
+        <div className="bg-white p-4 rounded-xl shadow flex flex-col">
           <h2 className="text-xl font-semibold mb-4">Your Items</h2>
 
-          {cartItems.map((item) => (
-            <div
-              key={item._id}
-              className="flex items-center gap-4 p-3 border-b"
-            >
-              <img
-                src={item.image}
-                className="w-20 h-20 rounded object-cover"
-              />
-              <div className="flex-1">
-                <h3 className="font-semibold">{item.name}</h3>
-                <p>Qty: {item.qty}</p>
-                <p>Price: ৳ {item.discountPrice || item.price}</p>
+          <div className="space-y-3 max-h-[400px] overflow-y-auto">
+            {cartItems.map((item) => (
+              <div key={item._id} className="flex items-center gap-4 p-3 ">
+                <img
+                  src={item.image}
+                  className="w-20 h-20 rounded object-cover"
+                />
+                <div className="flex-1">
+                  <h3 className="font-semibold">{item.name}</h3>
+                  <p>Qty: {item.qty}</p>
+                  <p>Price: ৳ {Math.ceil(item.discountPrice || item.price)}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
 
-          <div className="flex justify-between mt-4 font-semibold text-lg">
+          {/* Cart Totals */}
+          <div className="mt-4 border-t pt-2 font-semibold text-lg flex justify-between">
             <p>Total Quantity: {totalQty}</p>
-            <p>Total Price: ৳ {totalPrice}</p>
+            <p>Total Price: ৳ {Math.ceil(totalPrice)}</p>
           </div>
         </div>
 
-        {/* Checkout Form */}
+        {/* Right Side - Checkout Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white p-4 rounded-xl shadow"
+          className="bg-white p-4 rounded-xl shadow flex flex-col"
         >
           <h2 className="text-xl font-semibold mb-4">Shipping Details</h2>
 
@@ -132,7 +131,7 @@ const OrderPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-primary text-white py-2 rounded-lg font-semibold"
+            className="w-full bg-primary text-white py-2 rounded-lg font-semibold mt-auto"
           >
             Place Order
           </button>

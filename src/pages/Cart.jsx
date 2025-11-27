@@ -36,7 +36,7 @@ const Cart = () => {
             {cartItems.map((item) => (
               <div
                 key={item._id}
-                className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 p-4 border rounded-lg shadow-sm"
+                className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 p-2  rounded-lg shadow-sm"
               >
                 <div className="flex items-center gap-4 w-full">
                   <img
@@ -68,14 +68,14 @@ const Cart = () => {
           <div className="bg-white shadow-md rounded-xl p-4 h-fit">
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 
-            <div className="flex justify-between mb-3">
+            <div className="flex justify-between mb-2">
               <p>Total Items:</p>
               <p>{totalQty}</p>
             </div>
 
-            <div className="flex justify-between mb-3">
+            <div className="flex justify-between mb-2">
               <p>Total Price:</p>
-              <p>৳ {totalPrice}</p>
+              <p>৳ {Math.ceil(totalPrice)}</p>
             </div>
 
             <button
@@ -87,7 +87,7 @@ const Cart = () => {
 
             <button
               onClick={handleCheckout}
-              className="w-full py-2 bg-success text-white rounded hover:bg-green-700 mt-4"
+              className="w-full py-2 bg-success text-white rounded hover:bg-green-700 mt-2"
             >
               Checkout
             </button>

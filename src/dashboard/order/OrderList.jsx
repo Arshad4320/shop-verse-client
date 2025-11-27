@@ -40,17 +40,14 @@ const OrderList = () => {
       <h2 className="text-xl font-semibold mb-4">Order List</h2>
 
       {orders?.data?.length > 0 ? (
-        <div className="space-y-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {orders?.data?.map((order, index) => (
-            <div
-              key={index}
-              className=" rounded-lg p-5 shadow-sm hover:shadow-md transition bg-gray-50"
-            >
+            <div key={index} className=" rounded-lg p-5 shadow bg-gray-50">
               <div className="flex flex-col sm:flex-row space-y-4  sm:justify-between items-start">
                 {/* Order Info */}
                 <div className="space-y-1">
                   <p className="font-semibold text-gray-800">
-                    Order {order._id.slice(0, 4)}
+                    Order {order._id.slice(0, 6)}
                   </p>
 
                   <p className="text-sm text-gray-600">
