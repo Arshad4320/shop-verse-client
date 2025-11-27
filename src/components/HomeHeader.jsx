@@ -2,10 +2,11 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import img from "../assets/img.jpg";
-import img2 from "../assets/img2.jpg";
-import img3 from "../assets/img3.jpg";
-import img4 from "../assets/img4.jpg";
+import img from "../assets/kids.jpg";
+import img2 from "../assets/accessories.jpg";
+import img3 from "../assets/electronics.jpg";
+import img4 from "../assets/man.jpg";
+import img5 from "../assets/women.jpg";
 import Button from "./Button";
 import SecondaryButton from "./SecondaryButton";
 import { Link } from "react-router";
@@ -14,26 +15,30 @@ const HomeHeader = () => {
   const slides = [
     {
       image: img,
-      title: "Latest Fashion Collection",
-      text: "Trendy outfits at the best prices.",
+      title: "Kids' Fashion Collection",
+      text: "Cute and comfy outfits for your little ones.",
     },
     {
       image: img2,
-      title: "New Tech Gadgets",
-      text: "Smart devices for modern living.",
+      title: "Stylish Accessories",
+      text: "Complete your look with the perfect accessories.",
     },
     {
       image: img3,
-      title: "Comfortable & Stylish Shoes",
-      text: "Step into the world of comfort.",
+      title: "Latest Tech Gadgets",
+      text: "Innovative gadgets to make life easier and fun.",
     },
     {
       image: img4,
-      title: "Accessories for Everyone",
-      text: "High quality accessories at your fingertips.",
+      title: "Men's Fashion",
+      text: "Trendy and comfortable clothing for men.",
+    },
+    {
+      image: img5,
+      title: "Women's Fashion",
+      text: "Elegant and stylish outfits for every occasion.",
     },
   ];
-
   return (
     <div className="w-full ">
       {/* mt-[70px] navbar overlap fix (if navbar is fixed) */}
@@ -43,7 +48,7 @@ const HomeHeader = () => {
         showArrows={true}
         autoPlay={true}
         infiniteLoop={true}
-        interval={3000}
+        interval={2500}
         showThumbs={false}
         showStatus={false}
         showIndicators={false}
@@ -59,7 +64,7 @@ const HomeHeader = () => {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-black/60"></div>
 
             {/* Text + Buttons */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">

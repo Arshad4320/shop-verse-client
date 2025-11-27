@@ -94,14 +94,16 @@ const ProductDetails = () => {
             {/* Price */}
             <div className="flex items-center gap-3">
               {!product?.discountPrice ? (
-                <p className="text-xl text-primary">৳ {product?.price}</p>
+                <p className="text-xl text-primary">
+                  ৳ {Math.ceil(product?.price)}
+                </p>
               ) : (
                 <>
                   <p className="text-xl font-semibold text-primary">
-                    ৳ {product?.discountPrice}
+                    ৳ {Math.ceil(product?.discountPrice)}
                   </p>
                   <p className="line-through text-gray-400 text-xl">
-                    ৳ {product?.price}
+                    ৳ {Math.ceil(product?.price)}
                   </p>
                 </>
               )}

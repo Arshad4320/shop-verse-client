@@ -20,10 +20,20 @@ const ProductViewModal = ({ isOpen, onClose, order }) => {
                   {product?.product?.name}
                 </p>
                 <p>Qty: {product?.quantity}</p>
-                <p>Price: ৳ {product.price}</p>
+                <p>Price: ৳ {Math.ceil(product.price)}</p>
               </div>
             </div>
           ))}
+
+          {/* Grand Total */}
+          <div className="font-bold text-center">
+            Grand Total: ৳{" "}
+            {order.item.reduce(
+              (sum, product) =>
+                sum + Math.ceil(product.price) * product.quantity,
+              0
+            )}
+          </div>
         </div>
 
         <div className="text-right mt-4">

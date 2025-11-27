@@ -19,13 +19,14 @@ const AddCategory = () => {
     const formData = new FormData();
 
     formData.append("name", data.name);
+    formData.append("description", data.description);
     if (data.image && data.image[0]) {
       formData.append("image", data.image[0]);
     }
 
     try {
       const result = await createCategory(formData).unwrap();
-      console.log(result);
+
       toast.success(result.message);
       reset();
     } catch (err) {
@@ -54,6 +55,21 @@ const AddCategory = () => {
           </label>
           <input
             {...register("name", { required: "category name is required" })}
+            className={inputClass}
+            placeholder="Enter category name"
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
+        <div>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Description*
+          </label>
+          <input
+            {...register("description", {
+              required: "category description is required",
+            })}
             className={inputClass}
             placeholder="Enter category name"
           />

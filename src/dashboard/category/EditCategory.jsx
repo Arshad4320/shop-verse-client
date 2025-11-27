@@ -28,6 +28,7 @@ const EditCategory = () => {
   const onSubmit = async (form) => {
     const formData = new FormData();
     formData.append("name", form.name);
+    formData.append("description", form.description);
 
     if (form.image && form.image[0]) {
       formData.append("image", form.image[0]);
@@ -62,6 +63,16 @@ const EditCategory = () => {
             {...register("name")}
             className={inputClass}
             placeholder="Enter category name"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block font-semibold mb-1 text-text">
+            Description
+          </label>
+          <input
+            {...register("description")}
+            className={inputClass}
+            placeholder="Enter category description"
           />
         </div>
 

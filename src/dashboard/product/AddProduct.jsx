@@ -34,7 +34,7 @@ const AddProduct = () => {
       const result = await createProduct(formData).unwrap();
       toast.success(result.message);
       console.log(result);
-      reset();
+      // reset();
     } catch (err) {
       console.log(err);
       toast.error(err.message || "failed to create product");

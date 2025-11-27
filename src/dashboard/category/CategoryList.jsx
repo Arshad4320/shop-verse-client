@@ -10,10 +10,10 @@ import { toast } from "react-toastify";
 const CategoryList = () => {
   const { data } = useGetCategoryQuery();
   const [deleteCategory, { isLoading }] = useDeleteCategoryMutation();
+  const mappingData = data?.data?.map((item) => item._id);
 
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
-
   const openModal = (item) => {
     setDeleteItem(item);
     setIsOpen(true);
@@ -22,6 +22,7 @@ const CategoryList = () => {
   const confirmDelete = async () => {
     try {
       const result = await deleteCategory(deleteItem).unwrap();
+
       toast.success(result.message);
       setIsOpen(false);
     } catch (err) {
@@ -51,6 +52,9 @@ const CategoryList = () => {
               <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Name
               </th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                Description
+              </th>
 
               <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Image
@@ -71,6 +75,9 @@ const CategoryList = () => {
                 <td className="px-4 py-2 text-gray-900 border border-gray-300">
                   {item.name}
                 </td>
+                <td className="px-4 py-2 text-gray-900 border border-gray-300">
+                  {item.description.slice(0, 60)}
+                </td>
 
                 <td className="px-4 py-2 flex justify-center items-center border border-gray-300">
                   <img
@@ -87,7 +94,7 @@ const CategoryList = () => {
                   </Link>
 
                   <button
-                    onClick={() => openModal(item._id)}
+                    onClick={() => openModal(item?._id)}
                     className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
                   >
                     Delete
@@ -104,7 +111,7 @@ const CategoryList = () => {
         onClose={() => setIsOpen(false)}
         onConfirm={confirmDelete}
         title="Delete Confirmation"
-        message={`Are you sure you want to delete "${deleteItem?.name}"?`}
+        message={`Are you sure you want to delete "${deleteItem}"?`}
       />
     </div>
   );

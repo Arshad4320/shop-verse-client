@@ -6,7 +6,7 @@ import Heading from "../Heading";
 const ManFashion = () => {
   const { data } = useGetProductQuery();
   const filteredData = data?.data?.filter(
-    (product) => product.categoryId.name === "Men’s Fashion"
+    (product) => product?.categoryId?.name === "Men’s Fashion"
   );
   return (
     <div className="max-w-7xl w-full mx-auto px-4">

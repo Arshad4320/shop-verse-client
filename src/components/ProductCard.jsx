@@ -51,8 +51,8 @@ const ProductCard = ({ product }) => {
         </div>
 
         {discount > 0 && (
-          <div className="bg-success absolute w-10 left-2 top-2 h-10 rounded-full flex items-center justify-center text-white font-semibold">
-            {discount}%
+          <div className="bg-success absolute w-10 left-2  top-2 h-10 rounded-full flex items-center justify-center text-white font-semibold gap-1">
+            -{discount}%
           </div>
         )}
 
@@ -70,12 +70,13 @@ const ProductCard = ({ product }) => {
                   : "flex gap-1 items-center text-success font-bold"
               }`}
             >
-              <FaBangladeshiTakaSign /> {price}
+              <FaBangladeshiTakaSign />{" "}
+              {discountPrice ? Math.ceil(price) : null}
             </span>
 
-            {discountPrice > 0 && (
+            {discountPrice > 0 && discount > 0 && (
               <span className="flex gap-1 items-center text-success font-bold">
-                <FaBangladeshiTakaSign /> {discountPrice}
+                <FaBangladeshiTakaSign /> {Math.ceil(discountPrice)}
               </span>
             )}
           </div>

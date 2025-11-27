@@ -8,7 +8,7 @@ const Electronics = () => {
   const { data } = useGetProductQuery();
 
   const filteredData = data?.data?.filter(
-    (product) => product.categoryId.name === "Electronics & Gadgets"
+    (product) => product?.categoryId?.name === "Electronics & Gadgets"
   );
 
   return (

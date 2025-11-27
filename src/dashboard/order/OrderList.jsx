@@ -1,15 +1,31 @@
 import React, { useState } from "react";
-import { useGetAllOrdersQuery } from "../../redux/features/order/order";
-import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import {
+  useDeleteOrderMutation,
+  useGetAllOrdersQuery,
+} from "../../redux/features/order/order";
+import { FaBangladeshiTakaSign, FaRegEyeSlash } from "react-icons/fa6";
 import ProductViewModal from "../../components/ProductViewModal";
-
+import { MdDelete } from "react-icons/md";
+import { toast } from "react-toastify";
 const OrderList = () => {
+  const [deleteItem] = useDeleteOrderMutation();
   const { data: orders, isLoading, isError } = useGetAllOrdersQuery();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const openModal = (order) => {
     setSelectedOrder(order);
     setIsOpen(true);
+  };
+
+  const handleDelete = async (item) => {
+    try {
+      const result = await deleteItem(item);
+
+      toast.success(result?.data?.message);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(item);
   };
   if (isLoading) {
     return <p>Loading orders...</p>;
@@ -70,12 +86,22 @@ const OrderList = () => {
                 </div>
 
                 {/* View Button */}
-                <button
-                  onClick={() => openModal(order)}
-                  className="px-2 py-1  bg-primary text-white rounded-md hover:bg-purple-700 transition"
-                >
-                  Details
-                </button>
+                <div>
+                  <button
+                    onClick={() => {
+                      handleDelete(order?._id);
+                    }}
+                    className="text-danger text-2xl"
+                  >
+                    <MdDelete />
+                  </button>
+                  <button
+                    onClick={() => openModal(order)}
+                    className="px-2 py-1  text-primary text-2xl rounded-md hover:text-purple-700 transition"
+                  >
+                    <FaRegEyeSlash />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
