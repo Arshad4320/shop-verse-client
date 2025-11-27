@@ -1,11 +1,10 @@
 import React from "react";
 import HomeHeader from "../components/HomeHeader";
 import Products from "../components/Products";
-
 import Category from "./Category";
-import Electronics from "../components/categoryProduct/Electronics";
 import ManFashion from "../components/categoryProduct/ManFashion";
 import WomenFashion from "../components/categoryProduct/WomenFashion";
+import Bags from "../components/categoryProduct/Bags";
 
 const Home = () => {
   return (
@@ -21,7 +20,7 @@ const Home = () => {
           <Products />
         </section> */}
         <section>
-          <Electronics />
+          <Bags />
         </section>
         <section>
           <ManFashion />

@@ -4,18 +4,18 @@ import { useGetProductQuery } from "../../redux/features/product/productApi";
 import ProductCard from "../ProductCard";
 import Heading from "../Heading";
 
-const Electronics = () => {
+const Bags = () => {
   const { data } = useGetProductQuery();
 
   const filteredData = data?.data?.filter(
-    (product) => product?.categoryId?.name === "Electronics & Gadgets"
+    (product) => product?.categoryId?.name === "Bags & Accessories"
   );
 
   return (
     <div className="max-w-7xl w-full mx-auto px-4">
       {filteredData?.length > 0 && (
         <>
-          <Heading text={"Electronics & Gadgets"} />
+          <Heading text={"Bags & Accessories"} />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
             {filteredData?.map((product) => (
               <ProductCard product={product} key={product._id} />
@@ -27,4 +27,4 @@ const Electronics = () => {
   );
 };
 
-export default Electronics;
+export default Bags;
