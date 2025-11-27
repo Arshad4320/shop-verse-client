@@ -5,7 +5,7 @@ const ProductViewModal = ({ isOpen, onClose, order }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center  px-4 sm:px-0">
       <div className="absolute inset-0 bg-black/40" onClick={onClose}></div>
 
-      <div className="relative bg-white rounded shadow w-full max-w-lg p-6 mt-24">
+      <div className="relative bg-white rounded shadow w-full max-w-lg p-6 mt-20 mb-10">
         <h2 className="text-xl font-semibold mb-4">Order Items</h2>
 
         <div className="space-y-3 max-h-80 overflow-y-auto">

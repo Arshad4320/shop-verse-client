@@ -54,7 +54,7 @@ const Profile = () => {
         <h2 className="text-xl font-semibold mb-4">Your Orders</h2>
 
         {orders.length > 0 ? (
-          <div className="space-y-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {orders.map((order, index) => (
               <div
                 key={index}
@@ -89,7 +89,7 @@ const Profile = () => {
                       <span
                         className={`px-2 py-0.5 rounded text-white ml-1 text-xs
                           ${
-                            order.paymentStatus === "paid"
+                            order.paymentStatus === "Paid"
                               ? "bg-green-600"
                               : "bg-yellow-600"
                           }`}
@@ -102,9 +102,9 @@ const Profile = () => {
                   {/* View Button */}
                   <button
                     onClick={() => openModal(order)}
-                    className="px-3 py-1 sm:px-4 md:py-2 bg-primary text-white rounded-md hover:bg-purple-700 transition"
+                    className="px-2 py-1  bg-primary text-white rounded-md hover:bg-purple-700 transition"
                   >
-                    View Details
+                    Details
                   </button>
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
 
 const UserList = () => {
   const { data, isLoading, isError } = useGetAllUserQuery();
-  console.log(data?.data);
+
   const users = data?.data || [];
 
   if (isLoading) {
@@ -23,7 +23,7 @@ const UserList = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 p-6 bg-white rounded-xl shadow">
+    <div className="   p-6 bg-white rounded-xl shadow">
       <h2 className="text-2xl font-bold mb-5">User List</h2>
 
       {users.length === 0 ? (
@@ -56,10 +56,12 @@ const UserList = () => {
                   <td className="p-3 capitalize">
                     <span
                       className={`px-2 py-1 rounded text-white text-sm ${
-                        user.role === "admin" ? "bg-purple-600" : "bg-blue-600"
+                        user.userType === "Admin"
+                          ? "bg-purple-600"
+                          : "bg-blue-600"
                       }`}
                     >
-                      {user.role}
+                      {user.userType}
                     </span>
                   </td>
 

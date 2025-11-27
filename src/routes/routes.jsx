@@ -23,6 +23,7 @@ import OrderSuccess from "../pages/OrderSuccess";
 import OrderPage from "../pages/Order";
 import Electronics from "../components/categoryProduct/Electronics";
 import UserList from "../dashboard/user/userList";
+import OrderList from "../dashboard/order/OrderList";
 
 const routes = createBrowserRouter([
   {
@@ -124,6 +125,10 @@ const routes = createBrowserRouter([
       {
         path: "users",
         element: <UserList />,
+      },
+      {
+        path: "orders",
+        element: <OrderList />,
       },
     ],
   },

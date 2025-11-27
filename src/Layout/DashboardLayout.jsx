@@ -12,6 +12,7 @@ const DashboardLayout = ({ children }) => {
   const [userDrop, setUserDrop] = useState(false);
   const [productDrop, setProductDrop] = useState(false);
   const [categoryDrop, setCategoryDrop] = useState(false);
+  const [order, setOrderDrop] = useState(false);
   const handleLogOut = () => {
     dispatch(logOut());
     navigate("/");
@@ -69,6 +70,29 @@ const DashboardLayout = ({ children }) => {
                     className="block px-3 py-1 rounded hover:bg-secondary/20"
                   >
                     Users List
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+          {/* Order Dropdown */}
+          <li>
+            <button
+              onClick={() => setOrderDrop(!order)}
+              className="flex justify-between items-center w-full px-3 py-2 rounded hover:bg-secondary/20"
+            >
+              <span>Orders</span>
+              <span className="text-secondary">{dropdownIcon(order)}</span>
+            </button>
+            {order && (
+              <ul className="ml-4 mt-2 space-y-2">
+                <li>
+                  <Link
+                    onClick={() => setOpen(false)}
+                    to="/dashboard/orders"
+                    className="block px-3 py-1 rounded hover:bg-secondary/20"
+                  >
+                    Order List
                   </Link>
                 </li>
               </ul>
