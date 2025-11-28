@@ -7,10 +7,10 @@ import Heading from "../Heading";
 const Bags = () => {
   const { data } = useGetProductQuery();
 
-  const filteredData = data?.data?.result?.filter(
+  const filteredData = data?.data?.filter(
     (product) => product?.categoryId?.name === "Bags & Accessories"
   );
-  console.log(data?.data);
+
   return (
     <div className="max-w-7xl w-full mx-auto px-4">
       {filteredData?.length > 0 && (

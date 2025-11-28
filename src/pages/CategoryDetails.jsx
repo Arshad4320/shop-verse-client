@@ -9,7 +9,7 @@ const CategoryDetails = () => {
   const { data: category } = useGetSingleCategoryQuery(id);
   const { data: products } = useGetProductQuery();
 
-  const filteredData = products?.data?.filter(
+  const filteredData = products?.data?.result?.filter(
     (item) => item.categoryId?._id === category?.data?._id
   );
 

@@ -9,7 +9,7 @@ import DeleteModal from "./../../components/DeleteModal";
 
 const ProductList = () => {
   const { data } = useGetProductQuery();
-  console.log(data?.data);
+
   const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +75,7 @@ const ProductList = () => {
 
           {/* Table Body */}
           <tbody>
-            {data.data.map((item) => (
+            {data.data?.result?.map((item) => (
               <tr
                 key={item._id}
                 className="hover:bg-gray-50 border border-gray-300 text-center"

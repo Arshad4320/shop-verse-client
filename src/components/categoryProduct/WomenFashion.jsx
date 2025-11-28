@@ -6,7 +6,7 @@ import Heading from "../Heading";
 
 const WomenFashion = () => {
   const { data } = useGetProductQuery();
-  const filteredData = data?.data?.result?.filter(
+  const filteredData = data?.data?.filter(
     (product) => product?.categoryId?.name === "Women’s Fashion"
   );
   return (

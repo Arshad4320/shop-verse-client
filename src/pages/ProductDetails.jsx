@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import {
   useGetProductQuery,
@@ -21,11 +21,13 @@ const ProductDetails = () => {
   const { data: products } = useGetProductQuery();
   const { cartItems } = useSelector((state) => state.cart);
 
-  const filteredData = products?.data?.result?.filter(
+  const filteredData = products?.data?.filter(
     (item) =>
       item._id !== id && item.categoryId._id === data?.data?.categoryId._id
   );
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [filteredData]);
   const filterCategory = category?.data?.filter(
     (item) => item._id !== data?.data.categoryId._id
   );

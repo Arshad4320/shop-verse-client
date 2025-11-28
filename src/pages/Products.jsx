@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { useGetProductQuery } from "../redux/features/product/productApi";
+import React, { useEffect, useState } from "react";
+import { useQueryProductsQuery } from "../redux/features/product/productApi";
 import Heading from "../components/Heading";
 import ProductCard from "../components/ProductCard";
 
 const Products = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-
-  const { data } = useGetProductQuery({ search, page, limit: 8 });
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+  const { data } = useQueryProductsQuery({ search, page, limit: 8 });
 
   const products = data?.data?.result || [];
-  const totalPage = data?.meta?.totalPage || 1;
+  const totalPage = data?.data?.meta?.totalPage || 1;
 
   return (
     <div className="w-7xl mx-auto">
@@ -20,13 +22,13 @@ const Products = () => {
       <div className="my-4">
         <input
           type="text"
-          placeholder="Search products..."
+          placeholder="Search your favorite product or category or brand"
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
             setPage(1);
           }}
-          className="border px-4 py-2 w-full rounded-md"
+          className="w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none"
         />
       </div>
 
@@ -38,23 +40,23 @@ const Products = () => {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center items-center gap-4 my-8">
+      <div className="flex justify-center items-center gap-4 my-8 f">
         <button
           disabled={page === 1}
           onClick={() => setPage((p) => p - 1)}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
         >
           Prev
         </button>
 
-        <span className="font-semibold">
-          Page {page} of {totalPage}
+        <span className="font-semibold bg-primary text-white px-3 py-1">
+          {page}
         </span>
 
         <button
           disabled={page === totalPage}
           onClick={() => setPage((p) => p + 1)}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
         >
           Next
         </button>
