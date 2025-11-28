@@ -21,7 +21,7 @@ const ProductDetails = () => {
   const { data: products } = useGetProductQuery();
   const { cartItems } = useSelector((state) => state.cart);
 
-  const filteredData = products?.data?.filter(
+  const filteredData = products?.data?.result?.filter(
     (item) =>
       item._id !== id && item.categoryId._id === data?.data?.categoryId._id
   );

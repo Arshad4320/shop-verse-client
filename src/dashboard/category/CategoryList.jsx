@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const CategoryList = () => {
   const { data } = useGetCategoryQuery();
   const [deleteCategory, { isLoading }] = useDeleteCategoryMutation();
-  const mappingData = data?.data?.map((item) => item._id);
+  // const mappingData = data?.data?.map((item) => item._id);
 
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);

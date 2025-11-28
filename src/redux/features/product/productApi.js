@@ -14,9 +14,25 @@ const productApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Product"],
     }),
     getProduct: builder.query({
-      query: () => ({
-        url: "/products",
-      }),
+      query: ({
+        search = "",
+        page = 1,
+        limit = 8,
+        category = "",
+        brand = "",
+      } = {}) => {
+        const params = new URLSearchParams();
+
+        if (search) params.append("search", search);
+        if (page) params.append("page", page);
+        if (limit) params.append("limit", limit);
+        if (category) params.append("category", category);
+        if (brand) params.append("brand", brand);
+        return {
+          url: `/products?${params.toString()}`,
+          method: "GET",
+        };
+      },
       providesTags: ["Product"],
     }),
     getSingleProduct: builder.query({
