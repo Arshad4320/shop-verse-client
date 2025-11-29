@@ -22,7 +22,7 @@ import PrivetRoute from "../utilitis/PrivetRoute";
 import OrderSuccess from "../pages/OrderSuccess";
 import OrderPage from "../pages/Order";
 // import Electronics from "../components/categoryProduct/Electronics";
-import UserList from "../dashboard/user/userList";
+import UserList from "../dashboard/user/UserList";
 import OrderList from "../dashboard/order/OrderList";
 
 const routes = createBrowserRouter([
