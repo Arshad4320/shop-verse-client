@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useDeleteOrderMutation,
   useGetAllOrdersQuery,
@@ -11,16 +11,19 @@ import { toast } from "react-toastify";
 const OrderList = () => {
   const [deleteItem] = useDeleteOrderMutation();
   const [page, setPage] = useState(1);
-  console.log(page);
+  // const { data: order } = useGetAllOrdersQuery();
+
   const [search, setSearch] = useState("");
   const {
     data: orders,
     isLoading,
     isError,
   } = useGetQueryOrderQuery({ page, search });
-
+  console.log(orders.data);
   const totalPage = orders?.data?.meta?.totalPage;
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const openModal = (order) => {
@@ -30,13 +33,11 @@ const OrderList = () => {
 
   const handleDelete = async (item) => {
     try {
-      const result = await deleteItem(item);
-
-      toast.success(result?.data?.message);
+      const result = await deleteItem(item).unwrap();
+      toast.success(result?.message);
     } catch (err) {
       console.log(err);
     }
-    console.log(item);
   };
   if (isLoading) {
     return <p>Loading orders...</p>;
@@ -49,7 +50,18 @@ const OrderList = () => {
   return (
     <div className="bg-white p-4 rounded-xl shadow-sm ">
       <h2 className="text-xl font-semibold mb-4">Order List</h2>
-
+      <div className="my-4">
+        <input
+          type="text"
+          placeholder="Find order to phone or name"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          className="w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none"
+        />
+      </div>
       {orders?.data?.result?.length > 0 ? (
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {orders?.data?.result?.map((order, index) => (
@@ -67,7 +79,10 @@ const OrderList = () => {
                   </p>
 
                   <p className="text-sm text-gray-600">
-                    Customer: {order?.user?.name}
+                    Customer:{" "}
+                    {order?.address.name
+                      ? order?.address.name
+                      : order.user.name}
                   </p>
 
                   <p className="text-sm text-gray-600">
@@ -75,7 +90,10 @@ const OrderList = () => {
                   </p>
 
                   <p className="text-sm text-gray-600">
-                    Phone: {order.address.phone}
+                    Phone:{" "}
+                    {order.address.phone
+                      ? order.address.phone
+                      : order?.user?.phone}
                   </p>
 
                   <p className="text-sm text-gray-600">

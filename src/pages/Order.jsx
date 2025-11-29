@@ -45,6 +45,7 @@ const OrderPage = () => {
       };
 
       const result = await createOrder(orderData).unwrap();
+
       toast.success(result.message || "Order created successfully");
       dispatch(clearCart());
       navigate("/success");

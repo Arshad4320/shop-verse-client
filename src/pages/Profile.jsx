@@ -61,8 +61,7 @@ const Profile = () => {
                 key={index}
                 className=" rounded-lg p-5 shadow-sm hover:shadow-md transition bg-gray-50"
               >
-                <div className="flex flex-col sm:flex-row space-y-4  sm:justify-between items-start">
-                  {/* Order Info */}
+                <div className="flex flex-col sm:flex-row space-y-4 sm:justify-between items-start">
                   <div className="space-y-1">
                     <p className="font-semibold text-gray-800">
                       Order #{order._id.slice(0, 8)}
@@ -73,37 +72,51 @@ const Profile = () => {
                       <span className="font-medium">{order.item.length}</span>
                     </p>
 
+                    {/* Conditional Customer Name */}
                     <p className="text-sm text-gray-600">
-                      Customer: {order?.user?.name}
+                      Customer:{" "}
+                      <span className="font-medium">
+                        {order?.address?.name?.trim()
+                          ? order.address.name
+                          : user?.name}
+                      </span>
                     </p>
 
                     <p className="text-sm text-gray-600">
-                      Address: {order.address.city}, {order.address.upozilla}
+                      Address:{" "}
+                      {order?.address?.city
+                        ? order.address.city
+                        : user?.address?.city}
+                      ,{" "}
+                      {order?.address?.upozilla
+                        ? order.address.upozilla
+                        : user?.address?.upozilla}
                     </p>
 
                     <p className="text-sm text-gray-600">
-                      Phone: {order.address.phone}
+                      Phone:{" "}
+                      {order?.address?.phone
+                        ? order.address.phone
+                        : user?.address?.phone}
                     </p>
 
                     <p className="text-sm text-gray-600">
                       Payment: {order.paymentMethod}{" "}
                       <span
-                        className={`px-2 py-0.5 rounded text-white ml-1 text-xs
-                          ${
-                            order.paymentStatus === "Paid"
-                              ? "bg-green-600"
-                              : "bg-yellow-600"
-                          }`}
+                        className={`px-2 py-0.5 rounded text-white ml-1 text-xs ${
+                          order.paymentStatus === "Paid"
+                            ? "bg-green-600"
+                            : "bg-yellow-600"
+                        }`}
                       >
                         {order.paymentStatus}
                       </span>
                     </p>
                   </div>
 
-                  {/* View Button */}
                   <button
                     onClick={() => openModal(order)}
-                    className="px-2 py-1  text-primary text-2xl rounded-md hover:text-purple-700 transition"
+                    className="px-2 py-1 text-primary text-2xl rounded-md hover:text-purple-700 transition"
                   >
                     <FaRegEyeSlash />
                   </button>

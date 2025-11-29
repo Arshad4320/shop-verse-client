@@ -29,6 +29,7 @@ const orderApi = apiSlice.injectEndpoints({
           url: `query/get-orders?${params.toString()}`,
         };
       },
+      providesTags: ["Order"],
     }),
     getSingleOrder: builder.query({
       query: (id) => ({
