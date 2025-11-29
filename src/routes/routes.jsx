@@ -18,7 +18,7 @@ import CategoryDetails from "../pages/CategoryDetails";
 import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
-import PrivetRoute from "../utilitis/privetRoute";
+import PrivetRoute from "../utilitis/PrivetRoute";
 import OrderSuccess from "../pages/OrderSuccess";
 import OrderPage from "../pages/Order";
 // import Electronics from "../components/categoryProduct/Electronics";
