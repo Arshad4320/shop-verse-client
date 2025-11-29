@@ -18,7 +18,18 @@ const orderApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["Order"],
     }),
-
+    getQueryOrder: builder.query({
+      query: ({ search, limit, page } = {}) => {
+        const params = new URLSearchParams();
+        if (search) params.append("search", search);
+        if (page) params.append("page", page);
+        if (limit) params.append("limit", limit);
+        return {
+          method: "Get",
+          url: `query/get-orders?${params.toString()}`,
+        };
+      },
+    }),
     getSingleOrder: builder.query({
       query: (id) => ({
         method: "GET",
@@ -49,6 +60,7 @@ const orderApi = apiSlice.injectEndpoints({
 export const {
   useCreateOrderMutation,
   useGetAllOrdersQuery,
+  useGetQueryOrderQuery,
   useGetSingleOrderQuery,
   useUpdateOrderMutation,
   useDeleteOrderMutation,

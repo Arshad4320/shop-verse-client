@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 const Products = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);

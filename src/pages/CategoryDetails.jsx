@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetSingleCategoryQuery } from "../redux/features/category/categoryApi";
 import { Link, useParams } from "react-router";
 import { useGetProductQuery } from "../redux/features/product/productApi";
@@ -9,10 +9,12 @@ const CategoryDetails = () => {
   const { data: category } = useGetSingleCategoryQuery(id);
   const { data: products } = useGetProductQuery();
 
-  const filteredData = products?.data?.result?.filter(
+  const filteredData = products?.data?.filter(
     (item) => item.categoryId?._id === category?.data?._id
   );
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [filteredData]);
   return (
     <div className="max-w-7xl mx-auto py-8">
       {!filteredData || filteredData.length === 0 ? (

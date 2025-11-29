@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -27,7 +27,9 @@ const OrderPage = () => {
       paymentStatus: "Pending",
     },
   });
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [cartItems]);
   const onSubmit = async (data) => {
     try {
       const orderData = {
@@ -51,7 +53,8 @@ const OrderPage = () => {
       toast.error(err.message || "Something went wrong");
     }
   };
-
+  const inputClass =
+    "w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none mb-3";
   return (
     <div className="max-w-7xl mx-auto p-6 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-center lg:text-left">
@@ -80,7 +83,7 @@ const OrderPage = () => {
           </div>
 
           {/* Cart Totals */}
-          <div className="mt-4 border-t pt-2 font-semibold text-lg flex justify-between">
+          <div className="mt-4 border-t border-t-primary pt-2 font-semibold text-lg flex justify-between">
             <p>Total Quantity: {totalQty}</p>
             <p>Total Price: ৳ {Math.ceil(totalPrice)}</p>
           </div>
@@ -96,33 +99,30 @@ const OrderPage = () => {
           <input
             {...register("address.name")}
             placeholder="Full Name"
-            className="w-full border p-2 rounded mb-3"
+            className={inputClass}
           />
 
           <input
             {...register("address.phone")}
             placeholder="Phone"
-            className="w-full border p-2 rounded mb-3"
+            className={inputClass}
           />
 
           <input
             {...register("address.upozilla")}
             placeholder="Upozilla"
-            className="w-full border p-2 rounded mb-3"
+            className={inputClass}
           />
 
           <input
             {...register("address.city")}
             placeholder="City"
-            className="w-full border p-2 rounded mb-4"
+            className={inputClass}
           />
 
           <h2 className="text-xl font-semibold mb-2">Payment Method</h2>
 
-          <select
-            {...register("paymentMethod")}
-            className="w-full border p-2 rounded mb-4"
-          >
+          <select {...register("paymentMethod")} className={inputClass}>
             <option value="COD">Cash on Delivery</option>
             <option value="Bkash">Bkash</option>
             <option value="Nagad">Nagad</option>

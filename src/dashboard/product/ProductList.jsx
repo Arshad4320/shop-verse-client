@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
 import {
   useDeleteProductMutation,
-  useGetProductQuery,
+  useQueryProductsQuery,
 } from "../../redux/features/product/productApi";
 import DeleteModal from "./../../components/DeleteModal";
 
 const ProductList = () => {
-  const { data } = useGetProductQuery();
-
+  const [page, setPage] = useState(1);
+  const { data } = useQueryProductsQuery({ page });
+  const totalPage = data?.data?.meta?.totalPage;
   const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
   const openModal = (item) => {
     setDeleteItem(item);
     setIsOpen(true);
@@ -39,8 +42,8 @@ const ProductList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 py-8">
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+    <div className="min-h-screen bg-gray-100 px-4 py-4">
+      <h2 className="text-2xl font-semibold mb-2 text-gray-800">
         Products List
       </h2>
 
@@ -121,7 +124,31 @@ const ProductList = () => {
           </tbody>
         </table>
       </div>
+      <div className="flex justify-center items-center gap-4 my-8 f">
+        <button
+          disabled={page === 1}
+          onClick={() => {
+            setPage(page - 1);
+          }}
+          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
+        >
+          Prev
+        </button>
 
+        <span className="font-semibold bg-primary text-white px-3 py-1">
+          {page}
+        </span>
+
+        <button
+          disabled={page === totalPage}
+          onClick={() => {
+            setPage(page + 1);
+          }}
+          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
+        >
+          Next
+        </button>
+      </div>
       <DeleteModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}

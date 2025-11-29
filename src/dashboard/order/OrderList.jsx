@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   useDeleteOrderMutation,
   useGetAllOrdersQuery,
+  useGetQueryOrderQuery,
 } from "../../redux/features/order/order";
 import { FaBangladeshiTakaSign, FaRegEyeSlash } from "react-icons/fa6";
 import ProductViewModal from "../../components/ProductViewModal";
@@ -9,7 +10,17 @@ import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 const OrderList = () => {
   const [deleteItem] = useDeleteOrderMutation();
-  const { data: orders, isLoading, isError } = useGetAllOrdersQuery();
+  const [page, setPage] = useState(1);
+  console.log(page);
+  const [search, setSearch] = useState("");
+  const {
+    data: orders,
+    isLoading,
+    isError,
+  } = useGetQueryOrderQuery({ page, search });
+
+  const totalPage = orders?.data?.meta?.totalPage;
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const openModal = (order) => {
@@ -39,9 +50,9 @@ const OrderList = () => {
     <div className="bg-white p-4 rounded-xl shadow-sm ">
       <h2 className="text-xl font-semibold mb-4">Order List</h2>
 
-      {orders?.data?.length > 0 ? (
+      {orders?.data?.result?.length > 0 ? (
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {orders?.data?.map((order, index) => (
+          {orders?.data?.result?.map((order, index) => (
             <div key={index} className=" rounded-lg p-5 shadow bg-gray-50">
               <div className="flex flex-col sm:flex-row space-y-4  sm:justify-between items-start">
                 {/* Order Info */}
@@ -106,6 +117,32 @@ const OrderList = () => {
       ) : (
         <p className="text-gray-600">No orders found</p>
       )}
+
+      <div className="flex justify-center items-center gap-4 my-8 f">
+        <button
+          disabled={page === 1}
+          onClick={() => {
+            setPage(page - 1);
+          }}
+          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
+        >
+          Prev
+        </button>
+
+        <span className="font-semibold bg-primary text-white px-3 py-1">
+          {page}
+        </span>
+
+        <button
+          disabled={page === totalPage}
+          onClick={() => {
+            setPage(page + 1);
+          }}
+          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
+        >
+          Next
+        </button>
+      </div>
       <ProductViewModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
