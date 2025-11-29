@@ -95,8 +95,8 @@ const Navbar = () => {
     <nav className="fixed w-full top-0 left-0 z-60 shadow text-md font-medium bg-white">
       <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center h-16">
         {/* Logo */}
-        <div className="text-xl font-bold">
-          <Link to="/">Brand</Link>
+        <div className="text-2xl text-primary italic font-bold">
+          <Link to="/">NextGenTech</Link>
         </div>
 
         {/* Desktop Menu */}
