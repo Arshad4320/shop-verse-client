@@ -21,7 +21,9 @@ const Profile = () => {
   return (
     <div className="mx-auto max-w-5xl my-10 p-5 space-y-4">
       <div className="bg-white p-6 rounded-xl shadow-sm ">
-        <h1 className="text-2xl font-semibold">Welcome, {user?.name} 👋</h1>
+        <h1 className="text-xl sm:text-2xl font-semibold text-text">
+          Welcome, {user?.name}👋
+        </h1>
         <p className="text-gray-600 mt-1">Manage your account and orders</p>
       </div>
 
@@ -61,7 +63,7 @@ const Profile = () => {
                 key={index}
                 className=" rounded-lg p-5 shadow-sm hover:shadow-md transition bg-gray-50"
               >
-                <div className="flex flex-col sm:flex-row space-y-4 sm:justify-between items-start">
+                <div className="flex  justify-between items-start">
                   <div className="space-y-1">
                     <p className="font-semibold text-gray-800">
                       Order #{order._id.slice(0, 8)}

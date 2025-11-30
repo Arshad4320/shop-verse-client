@@ -58,15 +58,17 @@ const OrderPage = () => {
     "w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none mb-3";
   return (
     <div className="max-w-7xl mx-auto p-6 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-center lg:text-left">
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 lg:mb-6 text-center text-text">
         Checkout
       </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* <h1 className="text-3xl font-bold mb-6 text-center lg:text-left">
+        Checkout
+      </h1> */}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Side - Cart Summary */}
         <div className="bg-white p-4 rounded-xl shadow flex flex-col">
-          <h2 className="text-xl font-semibold mb-4">Your Items</h2>
-
           <div className="space-y-3 max-h-[400px] overflow-y-auto">
             {cartItems.map((item) => (
               <div key={item._id} className="flex items-center gap-4 p-3 ">
@@ -74,9 +76,9 @@ const OrderPage = () => {
                   src={item.image}
                   className="w-20 h-20 rounded object-cover"
                 />
-                <div className="flex-1">
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p>Qty: {item.qty}</p>
+                <div className="flex-1 text-text">
+                  <h3 className="font-semibold ">{item.name}</h3>
+                  <p>Quantity: {item.qty}</p>
                   <p>Price: ৳ {Math.ceil(item.discountPrice || item.price)}</p>
                 </div>
               </div>
@@ -84,9 +86,9 @@ const OrderPage = () => {
           </div>
 
           {/* Cart Totals */}
-          <div className="mt-4 border-t border-t-primary pt-2 font-semibold text-lg flex justify-between">
-            <p>Total Quantity: {totalQty}</p>
-            <p>Total Price: ৳ {Math.ceil(totalPrice)}</p>
+          <div className="mt-4 border-t border-t-primary pt-2 font-semibold text-text text-md flex justify-between">
+            <p>Quantity: {totalQty}</p>
+            <p>Total: ৳ {Math.ceil(totalPrice)}</p>
           </div>
         </div>
 
@@ -95,7 +97,9 @@ const OrderPage = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white p-4 rounded-xl shadow flex flex-col"
         >
-          <h2 className="text-xl font-semibold mb-4">Shipping Details</h2>
+          <h2 className="text-lg md:text-xl font-semibold mb-4 text-text">
+            Shipping Details
+          </h2>
 
           <input
             {...register("address.name")}
@@ -121,7 +125,9 @@ const OrderPage = () => {
             className={inputClass}
           />
 
-          <h2 className="text-xl font-semibold mb-2">Payment Method</h2>
+          <h2 className="text-lg md:text-xl font-semibold text-text mb-2">
+            Payment Method
+          </h2>
 
           <select {...register("paymentMethod")} className={inputClass}>
             <option value="COD">Cash on Delivery</option>

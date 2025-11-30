@@ -17,11 +17,13 @@ const Cart = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 lg:mb-6 text-center text-text">
+        Your Cart
+      </h1>
 
       {cartItems.length === 0 ? (
         <div className="text-center mt-20">
-          <p className="text-xl mb-4">Your cart is empty.</p>
+          <p className="text-xl mb-4 text-text">Your cart is empty.</p>
           <Link
             to="/products"
             className="px-6 py-2 bg-primary text-white rounded"
@@ -46,34 +48,41 @@ const Cart = () => {
                   />
 
                   <div className="flex-1">
-                    <h2 className="text-lg font-semibold">{item.name}</h2>
-                    <p className="text-primary font-semibold mt-1">
-                      ৳ {item.discountPrice || item.price}
+                    <div className="flex justify-between">
+                      <h2 className="text-md font-medium text-text">
+                        {item.name}
+                      </h2>
+                      <button
+                        onClick={() => dispatch(removeFromCart(item._id))}
+                        className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                      >
+                        X
+                      </button>
+                    </div>
+                    <p className="text-primary font-semibold ">
+                      ৳ {Math.ceil(item.discountPrice) || Math.ceil(item.price)}
                     </p>
-                    <p className="text-sm text-gray-500">Qty: {item.qty}</p>
+                    <p className="text-sm text-gray-500 medium">
+                      Quantity: {item.qty}
+                    </p>
                   </div>
                 </div>
-
-                <button
-                  onClick={() => dispatch(removeFromCart(item._id))}
-                  className="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                >
-                  Remove
-                </button>
               </div>
             ))}
           </div>
 
           {/* Summary */}
           <div className="bg-white shadow-md rounded-xl p-4 h-fit">
-            <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+            <h2 className="text-xl font-semibold mb-4 text-text">
+              Order Summary
+            </h2>
 
-            <div className="flex justify-between mb-2">
+            <div className="flex justify-between mb-2 font-semibold text-text">
               <p>Total Items:</p>
               <p>{totalQty}</p>
             </div>
 
-            <div className="flex justify-between mb-2">
+            <div className="flex justify-between mb-2 font-semibold text-text">
               <p>Total Price:</p>
               <p>৳ {Math.ceil(totalPrice)}</p>
             </div>
