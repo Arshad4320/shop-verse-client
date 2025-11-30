@@ -16,7 +16,7 @@ const Products = () => {
   const totalPage = data?.data?.meta?.totalPage || 1;
 
   return (
-    <div className="w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <Heading text={"Products"} />
 
       {/* Search Box */}

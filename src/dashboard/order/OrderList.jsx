@@ -19,7 +19,7 @@ const OrderList = () => {
     isLoading,
     isError,
   } = useGetQueryOrderQuery({ page, search });
-  console.log(orders.data);
+
   const totalPage = orders?.data?.meta?.totalPage;
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
