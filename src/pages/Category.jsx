@@ -6,7 +6,7 @@ import CategoryCard from "../components/CategoryCard";
 const Category = () => {
   const { data } = useGetCategoryQuery();
   return (
-    <div className="py-10">
+    <div className="py-6">
       {data?.data?.length > 0 && (
         <>
           <Heading text={"Categories"} />
