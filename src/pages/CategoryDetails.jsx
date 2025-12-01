@@ -20,7 +20,7 @@ const CategoryDetails = () => {
       {!filteredData || filteredData.length === 0 ? (
         <>
           {" "}
-          <p className="flex items-center h-[350px] justify-center  text-primary text-3xl font-bold">
+          <p className="flex items-center h-[350px] justify-center  text-primary text-2xl md:text-3xl font-bold">
             Products not found! This category is empty.
             <Link className="underline" to="/">
               Back to home
@@ -28,7 +28,7 @@ const CategoryDetails = () => {
           </p>
         </>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-6 lg:mx-0">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mx-6 lg:mx-0">
           {filteredData.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}

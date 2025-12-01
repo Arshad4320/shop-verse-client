@@ -149,12 +149,12 @@ const ProductDetails = () => {
             </div>
 
             {/* Buttons */}
-            <div className="flex flex-col md:flex-row gap-4 mt-6">
+            <div className="flex flex-row gap-4 mt-6">
               <Button onClick={handleAddToCart} text={"Add To Cart"} />
 
               <button
                 onClick={handleCheckout}
-                className="px-6 py-1 bg-success text-white cursor-pointer flex items-center justify-center rounded hover:bg-green-700"
+                className="px-6 py-1 bg-success w-full text-white cursor-pointer flex items-center justify-center rounded hover:bg-green-700"
               >
                 Buy Now
               </button>
@@ -171,7 +171,7 @@ const ProductDetails = () => {
         {filteredData?.length > 0 && (
           <>
             <h2 className="text-xl font-semibold my-4">Related Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mt-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mt-6">
               {filteredData?.map((item) => (
                 <Link key={item._id} to={`/product/details/${item._id}`}>
                   <ProductCard product={item} />
