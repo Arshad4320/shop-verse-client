@@ -60,7 +60,7 @@ const HomeHeader = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-auto max-h-[45vh] sm:max-h-[60vh] md:max-h-[80vh] object-cover object-center"
+              className="w-full  max-h-[45vh] sm:max-h-[55vh] md:max-h-[75vh] object-cover object-center"
               loading="lazy"
             />
 
@@ -80,11 +80,11 @@ const HomeHeader = () => {
               {/* Responsive Buttons */}
               <Link
                 to="/products"
-                className="flex flex-col lg:flex-row gap-3 mt-4 w-full max-w-xs md:max-w-sm mx-auto"
+                className="flex flex-row gap-3 mt-4 w-full max-w-xs md:max-w-sm mx-auto"
               >
                 <Button text={" Shop Now"} />
-                <button className="w-full md:w-auto text-sm md:text-md px-3 sm:px-4 md:px-8 py-2 border border-white text-white rounded font-semibold hover:bg-primary hover:text-white transition hover:border-primary cursor-pointer">
-                  View Collections
+                <button className="w-full md:w-auto text-sm md:text-md px-3 sm:px-4 md:px-8 py-1 md:py-2 border border-white text-white rounded font-semibold hover:bg-primary hover:text-white transition hover:border-primary cursor-pointer">
+                  Collections
                 </button>
               </Link>
             </div>

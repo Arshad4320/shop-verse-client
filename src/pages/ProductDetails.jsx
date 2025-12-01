@@ -171,7 +171,7 @@ const ProductDetails = () => {
         {filteredData?.length > 0 && (
           <>
             <h2 className="text-xl font-semibold my-4">Related Products</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mt-6">
+            <div className="grid grid-cols-2 md:grid-cols-3  gap-4 md:gap-5 mt-6">
               {filteredData?.map((item) => (
                 <Link key={item._id} to={`/product/details/${item._id}`}>
                   <ProductCard product={item} />
@@ -186,7 +186,7 @@ const ProductDetails = () => {
       <div className="lg:col-span-3 bg-white rounded  py-2 px-4 h-fit">
         <p className="text-xl font-bold mb-4">Browse More Categories</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 mt-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4 mt-4">
           {filterCategory?.map((item) => (
             <CategoryCard key={item._id} item={item} />
           ))}
