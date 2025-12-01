@@ -5,6 +5,7 @@ import SecondaryButton from "./SecondaryButton";
 import { Link, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/features/cart/cart";
+
 const ProductCard = ({ product }) => {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -39,10 +40,10 @@ const ProductCard = ({ product }) => {
   const { name, discount, price, image, _id, discountPrice } = product;
 
   return (
-    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer relative duration-300 h-[420px] flex flex-col">
+    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer relative duration-300 h-[330px] md:h-[420px] flex flex-col">
       {/* Image */}
       <Link to={`/product/details/${_id}`} className="flex-1">
-        <div className="w-full h-56 overflow-hidden">
+        <div className="w-full h-42 md:h-56 overflow-hidden">
           <img
             src={image}
             alt={name}
@@ -51,14 +52,14 @@ const ProductCard = ({ product }) => {
         </div>
 
         {discount > 0 && (
-          <div className="bg-success absolute w-10 left-2  top-2 h-10 rounded-full flex items-center justify-center text-white font-semibold gap-1">
+          <div className="bg-success absolute w-10 left-2  top-2 h-10 rounded-full flex items-center justify-center text-white text-[13px] md:text-[15px] font-semibold gap-1">
             -{discount}%
           </div>
         )}
 
         {/* Content */}
         <div className="p-3">
-          <h3 className="text-sm font-bold text-text text-center mb-2">
+          <h3 className="  text-[13px] md:text-[15px] font-semibold md:font-bold text-text text-center mb-2">
             {name}
           </h3>
 
@@ -67,7 +68,7 @@ const ProductCard = ({ product }) => {
               className={`${
                 discountPrice > 0 && discount > 0
                   ? "line-through text-text flex gap-1 items-center"
-                  : "flex gap-1 items-center text-success font-bold"
+                  : "flex gap-1 items-center text-success text-[13px] md:text-[15px] font-bold"
               }`}
             >
               <FaBangladeshiTakaSign />{" "}
@@ -75,7 +76,7 @@ const ProductCard = ({ product }) => {
             </span>
 
             {discountPrice > 0 && discount > 0 && (
-              <span className="flex gap-1 items-center text-success font-bold">
+              <span className="flex gap-1 items-center text-success  text-[13px] md:text-[15px] font-bold">
                 <FaBangladeshiTakaSign /> {Math.ceil(discountPrice)}
               </span>
             )}
@@ -86,6 +87,7 @@ const ProductCard = ({ product }) => {
       {/* Bottom Buttons */}
       <div className="p-4 pt-0 flex flex-col gap-2">
         <Button onClick={handleCheckout} text="Buy Now" />
+
         <SecondaryButton onClick={handleAddToCart} text="Add To Cart" />
       </div>
     </div>

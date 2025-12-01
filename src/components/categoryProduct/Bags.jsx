@@ -12,11 +12,11 @@ const Bags = () => {
   );
 
   return (
-    <div className="max-w-7xl w-full mx-auto px-4">
+    <div className="max-w-7xl w-full mx-auto ">
       {filteredData?.length > 0 && (
         <>
           <Heading text={"Bags & Accessories"} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mt-6">
             {filteredData?.map((product) => (
               <ProductCard product={product} key={product._id} />
             ))}

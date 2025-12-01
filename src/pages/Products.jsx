@@ -16,11 +16,11 @@ const Products = () => {
   const totalPage = data?.data?.meta?.totalPage || 1;
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl lg:mx-auto mx-4 ">
       <Heading text={"Products"} />
 
       {/* Search Box */}
-      <div className="my-4">
+      <div className=" ">
         <input
           type="text"
           placeholder="Search your favorite product or category or brand"
@@ -34,14 +34,14 @@ const Products = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 ">
         {products.map((product) => (
           <ProductCard product={product} key={product._id} />
         ))}
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center items-center gap-4 my-8 f">
+      <div className="flex justify-center items-center gap-4 my-8 ">
         <button
           disabled={page === 1}
           onClick={() => setPage((p) => p - 1)}

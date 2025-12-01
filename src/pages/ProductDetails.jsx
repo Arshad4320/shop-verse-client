@@ -183,7 +183,7 @@ const ProductDetails = () => {
       </div>
 
       {/* Right Sidebar */}
-      <div className="lg:col-span-3 bg-white rounded shadow-md py-2 px-4 h-fit">
+      <div className="lg:col-span-3 bg-white rounded  py-2 px-4 h-fit">
         <p className="text-xl font-bold mb-4">Browse More Categories</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 mt-4">
