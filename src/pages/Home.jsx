@@ -16,9 +16,9 @@ const Home = () => {
         <section>
           <Category />
         </section>
-        <section>
+        {/* <section>
           <Products />
-        </section>
+        </section> */}
         <section>
           <Bags />
         </section>
