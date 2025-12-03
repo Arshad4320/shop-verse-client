@@ -81,7 +81,7 @@ const ProductDetails = () => {
             <img
               src={product?.image}
               alt={product?.name}
-              className="rounded-lg shadow-lg w-full h-[300px] sm:h-[350px] md:h-[380px]"
+              className=" w-full h-[300px] sm:h-[350px] md:h-[380px]"
             />
             {product?.discount > 0 && (
               <span className="absolute top-3 left-3 bg-success text-white px-3 py-1 rounded-md text-sm">
