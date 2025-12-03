@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
     };
     dispatch(addToCart(cartItem));
   };
-  console.log(handleAddToCart());
+  // console.log(handleAddToCart());
   const handleCheckout = () => {
     const existingItem = cartItems.find((item) => item._id === product?._id);
 

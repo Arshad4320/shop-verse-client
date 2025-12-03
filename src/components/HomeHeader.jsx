@@ -54,11 +54,11 @@ const HomeHeader = () => {
         showIndicators={false}
       > */}
       {slides.map((slide, index) => (
-        <div className="relative">
+        <div key={index} className="relative">
           {/* Image */}
 
           <img
-            src={slide.img}
+            src={slide.image}
             alt={slide.title}
             className="w-full  max-h-[45vh] sm:max-h-[55vh] md:max-h-[75vh] object-cover object-center"
             loading="lazy"
