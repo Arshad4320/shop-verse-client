@@ -58,7 +58,7 @@ const HomeHeader = () => {
           {/* Image */}
 
           <img
-            src={slide.img3}
+            src={slide.img}
             alt={slide.title}
             className="w-full  max-h-[45vh] sm:max-h-[55vh] md:max-h-[75vh] object-cover object-center"
             loading="lazy"
