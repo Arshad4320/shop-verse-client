@@ -23,13 +23,13 @@ const ProductDetails = () => {
 
   const filteredData = products?.data?.filter(
     (item) =>
-      item._id !== id && item.categoryId._id === data?.data?.categoryId._id
+      item?._id !== id && item?.categoryId?._id === data?.data?.categoryId._id
   );
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [filteredData]);
   const filterCategory = category?.data?.filter(
-    (item) => item._id !== data?.data.categoryId._id
+    (item) => item?._id !== data?.data?.categoryId?._id
   );
 
   const [qty, setQty] = useState(1);

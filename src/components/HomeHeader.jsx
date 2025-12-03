@@ -13,37 +13,37 @@ import { Link } from "react-router";
 
 const HomeHeader = () => {
   const slides = [
-    // {
-    //   image: img,
-    //   title: "Kids' Fashion Collection",
-    //   text: "Cute and comfy outfits for your little ones.",
-    // },
-    // {
-    //   image: img2,
-    //   title: "Stylish Accessories",
-    //   text: "Complete your look with the perfect accessories.",
-    // },
+    {
+      image: img,
+      title: "Kids' Fashion Collection",
+      text: "Cute and comfy outfits for your little ones.",
+    },
+    {
+      image: img2,
+      title: "Stylish Accessories",
+      text: "Complete your look with the perfect accessories.",
+    },
     {
       image: img3,
       title: "Latest Tech Gadgets",
       text: "Innovative gadgets to make life easier and fun.",
     },
-    // {
-    //   image: img4,
-    //   title: "Men's Fashion",
-    //   text: "Trendy and comfortable clothing for men.",
-    // },
-    // {
-    //   image: img5,
-    //   title: "Women's Fashion",
-    //   text: "Elegant and stylish outfits for every occasion.",
-    // },
+    {
+      image: img4,
+      title: "Men's Fashion",
+      text: "Trendy and comfortable clothing for men.",
+    },
+    {
+      image: img5,
+      title: "Women's Fashion",
+      text: "Elegant and stylish outfits for every occasion.",
+    },
   ];
   return (
     <div className="w-full ">
       {/* mt-[70px] navbar overlap fix (if navbar is fixed) */}
 
-      {/* <Carousel
+      <Carousel
         className=""
         showArrows={true}
         autoPlay={true}
@@ -52,45 +52,45 @@ const HomeHeader = () => {
         showThumbs={false}
         showStatus={false}
         showIndicators={false}
-      > */}
-      {slides.map((slide, index) => (
-        <div key={index} className="relative">
-          {/* Image */}
+      >
+        {slides.map((slide, index) => (
+          <div key={index} className="relative">
+            {/* Image */}
 
-          <img
-            src={slide.image}
-            alt={slide.title}
-            className="w-full  max-h-[45vh] sm:max-h-[55vh] md:max-h-[75vh] object-cover object-center"
-            loading="lazy"
-          />
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full  max-h-[45vh] sm:max-h-[55vh] md:max-h-[75vh] object-cover object-center"
+              loading="lazy"
+            />
 
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/60"></div>
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/60"></div>
 
-          {/* Text + Buttons */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white drop-shadow-lg">
-              {slide.title}
-            </h1>
+            {/* Text + Buttons */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white drop-shadow-lg">
+                {slide.title}
+              </h1>
 
-            <p className="mt-2 text-white text-md md:text-lg lg:text-xl drop-shadow">
-              {slide.text}
-            </p>
+              <p className="mt-2 text-white text-md md:text-lg lg:text-xl drop-shadow">
+                {slide.text}
+              </p>
 
-            {/* Responsive Buttons */}
-            <Link
-              to="/products"
-              className="flex flex-row gap-3 mt-4 w-full max-w-xs md:max-w-sm mx-auto"
-            >
-              <Button text={" Shop Now"} />
-              <button className="w-full md:w-auto text-sm md:text-md px-3 sm:px-4 md:px-8 py-1 md:py-2 border border-white text-white rounded font-semibold hover:bg-primary hover:text-white transition hover:border-primary cursor-pointer">
-                Collections
-              </button>
-            </Link>
+              {/* Responsive Buttons */}
+              <Link
+                to="/products"
+                className="flex flex-row gap-3 mt-4 w-full max-w-xs md:max-w-sm mx-auto"
+              >
+                <Button text={" Shop Now"} />
+                <button className="w-full md:w-auto text-sm md:text-md px-3 sm:px-4 md:px-8 py-1 md:py-2 border border-white text-white rounded font-semibold hover:bg-primary hover:text-white transition hover:border-primary cursor-pointer">
+                  Collections
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
-      {/* </Carousel> */}
+        ))}
+      </Carousel>
     </div>
   );
 };

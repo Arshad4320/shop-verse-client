@@ -17,15 +17,18 @@ const cartSlice = createSlice({
 
       if (exist) {
         exist.qty += product.qty;
-        toast.success("product is added check to cart");
+        toast.success("Product added to cart");
       } else {
-        toast.success("product is added check to cart");
         state.cartItems.push({ ...product, qty: product.qty });
+        toast.success("Product added to cart");
       }
 
-      state.totalQty += product.qty;
-      state.totalPrice +=
-        product.qty * (product.discountPrice || product.price);
+      state.totalQty = state.cartItems.reduce((acc, item) => acc + item.qty, 0);
+      state.totalPrice = state.cartItems.reduce(
+        (acc, item) =>
+          acc + item.qty * Math.ceil(item.discountPrice || item.price),
+        0
+      );
     },
 
     removeFromCart: (state, action) => {
@@ -33,12 +36,17 @@ const cartSlice = createSlice({
       const item = state.cartItems.find((item) => item._id === id);
 
       if (item) {
-        toast.warn("remove item from your cart");
-        state.totalQty -= item.qty;
-        state.totalPrice -= item.qty * (item.discountPrice || item.price);
+        toast.warn("Item removed from cart");
       }
 
       state.cartItems = state.cartItems.filter((item) => item._id !== id);
+
+      state.totalQty = state.cartItems.reduce((acc, item) => acc + item.qty, 0);
+      state.totalPrice = state.cartItems.reduce(
+        (acc, item) =>
+          acc + item.qty * Math.ceil(item.discountPrice || item.price),
+        0
+      );
     },
 
     clearCart: (state) => {
@@ -46,8 +54,25 @@ const cartSlice = createSlice({
       state.totalQty = 0;
       state.totalPrice = 0;
     },
+
+    updateQty: (state, action) => {
+      const { id, qty } = action.payload;
+
+      const item = state.cartItems.find((item) => item._id === id);
+      if (item) {
+        item.qty = qty;
+      }
+
+      state.totalQty = state.cartItems.reduce((acc, item) => acc + item.qty, 0);
+      state.totalPrice = state.cartItems.reduce(
+        (acc, item) =>
+          acc + item.qty * Math.ceil(item.discountPrice || item.price),
+        0
+      );
+    },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, updateQty } =
+  cartSlice.actions;
 export default cartSlice.reducer;
