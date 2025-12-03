@@ -8,7 +8,7 @@ import LogoutButton from "./LogoutButton";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { totalQty } = useSelector((state) => state.cart);
+  const { totalQty, cartItems } = useSelector((state) => state.cart);
   const { user, token, isAuthenticated } = useSelector((state) => state.auth);
 
   const routeLinks = (
@@ -65,7 +65,7 @@ const Navbar = () => {
         <IoCartOutline size={20} />
 
         <span className="absolute -top-1 left-3 sm:-top-2  bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-          {totalQty}
+          {cartItems?.length}
         </span>
       </Link>
 

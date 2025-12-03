@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, clearCart } from "../redux/features/cart/cart";
 import { useNavigate, Link } from "react-router-dom";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ const Cart = () => {
   const { cartItems, totalPrice, totalQty } = useSelector(
     (state) => state.cart
   );
-
+  console.log(cartItems);
   const handleCheckout = () => {
     if (cartItems.length === 0) return;
     navigate("/order", { state: { cartItems, totalPrice } });
@@ -59,9 +60,53 @@ const Cart = () => {
                         X
                       </button>
                     </div>
-                    <p className="text-primary font-semibold ">
-                      ৳ {Math.ceil(item.discountPrice) || Math.ceil(item.price)}
-                    </p>
+                    <div className="flex gap-2 ">
+                      {/* <span
+                        className={`${
+                          item?.discountPrice > 0
+                            ? "line-through text-text flex gap-1 items-center"
+                            : " flex gap-1 items-center text-success text-[13px] md:text-[15px] font-bold"
+                        }`}
+                      >
+                        <FaBangladeshiTakaSign />{" "}
+                        {item?.discountPrice ? Math.ceil(item?.price) : null}
+                      </span> */}
+                      {/* <span
+                        className={`${
+                          item?.discountPrice > 0
+                            ? "line-through text-text flex gap-1 items-center"
+                            : " flex gap-1 items-center text-success text-[13px] md:text-[15px] font-bold"
+                        }`}
+                      >
+                        <FaBangladeshiTakaSign />{" "}
+                        {item?.discountPrice ? Math.ceil(item?.price) : null}
+                      </span> */}
+                      <span className="flex gap-1 items-center text-success  text-[13px] md:text-[15px] font-bold">
+                        {item?.discountPrice > 0 && (
+                          <span
+                            className={`${
+                              item?.discountPrice > 0
+                                ? "flex gap-1 items-center text-text line-through  text-[13px] md:text-[15px] font-bold"
+                                : "hidden"
+                            }`}
+                          >
+                            <FaBangladeshiTakaSign />
+                            {Math.ceil(item?.price)}
+                          </span>
+                        )}
+                      </span>
+                      {item?.discountPrice > 0 ? (
+                        <span className="flex gap-1 items-center text-success  text-[13px] md:text-[15px] font-bold">
+                          <FaBangladeshiTakaSign />{" "}
+                          {Math.ceil(item?.discountPrice)}
+                        </span>
+                      ) : (
+                        <span className="flex gap-1 items-center text-success  text-[13px] md:text-[15px] font-bold">
+                          <FaBangladeshiTakaSign /> {Math.ceil(item?.price)}
+                        </span>
+                      )}
+                    </div>
+
                     <p className="text-sm text-gray-500 medium">
                       Quantity: {item.qty}
                     </p>

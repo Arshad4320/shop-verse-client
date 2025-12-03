@@ -11,7 +11,7 @@ const Category = () => {
         <>
           <Heading text={"Categories"} />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mx-4 lg:mx-0 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4  mt-6">
             {data?.data?.map((item) => (
               <CategoryCard key={item._id} item={item} />
             ))}

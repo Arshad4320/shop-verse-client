@@ -76,12 +76,12 @@ const ProductDetails = () => {
     <div className="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Left Section */}
       <div className="lg:col-span-9">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           <div className="relative">
             <img
               src={product?.image}
               alt={product?.name}
-              className="rounded-lg shadow-lg w-full h-[400px]"
+              className="rounded-lg shadow-lg w-full h-[300px] sm:h-[350px] md:h-[380px]"
             />
             {product?.discount > 0 && (
               <span className="absolute top-3 left-3 bg-success text-white px-3 py-1 rounded-md text-sm">
@@ -91,7 +91,9 @@ const ProductDetails = () => {
           </div>
 
           <div>
-            <h1 className="text-3xl font-bold mb-3">{product?.name}</h1>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3">
+              {product?.name}
+            </h1>
 
             {/* Price */}
             <div className="flex items-center gap-3">
@@ -183,7 +185,7 @@ const ProductDetails = () => {
       </div>
 
       {/* Right Sidebar */}
-      <div className="lg:col-span-3 bg-white rounded  py-2 px-4 h-fit">
+      <div className="lg:col-span-3 bg-white rounded  py-2  h-fit">
         <p className="text-xl font-bold mb-4">Browse More Categories</p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4 mt-4">
