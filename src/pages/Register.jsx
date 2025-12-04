@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useCreateUserMutation } from "../redux/features/auth/authApi";
 import { toast } from "react-toastify";
-
+import logo from "../assets/logo-2.png";
+import bg from "../assets/bg.avif";
 const Register = () => {
   const [createUser] = useCreateUserMutation();
   const location = useLocation();
@@ -29,21 +30,38 @@ const Register = () => {
   };
 
   const inputClass =
-    "w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none";
+    "w-full border border-primary/50 p-3 rounded-lg bg-white backdrop-blur-md text-text focus:border-primary focus:ring-2 focus:ring-primary w-full focus:outline-none transition-all ";
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-bg px-4">
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center px-4 relative"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-card shadow-md rounded-lg p-6 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4"
+        className="
+    backdrop-blur-xl bg-primary/10 shadow-2xl rounded-2xl 
+    py-6 px-6 sm:px-8 
+    w-full max-w-md md:max-w-2xl 
+    border border-white/20 
+    grid grid-cols-1 md:grid-cols-2 gap-4
+  "
       >
-        <h2 className="text-3xl font-bold col-span-1 md:col-span-2 text-center mb-2 text-primary">
+        {/* Logo */}
+        <div className="w-28 md:w-36 mx-auto col-span-1 md:col-span-2">
+          <Link to="/">
+            <img className="w-full h-full" src={logo} />
+          </Link>
+        </div>
+
+        {/* Title */}
+        <h2 className="text-3xl col-span-1 md:col-span-2 text-white font-bold mt-4 mb-3 text-center drop-shadow-md">
           Register
         </h2>
 
         {/* Name */}
         <div>
-          <label className="block font-semibold mb-1 text-text">Name</label>
+          <label className="font-semibold mb-1 text-white/90">Name</label>
           <input
             {...register("name", { required: "Name is required" })}
             className={inputClass}
@@ -56,7 +74,7 @@ const Register = () => {
 
         {/* Email */}
         <div>
-          <label className="block font-semibold mb-1 text-text">Email</label>
+          <label className="font-semibold mb-1 text-white/90">Email</label>
           <input
             {...register("email", {
               required: "Email is required",
@@ -75,15 +93,12 @@ const Register = () => {
 
         {/* Password */}
         <div>
-          <label className="block font-semibold mb-1 text-text">Password</label>
+          <label className="font-semibold mb-1 text-white/90">Password</label>
           <input
             type="password"
             {...register("password", {
               required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
+              minLength: { value: 6, message: "Minimum 6 characters" },
             })}
             className={inputClass}
             placeholder="Enter your password"
@@ -95,7 +110,7 @@ const Register = () => {
 
         {/* Phone */}
         <div>
-          <label className="block font-semibold mb-1 text-text">Phone</label>
+          <label className="font-semibold mb-1 text-white/90">Phone</label>
           <input
             {...register("address.phone")}
             className={inputClass}
@@ -103,51 +118,20 @@ const Register = () => {
           />
         </div>
 
-        {/* Upozilla */}
-        <div>
-          <label className="block font-semibold mb-1 text-text">Upozilla</label>
-          <input
-            {...register("address.upozilla")}
-            className={inputClass}
-            placeholder="Upozilla"
-          />
-        </div>
-
-        {/* City */}
-        <div>
-          <label className="block font-semibold mb-1 text-text">City</label>
-          <input
-            {...register("address.city")}
-            className={inputClass}
-            placeholder="City"
-          />
-        </div>
-
-        {/* User Type */}
-        <div>
-          <label className="block font-semibold mb-1 text-text">
-            User Type
-          </label>
-          <select {...register("userType")} className={inputClass}>
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-          </select>
-        </div>
-
-        {/* Submit Button */}
+        {/* Submit */}
         <div className="col-span-1 md:col-span-2 mt-2">
           <button
             type="submit"
-            className="w-full bg-primary text-white py-2 rounded hover:bg-purple-700 transition"
+            className="w-full bg-primary hover:bg-primary/90 text-white p-3 rounded-lg font-semibold transition-all shadow-lg"
           >
             Register
           </button>
 
-          <p className="text-center mt-3 text-sm text-text">
+          <p className="text-center mt-4 text-white/90 text-sm">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-primary font-semibold underline   "
+              className="text-yellow-300 font-semibold underline"
             >
               Login
             </Link>

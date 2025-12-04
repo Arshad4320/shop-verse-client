@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoCartOutline } from "react-icons/io5";
 import { logOut } from "../redux/features/auth/authSlice";
 import LogoutButton from "./LogoutButton";
+import logo from "../assets/logo-2.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -95,8 +96,10 @@ const Navbar = () => {
     <nav className="fixed w-full top-0 left-0 z-60 shadow text-md font-medium bg-white">
       <div className="max-w-7xl mx-auto px-4 lg:px-0 flex justify-between items-center h-16">
         {/* Logo */}
-        <div className="text-2xl text-primary italic font-bold">
-          <Link to="/">NextGenTech</Link>
+        <div className="text-2xl text-accent italic font-bold">
+          <Link className="flex items-center w-15" to="/">
+            <img src={logo} alt="" /> NextGenTech
+          </Link>
         </div>
 
         {/* Desktop Menu */}
