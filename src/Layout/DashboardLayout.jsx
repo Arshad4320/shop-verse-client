@@ -4,7 +4,7 @@ import { Divide as Hamburger } from "hamburger-react";
 import { useDispatch } from "react-redux";
 import { logOut } from "../redux/features/auth/authSlice";
 import LogoutButton from "../components/LogoutButton";
-
+import logo from "../assets/logo-3.png";
 const DashboardLayout = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,21 +27,15 @@ const DashboardLayout = ({ children }) => {
           ${open ? "translate-x-0" : "-translate-x-full"}
           md:translate-x-0 md:w-64 w-56 transition-transform duration-300`}
       >
-        <div className="p-4">
-          <h2 className="text-2xl font-bold text-primary">Dashboard</h2>
+        <div className="w-16 md:w-24 mx-4">
+          <Link to="/">
+            <img className="w-full h-full" src={logo} />
+          </Link>
         </div>
 
         <ul className="p-4 space-y-3 text-text">
           {/* Overview */}
-          <li>
-            <Link
-              to="/"
-              onClick={() => setOpen(false)}
-              className="block px-3 py-2 rounded hover:bg-secondary/20"
-            >
-              Home
-            </Link>
-          </li>
+
           <li>
             <Link
               to="/dashboard"

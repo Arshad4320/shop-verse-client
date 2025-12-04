@@ -6,7 +6,9 @@ import {
   useQueryProductsQuery,
 } from "../../redux/features/product/productApi";
 import DeleteModal from "./../../components/DeleteModal";
-
+import { FaEdit } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 const ProductList = () => {
   const [page, setPage] = useState(1);
   const { data } = useQueryProductsQuery({ page });
@@ -43,8 +45,14 @@ const ProductList = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-4">
-      <h2 className="text-2xl font-semibold mb-2 text-gray-800">
-        Products List
+      <h2 className="text-2xl font-semibold  text-gray-800 mb-4">
+        <span> Products List</span>{" "}
+        <Link
+          to="/dashboard/add-product "
+          className="underline text-sm text-primary mb-4"
+        >
+          Add Product
+        </Link>
       </h2>
 
       <div className="overflow-x-auto bg-white shadow rounded-lg">
@@ -52,6 +60,9 @@ const ProductList = () => {
           {/* Table Head */}
           <thead className="bg-gray-200 text-center">
             <tr>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                SI
+              </th>
               <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Name
               </th>
@@ -64,9 +75,9 @@ const ProductList = () => {
               <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Category
               </th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+              {/* <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Description
-              </th>
+              </th> */}
               <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
                 Image
               </th>
@@ -78,11 +89,20 @@ const ProductList = () => {
 
           {/* Table Body */}
           <tbody>
-            {data.data?.result?.map((item) => (
+            {data.data?.result?.map((item, i) => (
               <tr
                 key={item._id}
                 className="hover:bg-gray-50 border border-gray-300 text-center"
               >
+                <td className="px-4 py-2 border border-gray-300">{i + 1}</td>
+                <td className="px-4 py-2 border border-gray-300">
+                  <img
+                    src={item.image}
+                    alt="category"
+                    className="h-10 w-10 rounded object-cover border"
+                  />
+                </td>
+
                 <td className="px-4 py-2 text-gray-900 border border-gray-300">
                   {item.name.slice(0, 40)}
                 </td>
@@ -95,28 +115,21 @@ const ProductList = () => {
                 <td className="px-4 py-2 text-gray-900 border border-gray-300">
                   {item?.categoryId?.name}
                 </td>
-                <td className="px-4 py-2 text-gray-600 text-sm border border-gray-300">
+                {/* <td className="px-4 py-2 text-gray-600 text-sm border border-gray-300">
                   {item.description.slice(0, 80) + "...."}
-                </td>
-                <td className="px-4 py-2 border border-gray-300">
-                  <img
-                    src={item.image}
-                    alt="category"
-                    className="h-10 w-10 rounded object-cover border"
-                  />
-                </td>
-                <td className="px-4 py-2 flex justify-center items-center gap-2 ">
+                </td> */}
+                <td className=" py-2 flex justify-center items-center gap-2 ">
                   <Link to={`/dashboard/edit-product/${item._id}`}>
-                    <button className="px-3 py-1 text-sm bg-primary text-white rounded hover:bg-purple-700">
-                      Update
+                    <button className=" text-2xl  text-primary cursor-pointer">
+                      <FaEdit />
                     </button>
                   </Link>
 
                   <button
                     onClick={() => openModal(item._id)}
-                    className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+                    className=" text-2xl  text-danger cursor-pointer"
                   >
-                    Delete
+                    <MdDelete />
                   </button>
                 </td>
               </tr>
