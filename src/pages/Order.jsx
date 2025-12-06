@@ -42,6 +42,7 @@ const OrderPage = () => {
           product: i._id,
           quantity: i.qty,
           price: i.discountPrice || i.price,
+          images: i.images,
         })),
         address: data.address,
         paymentMethod: data.paymentMethod,
@@ -49,7 +50,9 @@ const OrderPage = () => {
       };
 
       const result = await createOrder(orderData).unwrap();
-      toast.success(result.message || "Order created successfully");
+      console.log(result);
+      result.success &&
+        toast.success(result.message || "Order created successfully");
       dispatch(clearCart());
       navigate("/success");
     } catch (err) {
@@ -183,7 +186,7 @@ const OrderPage = () => {
             {cartItems.map((item) => (
               <div key={item._id} className="flex items-center gap-4">
                 <img
-                  src={item.image}
+                  src={item.images}
                   alt={item.name}
                   className="w-20 h-20 rounded object-cover"
                 />

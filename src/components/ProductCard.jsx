@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import Button from "./Button";
 import SecondaryButton from "./SecondaryButton";
@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/features/cart/cart";
 
 const ProductCard = ({ product }) => {
+  const { name, discount, price, images, _id, discountPrice } = product;
+
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const ProductCard = ({ product }) => {
       name: product?.name,
       price: product?.price,
       discountPrice: product?.discountPrice,
-      image: product?.image,
+      images: images[0],
       qty: 1,
     };
     dispatch(addToCart(cartItem));
@@ -31,14 +33,13 @@ const ProductCard = ({ product }) => {
         name: product?.name,
         price: product?.price,
         discountPrice: product?.discountPrice,
-        image: product?.image,
+        images: images[0],
         qty: 1,
       };
       dispatch(addToCart(cartItem));
     }
     navigate("/order");
   };
-  const { name, discount, price, image, _id, discountPrice } = product;
 
   return (
     <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer relative duration-300 h-[330px] md:h-[420px] flex flex-col">
@@ -46,7 +47,7 @@ const ProductCard = ({ product }) => {
       <Link to={`/product/details/${_id}`} className="flex-1">
         <div className="w-full h-42 md:h-56 overflow-hidden">
           <img
-            src={image}
+            src={images[0]}
             alt={name}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           />
@@ -73,7 +74,7 @@ const ProductCard = ({ product }) => {
               }`}
             >
               <FaBangladeshiTakaSign />{" "}
-              {discountPrice ? Math.ceil(price) : null}
+              {discountPrice ? discountPrice : Math.ceil(price)}
             </span>
 
             {discountPrice > 0 && discount > 0 && (

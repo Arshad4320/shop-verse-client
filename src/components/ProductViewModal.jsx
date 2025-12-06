@@ -1,4 +1,5 @@
 const ProductViewModal = ({ isOpen, onClose, order }) => {
+  console.log(order);
   if (!isOpen || !order) return null;
 
   return (
@@ -24,7 +25,7 @@ const ProductViewModal = ({ isOpen, onClose, order }) => {
           {order.item.map((product) => (
             <div key={product._id} className="flex gap-3">
               <img
-                src={product?.product?.image}
+                src={product?.images}
                 className="w-14 h-14 rounded-lg border object-cover"
               />
               <div className="flex-1">

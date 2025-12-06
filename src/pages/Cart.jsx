@@ -14,7 +14,7 @@ const Cart = () => {
   const { cartItems, totalPrice, totalQty } = useSelector(
     (state) => state.cart
   );
-
+  console.log(cartItems);
   const handleQuantity = (id, type) => {
     const item = cartItems.find((i) => i._id === id);
     if (!item) return;
@@ -62,7 +62,7 @@ const Cart = () => {
                   className="flex  gap-4 p-4  bg-white shadow"
                 >
                   <img
-                    src={item.image}
+                    src={item.images}
                     alt={item.name}
                     className="w-28 h-28 object-cover "
                   />
