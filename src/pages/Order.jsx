@@ -30,7 +30,7 @@ const OrderPage = () => {
         upozilla: user?.address?.upozilla || "",
         city: user?.address?.city || "",
       },
-      paymentMethod: "Cash",
+      paymentMethod: "COD",
     },
   });
 
@@ -134,7 +134,7 @@ const OrderPage = () => {
             <label className="flex  gap-1 p-2  bg-gray-100 items-center border border-gray-400  rounded cursor-pointer hover:shadow-md transition">
               <input
                 type="radio"
-                value="Cash"
+                value="COD"
                 {...register("paymentMethod")}
                 className="mb-2"
                 defaultChecked

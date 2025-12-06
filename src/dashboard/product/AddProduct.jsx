@@ -19,9 +19,36 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm();
 
+  // const onSubmit = async (data) => {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("name", data.name);
+  //     formData.append("price", data.price);
+  //     formData.append("quantity", data.quantity);
+  //     formData.append("discount", data.discount);
+  //     formData.append("tags", data.tags);
+  //     formData.append("brand", data.brand);
+  //     formData.append("description", data.description);
+  //     formData.append("categoryId", data.categoryId);
+  //     if (data.images && data.images.length > 0) {
+  //       [...data.images].forEach((img) => {
+  //         formData.append("images", img);
+  //       });
+  //     }
+  //     const result = await createProduct(formData).unwrap();
+  //     toast.success(result.message);
+  //     console.log(result);
+  //     // reset();
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err.message || "failed to create product");
+  //   }
+  // };
+
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();
+
       formData.append("name", data.name);
       formData.append("price", data.price);
       formData.append("quantity", data.quantity);
@@ -30,17 +57,25 @@ const AddProduct = () => {
       formData.append("brand", data.brand);
       formData.append("description", data.description);
       formData.append("categoryId", data.categoryId);
-      if (data?.image && data.image[0]) formData.append("image", data.image[0]);
+      if (data.images && data.images.length > 0) {
+        [...data.images].forEach((file) => {
+          formData.append("images", file);
+        });
+      }
+
+      if (data.sizes && data.sizes.length > 0) {
+        data.sizes.forEach((size) => {
+          formData.append("sizes[]", size);
+        });
+      }
+
       const result = await createProduct(formData).unwrap();
-      toast.success(result.message);
-      console.log(result);
-      // reset();
+
+      result.success && toast.success(result.message);
     } catch (err) {
-      console.log(err);
       toast.error(err.message || "failed to create product");
     }
   };
-
   const inputClass =
     "w-full border border-accent p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none text-text";
 
@@ -139,18 +174,13 @@ const AddProduct = () => {
         </div>
         {/* Tags */}
         <div>
-          <label className="block font-semibold mb-1 text-gray-700">
-            Tags*
-          </label>
+          <label className="block font-semibold mb-1 text-gray-700">Tags</label>
           <input
             type="string"
-            {...register("tags", { required: "tags is required" })}
+            {...register("tags")}
             className={inputClass}
             placeholder="Enter tags"
           />
-          {errors.tags && (
-            <p className="text-red-500 text-sm mt-1">{errors.tags.message}</p>
-          )}
         </div>
         {/* Brand */}
         <div>
@@ -168,21 +198,52 @@ const AddProduct = () => {
           )}
         </div>
         {/* Image */}
-        <div className="">
+        {/* <div className="">
           <label className="block font-semibold mb-1 text-gray-700">
             Image*
           </label>
           <input
             type="file"
-            {...register("image", { required: "Image is required" })}
-            className={inputClass}
+            multiple
+            {...register("images", { required: "Images are required" })}
           />
           {errors.image && (
             <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>
           )}
+        </div> */}
+        <div>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Images*
+          </label>
+          <input
+            type="file"
+            multiple
+            {...register("images", { required: "Images are required" })}
+            className={inputClass}
+          />
+          {errors.images && (
+            <p className="text-red-500 text-sm mt-1">{errors.images.message}</p>
+          )}
+        </div>
+        <div>
+          <label className="block font-semibold mb-1 text-gray-700">
+            Sizes
+          </label>
+
+          <select
+            multiple
+            {...register("sizes")}
+            className={inputClass + " h-24"}
+          >
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
         </div>
         {/* Description */}
-        <div className="md:col-span-2">
+        <div className="">
           <label className="block font-semibold mb-1 text-gray-700">
             Description*
           </label>

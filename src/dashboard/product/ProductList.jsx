@@ -48,7 +48,7 @@ const ProductList = () => {
       <h2 className="text-2xl font-semibold  text-gray-800 mb-4">
         <span> Products List</span>{" "}
         <Link
-          to="/dashboard/add-product "
+          to="/dashboard/add-product"
           className="underline text-sm text-primary mb-4"
         >
           Add Product
