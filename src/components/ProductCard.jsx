@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/features/cart/cart";
 
 const ProductCard = ({ product }) => {
-  const { name, discount, price, images, _id, discountPrice } = product;
+  // console.log(product);
+  const { name, discount, price, images, _id, discountPrice, sizes } = product;
 
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const ProductCard = ({ product }) => {
       discountPrice: product?.discountPrice,
       images: images[0],
       qty: 1,
+      sizes: sizes[0],
     };
     dispatch(addToCart(cartItem));
   };
@@ -35,6 +37,7 @@ const ProductCard = ({ product }) => {
         discountPrice: product?.discountPrice,
         images: images[0],
         qty: 1,
+        sizes: sizes[0],
       };
       dispatch(addToCart(cartItem));
     }

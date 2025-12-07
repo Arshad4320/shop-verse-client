@@ -12,7 +12,7 @@ const Products = () => {
   }, [page]);
   const { data } = useQueryProductsQuery({ search, page, limit: 8 });
   const products = data?.data?.result || [];
-  console.log(products);
+
   const totalPage = data?.data?.meta?.totalPage || 1;
 
   return (

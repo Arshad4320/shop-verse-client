@@ -43,14 +43,16 @@ const OrderPage = () => {
           quantity: i.qty,
           price: i.discountPrice || i.price,
           images: i.images,
+          sizes: i.sizes,
         })),
+
         address: data.address,
         paymentMethod: data.paymentMethod,
         paymentStatus: "Pending",
       };
 
       const result = await createOrder(orderData).unwrap();
-      console.log(result);
+
       result.success &&
         toast.success(result.message || "Order created successfully");
       dispatch(clearCart());
