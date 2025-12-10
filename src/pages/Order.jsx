@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { useCreateOrderMutation } from "../redux/features/order/order";
 import { toast } from "react-toastify";
 import { clearCart } from "../redux/features/cart/cart";
+import { setOrderInfo } from "../redux/features/order/orderSlice";
 
 import cash from "../assets/cash.jpg";
 import bkash from "../assets/bkash.svg";
@@ -27,8 +28,8 @@ const OrderPage = () => {
         name: user?.name || "",
         email: user?.email || "",
         phone: user?.address?.phone || "",
-        upozilla: user?.address?.upozilla || "",
-        city: user?.address?.city || "",
+        upozila: "",
+        zila: "",
       },
       paymentMethod: "COD",
     },
@@ -37,7 +38,7 @@ const OrderPage = () => {
   const onSubmit = async (data) => {
     try {
       const orderData = {
-        user: user._id,
+        user: user?._id || null,
         item: cartItems.map((i) => ({
           product: i._id,
           quantity: i.qty,
@@ -45,13 +46,24 @@ const OrderPage = () => {
           images: i.images,
           sizes: i.sizes,
         })),
-
         address: data.address,
         paymentMethod: data.paymentMethod,
         paymentStatus: "Pending",
       };
 
       const result = await createOrder(orderData).unwrap();
+
+      // Save order info to redux for guest checkout
+      if (result?.data?.address) {
+        dispatch(
+          setOrderInfo({
+            name: result?.data?.address?.name,
+            phone: result?.data?.address?.phone,
+            upozila: result?.data?.address?.upozila,
+            zila: result?.data?.address?.zila,
+          })
+        );
+      }
 
       result.success &&
         toast.success(result.message || "Order created successfully");
@@ -70,7 +82,7 @@ const OrderPage = () => {
   }, [cartItems]);
 
   return (
-    <div className="max-w-7xl mx-auto  min-h-screen">
+    <div className="max-w-7xl mx-auto min-h-screen">
       <h1 className="text-3xl font-bold text-text py-10 text-center md:text-left">
         Checkout
       </h1>
@@ -85,18 +97,19 @@ const OrderPage = () => {
             Shipping Information
           </h2>
 
+          {/* Name */}
           <input
-            {...register("address.name")}
+            {...register("address.name", { required: "Name is required" })}
             placeholder="Full Name"
             className={inputClass}
-            required
           />
-          <input
-            {...register("address.email")}
-            placeholder="Email Address"
-            className={inputClass}
-            required
-          />
+          {errors?.address?.name && (
+            <p className="text-red-500 text-sm">
+              {errors.address.name.message}
+            </p>
+          )}
+
+          {/* Phone */}
           <input
             {...register("address.phone", {
               required: "Phone number is required",
@@ -109,72 +122,81 @@ const OrderPage = () => {
             className={inputClass}
             type="tel"
           />
-
           {errors?.address?.phone && (
             <p className="text-red-500 text-sm">
               {errors.address.phone.message}
             </p>
           )}
 
+          {/* Upozila */}
           <input
-            {...register("address.city")}
-            placeholder="City"
+            {...register("address.upozila", {
+              required: "Upozila is required",
+            })}
+            placeholder="Upozila"
             className={inputClass}
-            required
           />
-          <input
-            {...register("address.upozilla")}
-            placeholder="Upozilla"
-            className={inputClass}
-            required
-          />
+          {errors?.address?.upozila && (
+            <p className="text-red-500 text-sm">
+              {errors.address.upozila.message}
+            </p>
+          )}
 
+          {/* Zila */}
+          <input
+            {...register("address.zila", { required: "Zila is required" })}
+            placeholder="Zila"
+            className={inputClass}
+          />
+          {errors?.address?.zila && (
+            <p className="text-red-500 text-sm">
+              {errors.address.zila.message}
+            </p>
+          )}
+
+          {/* Payment Method */}
           <h3 className="text-xl font-semibold mt-4 text-text">
             Payment Method
           </h3>
-
-          {/* Payment Methods */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {/* Cash */}
-            <label className="flex  gap-1 p-2  bg-gray-100 items-center border border-gray-400  rounded cursor-pointer hover:shadow-md transition">
+            {/* COD */}
+            <label className="flex gap-1 p-2 bg-gray-100 items-center border border-gray-400 rounded cursor-pointer hover:shadow-md transition">
               <input
                 type="radio"
                 value="COD"
                 {...register("paymentMethod")}
-                className="mb-2"
                 defaultChecked
               />
-              <img src={cash} className="w-8 h-8 mb-1" alt="" />
+              <img src={cash} className="w-8 h-8" alt="COD" />
               <span className="text-gray-700 text-sm">COD</span>
             </label>
 
             {/* Bkash */}
-            <label className="flex  gap-1 p-2  bg-gray-100 items-center border border-gray-400  rounded cursor-pointer hover:shadow-md transition">
+            <label className="flex gap-1 p-2 bg-gray-100 items-center border border-gray-400 rounded cursor-pointer hover:shadow-md transition">
               <input
                 type="radio"
                 value="Bkash"
                 {...register("paymentMethod")}
               />
-              <img src={bkash} className="w-8 h-8 " alt="" />
+              <img src={bkash} className="w-8 h-8" alt="Bkash" />
               <span className="text-gray-700 text-sm">Bkash</span>
             </label>
 
             {/* Nagad */}
-            <label className="flex  gap-1 p-2  bg-gray-100 items-center border border-gray-400  rounded cursor-pointer hover:shadow-md transition">
+            <label className="flex gap-1 p-2 bg-gray-100 items-center border border-gray-400 rounded cursor-pointer hover:shadow-md transition">
               <input
                 type="radio"
                 value="Nagad"
                 {...register("paymentMethod")}
-                className="mb-2"
               />
-              <img src={nagad} className="w-7 h-7 mb-1" alt="" />
+              <img src={nagad} className="w-7 h-7" alt="Nagad" />
               <span className="text-gray-700 text-sm">Nagad</span>
             </label>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-primary text-white py-3  font-semibold mt-4 hover:bg-primary/90 transition"
+            className="w-full bg-primary text-white py-3 font-semibold mt-4 hover:bg-primary/90 transition"
           >
             Confirm Order
           </button>

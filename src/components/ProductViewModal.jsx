@@ -26,7 +26,7 @@ const ProductViewModal = ({ isOpen, onClose, order }) => {
             <div key={product._id} className="flex gap-3">
               <img
                 src={product?.images}
-                className="w-14 h-14 rounded-lg border object-cover"
+                className="w-16 h-16 rounded object-cover"
               />
               <div className="flex-1">
                 <p className="font-medium text-gray-800 text-sm">
@@ -36,8 +36,9 @@ const ProductViewModal = ({ isOpen, onClose, order }) => {
                   Quantity: {product?.quantity}
                 </p>
                 <p className="text-xs text-gray-700">
-                  Price: ৳ {Math.ceil(product.price)}
+                  Price: ৳ {Math.ceil(product?.price)}
                 </p>
+                <p className="text-xs text-gray-700">Size:{product?.sizes}</p>
               </div>
             </div>
           ))}

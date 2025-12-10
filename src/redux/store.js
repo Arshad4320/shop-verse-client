@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api/apiSlice";
-
+import orderReducer from "./features/order/orderSlice";
 // import courseSlice from "./features/course/courseSlice";
 import authReducer from "./features/auth/authSlice";
 import cartReducer from "../redux/features/cart/cart";
@@ -9,6 +9,7 @@ export const store = configureStore({
     // course: courseSlice,
     auth: authReducer,
     cart: cartReducer,
+    order: orderReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

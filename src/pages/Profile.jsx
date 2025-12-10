@@ -6,13 +6,23 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 
 const Profile = () => {
   const { data, isLoading } = useGetAllOrdersQuery();
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const { user } = useSelector((state) => state.auth);
+  const orderInfo = useSelector((state) => state.order);
 
   const orders =
-    data?.data?.filter((order) => order.user?._id === user?._id) || [];
+    data?.data?.filter((order) => {
+      if (user) {
+        return order.user?._id === user?._id;
+      } else if (orderInfo?.phone) {
+        return order.address.phone === orderInfo?.phone;
+      }
+      return false;
+    }) || [];
 
+  console.log(orders);
   const openModal = (order) => {
     setSelectedOrder(order);
     setIsOpen(true);
@@ -21,37 +31,50 @@ const Profile = () => {
   return (
     <div className="mx-auto max-w-5xl my-10 p-5 space-y-4">
       <div className="bg-white p-6 rounded-xl shadow-sm ">
-        <h1 className="text-xl sm:text-2xl font-semibold text-text">
-          Welcome, {user?.name}👋
+        <h1 className="text-xl sm:text-2xl text-center font-semibold text-text">
+          Welcome, {user?.name || orderInfo.name}👋
         </h1>
-        <p className="text-gray-600 mt-1">Manage your account and orders</p>
+        <p className="text-gray-600 text-center mt-1">
+          Manage your account and orders
+        </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 bg-white p-6 rounded-xl shadow-sm ">
+      {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 bg-white p-6 rounded-xl shadow-sm">
         <div>
           <p className="font-semibold text-gray-700">Name</p>
-          <p className="text-gray-600">{user?.name}</p>
-
-          <p className="font-semibold mt-4 text-gray-700">Email</p>
-          <p className="text-gray-600">{user?.email}</p>
+          <p className="text-gray-600">{user?.name || orderInfo?.name}</p>
         </div>
 
         <div>
-          <p className="font-semibold text-gray-700">City</p>
-          <p className="text-gray-600">{user?.address?.city}</p>
-
-          <p className="font-semibold mt-4 text-gray-700">Upozilla</p>
-          <p className="text-gray-600">{user?.address?.upozilla}</p>
+          <p className="font-semibold text-gray-700">Upozila</p>
+          <p className="text-gray-600">
+            {user?.address?.upozila || orderInfo?.upozila}
+          </p>
+        </div>
+        <div>
+          <p className="font-semibold  text-gray-700">Zilla</p>
+          <p className="text-gray-600">
+            {user?.address?.zilla || orderInfo?.zila}
+          </p>
         </div>
 
         <div>
           <p className="font-semibold text-gray-700">Phone</p>
-          <p className="text-gray-600">{user?.address?.phone}</p>
-
-          <p className="font-semibold mt-4 text-gray-700">User Type</p>
-          <p className="text-gray-600">{user?.userType}</p>
+          <p className="text-gray-600">
+            {user?.address?.phone || orderInfo?.phone}
+          </p>
         </div>
+
+        {/* Email (always last) */}
+      <div className="md:col-span-3">
+        {user?.email && (
+          <>
+            <p className="font-semibold mt-4 text-gray-700">Email</p>
+            <p className="text-gray-600">{user?.email}</p>
+          </>
+        )}
       </div>
+      {/* </div> */}
 
       <div className="bg-white p-6 rounded-xl shadow-sm ">
         <h2 className="text-xl font-semibold mb-4">Your Orders</h2>

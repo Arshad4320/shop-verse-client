@@ -36,12 +36,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "profile",
-        element: (
-          <PrivetRoute>
-            {" "}
-            <Profile />
-          </PrivetRoute>
-        ),
+        element: <Profile />,
       },
       {
         path: "products",
@@ -49,11 +44,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "order",
-        element: (
-          <PrivetRoute>
-            <OrderPage />
-          </PrivetRoute>
-        ),
+        element: <OrderPage />,
       },
       {
         path: "success",

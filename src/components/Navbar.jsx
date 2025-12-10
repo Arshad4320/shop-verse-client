@@ -6,12 +6,14 @@ import { IoCartOutline } from "react-icons/io5";
 import { logOut } from "../redux/features/auth/authSlice";
 import LogoutButton from "./LogoutButton";
 import logo from "../assets/logo-2.png";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { totalQty, cartItems } = useSelector((state) => state.cart);
   const { user, token, isAuthenticated } = useSelector((state) => state.auth);
-
+  const orderInfo = useSelector((state) => state.order);
+  console.log(orderInfo);
   const routeLinks = (
     <>
       <Link
@@ -39,6 +41,16 @@ const Navbar = () => {
       </Link>
 
       {isAuthenticated && token && (
+        <Link
+          onClick={() => setIsOpen(false)}
+          to="/profile"
+          className="text-text hover:text-primary"
+        >
+          Profile
+        </Link>
+      )}
+
+      {!isAuthenticated && !token && orderInfo?.phone && (
         <Link
           onClick={() => setIsOpen(false)}
           to="/profile"

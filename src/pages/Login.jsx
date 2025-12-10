@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setCredential } from "../redux/features/auth/authSlice";
 import logo from "../assets/logo-2.png";
 import bg from "../assets/bg.avif";
+import { clearOrderInfo } from "../redux/features/order/orderSlice";
 
 const Login = () => {
   const [loginUser] = useLoginUserMutation();
@@ -24,7 +25,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const result = await loginUser(data).unwrap();
-
+      dispatch(clearOrderInfo());
       dispatch(
         setCredential({
           user: result?.data?.user,

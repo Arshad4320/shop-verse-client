@@ -2,12 +2,13 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { logOut } from "../redux/features/auth/authSlice";
+import { clearOrderInfo } from "../redux/features/order/orderSlice";
 
 const LogoutButton = ({ text }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
-    console.log("logout button");
+    dispatch(clearOrderInfo());
     dispatch(logOut());
     navigate("/");
   };

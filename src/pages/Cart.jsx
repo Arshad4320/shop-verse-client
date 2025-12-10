@@ -14,7 +14,7 @@ const Cart = () => {
   const { cartItems, totalPrice, totalQty } = useSelector(
     (state) => state.cart
   );
-  console.log(cartItems);
+
   const handleQuantity = (id, type) => {
     const item = cartItems.find((i) => i._id === id);
     if (!item) return;
