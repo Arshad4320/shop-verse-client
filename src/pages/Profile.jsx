@@ -66,14 +66,14 @@ const Profile = () => {
         </div>
 
         {/* Email (always last) */}
-      <div className="md:col-span-3">
+      {/* <div className="md:col-span-3">
         {user?.email && (
           <>
             <p className="font-semibold mt-4 text-gray-700">Email</p>
             <p className="text-gray-600">{user?.email}</p>
           </>
         )}
-      </div>
+      </div> */}
       {/* </div> */}
 
       <div className="bg-white p-6 rounded-xl shadow-sm ">
@@ -101,21 +101,13 @@ const Profile = () => {
                     <p className="text-sm text-gray-600">
                       Customer:{" "}
                       <span className="font-medium">
-                        {order?.address?.name?.trim()
-                          ? order.address.name
-                          : user?.name}
+                        {order?.address?.name?.trim() || orderInfo?.name}
                       </span>
                     </p>
 
                     <p className="text-sm text-gray-600">
-                      Address:{" "}
-                      {order?.address?.city
-                        ? order.address.city
-                        : user?.address?.city}
-                      ,{" "}
-                      {order?.address?.upozilla
-                        ? order.address.upozilla
-                        : user?.address?.upozilla}
+                      Address: {order.address.upozila || orderInfo?.upozila},{" "}
+                      {order.address.upozilla || orderInfo?.zila}
                     </p>
 
                     <p className="text-sm text-gray-600">

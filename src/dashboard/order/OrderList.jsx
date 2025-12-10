@@ -1,166 +1,183 @@
 import React, { useEffect, useState } from "react";
 import {
   useDeleteOrderMutation,
-  useGetAllOrdersQuery,
   useGetQueryOrderQuery,
 } from "../../redux/features/order/order";
-import { FaBangladeshiTakaSign, FaRegEyeSlash } from "react-icons/fa6";
-import ProductViewModal from "../../components/ProductViewModal";
+import { FaRegEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import ProductViewModal from "../../components/ProductViewModal";
 import { toast } from "react-toastify";
+
 const OrderList = () => {
   const [deleteItem] = useDeleteOrderMutation();
   const [page, setPage] = useState(1);
-  // const { data: order } = useGetAllOrdersQuery();
-
   const [search, setSearch] = useState("");
+
   const {
     data: orders,
     isLoading,
     isError,
-  } = useGetQueryOrderQuery({ page, search });
-
+  } = useGetQueryOrderQuery({
+    page,
+    search,
+  });
+  console.log(orders?.data);
   const totalPage = orders?.data?.meta?.totalPage;
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
+
   const openModal = (order) => {
     setSelectedOrder(order);
     setIsOpen(true);
   };
 
-  const handleDelete = async (item) => {
+  const handleDelete = async (id) => {
     try {
-      const result = await deleteItem(item).unwrap();
+      const result = await deleteItem(id).unwrap();
       toast.success(result?.message);
     } catch (err) {
       console.log(err);
     }
   };
-  if (isLoading) {
-    return <p>Loading orders...</p>;
-  }
 
-  if (isError) {
-    return <p>Something went wrong while fetching orders.</p>;
-  }
+  if (isLoading) return <p>Loading orders...</p>;
+  if (isError) return <p>Something went wrong!</p>;
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm ">
-      <h2 className="text-xl font-semibold mb-4">Order List</h2>
-      <div className="my-4">
-        <input
-          type="text"
-          placeholder="Find order to phone or name"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
-          }}
-          className="w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none"
-        />
+    <div className="bg-white p-6 rounded-xl shadow-md">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">Orders List</h2>
       </div>
-      {orders?.data?.result?.length > 0 ? (
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {orders?.data?.result?.map((order, index) => (
-            <div key={index} className=" rounded-lg p-5 shadow bg-gray-50">
-              <div className="flex flex-col sm:flex-row space-y-4  sm:justify-between items-start">
-                {/* Order Info */}
-                <div className="space-y-1">
-                  <p className="font-semibold text-gray-800">
-                    Order {order._id.slice(0, 6)}
-                  </p>
 
-                  <p className="text-sm text-gray-600">
-                    Items:{" "}
-                    <span className="font-medium">{order.item.length}</span>
-                  </p>
+      {/* Search */}
+      <input
+        type="text"
+        placeholder="Search by phone or customer name"
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setPage(1);
+        }}
+        className="w-full border p-2 rounded border-primary mb-5"
+      />
 
-                  <p className="text-sm text-gray-600">
-                    Customer:{" "}
-                    {order?.address.name
-                      ? order?.address.name
-                      : order.user.name}
-                  </p>
+      {/* Table */}
+      <div className="overflow-x-auto bg-white shadow rounded">
+        <table className="min-w-full  border border-gray-300 text-left">
+          <thead className="bg-gray-200 text-center">
+            <tr>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                SL
+              </th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                Customer
+              </th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                Items
+              </th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                Phone
+              </th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                Address
+              </th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                Payment
+              </th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-700 border border-gray-300">
+                Action
+              </th>
+            </tr>
+          </thead>
 
-                  <p className="text-sm text-gray-600">
-                    Address: {order.address.city}, {order.address.upozilla}
-                  </p>
+          <tbody>
+            {orders?.data?.result?.map((order, index) => (
+              <tr
+                key={index}
+                className="hover:bg-gray-50 border border-gray-300 text-center"
+              >
+                <td className="px-4 py-2 border border-gray-300">
+                  {(page - 1) * 10 + index + 1}
+                </td>
 
-                  <p className="text-sm text-gray-600">
-                    Phone:{" "}
-                    {order.address.phone
-                      ? order.address.phone
-                      : order?.user?.phone}
-                  </p>
+                <td className="px-4 py-2 border border-gray-300">
+                  {order?.address?.name || order?.user?.name}
+                </td>
 
-                  <p className="text-sm text-gray-600">
-                    Payment: {order.paymentMethod}{" "}
-                    <span
-                      className={`px-2 py-0.5 rounded text-white ml-1 text-xs
-                          ${
-                            order.paymentStatus === "Paid"
-                              ? "bg-green-600"
-                              : "bg-yellow-600"
-                          }`}
-                    >
-                      {order.paymentStatus}
-                    </span>
-                  </p>
-                </div>
+                <td className="px-4 py-2 border border-gray-300">
+                  {order?.item?.length}
+                </td>
 
-                {/* View Button */}
-                <div>
+                <td className="px-4 py-2 border border-gray-300">
+                  {order?.address?.phone || order?.user?.phone}
+                </td>
+
+                <td className="px-4 py-2 border border-gray-300">
+                  {(order?.address?.upozilla || order?.user?.upozilla) +
+                    ", " +
+                    (order?.address?.zila || order?.user?.zila)}
+                </td>
+
+                <td className="px-4 py-2 border border-gray-300">
+                  <span
+                    className={`px-2 py-1 text-xs rounded text-white ${
+                      order.paymentStatus === "Paid"
+                        ? "bg-success"
+                        : "bg-warning"
+                    }`}
+                  >
+                    {order.paymentStatus}
+                  </span>
+                </td>
+
+                <td className=" py-2 flex justify-center items-center gap-2 ">
                   <button
-                    onClick={() => {
-                      handleDelete(order?._id);
-                    }}
-                    className="text-danger text-2xl"
+                    onClick={() => openModal(order)}
+                    className="text-purple-600 text-xl hover:text-purple-800"
+                  >
+                    <FaRegEye />
+                  </button>
+
+                  <button
+                    onClick={() => handleDelete(order?._id)}
+                    className="text-red-600 text-xl hover:text-red-800"
                   >
                     <MdDelete />
                   </button>
-                  <button
-                    onClick={() => openModal(order)}
-                    className="px-2 py-1  text-primary text-2xl rounded-md hover:text-purple-700 transition"
-                  >
-                    <FaRegEyeSlash />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-600">No orders found</p>
-      )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <div className="flex justify-center items-center gap-4 my-8 f">
+      {/* Pagination */}
+      <div className="flex justify-center items-center gap-4 mt-6">
         <button
           disabled={page === 1}
-          onClick={() => {
-            setPage(page - 1);
-          }}
-          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
+          onClick={() => setPage(page - 1)}
+          className="px-4 py-1 bg-primary text-white rounded disabled:opacity-50"
         >
           Prev
         </button>
 
-        <span className="font-semibold bg-primary text-white px-3 py-1">
-          {page}
-        </span>
+        <span className="px-4 py-1 bg-primary text-white rounded">{page}</span>
 
         <button
           disabled={page === totalPage}
-          onClick={() => {
-            setPage(page + 1);
-          }}
-          className=" disabled:opacity-50 font-semibold bg-primary text-white px-3 py-1"
+          onClick={() => setPage(page + 1)}
+          className="px-4 py-1 bg-primary text-white rounded disabled:opacity-50"
         >
           Next
         </button>
       </div>
+
+      {/* Modal */}
       <ProductViewModal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
