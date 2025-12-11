@@ -9,11 +9,12 @@ import DeleteModal from "./../../components/DeleteModal";
 import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { Loader } from "../../components/Loader";
 const ProductList = () => {
   const [page, setPage] = useState(1);
-  const { data } = useQueryProductsQuery({ page });
+  const { data, isLoading } = useQueryProductsQuery({ page });
   const totalPage = data?.data?.meta?.totalPage;
-  const [deleteProduct, { isLoading }] = useDeleteProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
@@ -34,7 +35,7 @@ const ProductList = () => {
       toast.error(err?.data?.message || "Something went wrong");
     }
   };
-
+  if (isLoading) return <Loader />;
   if (!data?.data || data?.data.length === 0) {
     return (
       <Link to="/dashboard/add-product" className="text-primary underline">

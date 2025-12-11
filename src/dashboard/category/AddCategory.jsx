@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { useCreateCategoryMutation } from "../../redux/features/category/categoryApi";
 import { toast } from "react-toastify";
+import { Loader } from "../../components/Loader";
 
 const AddCategory = () => {
   const [createCategory, { isLoading, isSuccess, isError }] =
@@ -34,7 +35,7 @@ const AddCategory = () => {
       toast.error(err?.message || "Failed to create category");
     }
   };
-
+  if (isLoading) return <Loader />;
   const inputClass =
     "w-full border border-primary p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none text-text";
 

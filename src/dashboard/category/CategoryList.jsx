@@ -6,10 +6,11 @@ import {
 import { Link } from "react-router";
 import DeleteModal from "../../components/DeleteModal";
 import { toast } from "react-toastify";
+import { Loader } from "../../components/Loader";
 
 const CategoryList = () => {
-  const { data } = useGetCategoryQuery();
-  const [deleteCategory, { isLoading }] = useDeleteCategoryMutation();
+  const { data, isLoading } = useGetCategoryQuery();
+  const [deleteCategory] = useDeleteCategoryMutation();
   // const mappingData = data?.data?.map((item) => item._id);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ const CategoryList = () => {
       toast.error(err?.data?.message || "Something went wrong");
     }
   };
-
+  if (isLoading) return <Loader />;
   if (!data?.data || data?.data.length === 0) {
     return (
       <Link to="/dashboard/add-category" className="text-primary underline">

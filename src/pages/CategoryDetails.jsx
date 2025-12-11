@@ -16,16 +16,23 @@ const CategoryDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [filteredData]);
   return (
-    <div className="max-w-7xl mx-auto py-8">
+    <div className="max-w-7xl mx-auto py-8 px-4">
       {!filteredData || filteredData.length === 0 ? (
         <>
-          {" "}
-          <p className="flex items-center h-[350px] justify-center  text-primary text-2xl md:text-3xl font-bold">
-            Products not found! This category is empty.
+          <div className="flex flex-col justify-center items-center py-32 text-center">
+            {" "}
+            <h2 className="text-xl text-primary font-medium  uppercase ">
+              Products not found! This category is empty.{" "}
+              <Link to="/" className="underline">
+                Back to home
+              </Link>
+            </h2>
+          </div>{" "}
+          {/* <p className="flex items-center uppercase py-32 justify-center  text-primary text-xl sm:text-xl md:text-3xl font-medium">
             <Link className="underline" to="/">
-              Back to home
+              Products not found! This category is empty. Back to home
             </Link>
-          </p>
+          </p> */}
         </>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mx-6 lg:mx-0">

@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
+import { Loader } from "../../components/Loader";
 
 const UserList = () => {
   const { data, isLoading, isError } = useGetAllUserQuery();
@@ -7,11 +8,7 @@ const UserList = () => {
   const users = data?.data || [];
 
   if (isLoading) {
-    return (
-      <div className="p-10 text-center text-lg font-semibold">
-        Loading Users...
-      </div>
-    );
+    return <Loader />;
   }
 
   if (isError) {

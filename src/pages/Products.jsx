@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQueryProductsQuery } from "../redux/features/product/productApi";
 import Heading from "../components/Heading";
 import ProductCard from "../components/ProductCard";
+import { Loader } from "../components/Loader";
 
 const Products = () => {
   const [search, setSearch] = useState("");
@@ -10,11 +11,11 @@ const Products = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
-  const { data } = useQueryProductsQuery({ search, page, limit: 8 });
+  const { data, isLoading } = useQueryProductsQuery({ search, page, limit: 8 });
   const products = data?.data?.result || [];
 
   const totalPage = data?.data?.meta?.totalPage || 1;
-
+  if (isLoading) return <Loader />;
   return (
     <div className="max-w-7xl lg:mx-auto mx-4 ">
       <Heading text={"Products"} />

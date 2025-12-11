@@ -206,15 +206,13 @@ const Cart = () => {
       ) : (
         /* EMPTY CART */
         <div className="flex flex-col justify-center items-center py-32 text-center">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">
-            Your cart is empty!
+          {" "}
+          <h2 className="text-xl text-primary font-medium uppercase ">
+            Your cart is empty!{" "}
+            <Link to="/products" className=" underline">
+              GO TO SHOPPING{" "}
+            </Link>
           </h2>
-          <Link
-            to="/products"
-            className="px-6 py-3 bg-primary text-white rounded-md hover:bg-indigo-700 font-semibold"
-          >
-            GO TO SHOPPING
-          </Link>
         </div>
       )}
     </>

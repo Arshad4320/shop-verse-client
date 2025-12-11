@@ -10,6 +10,7 @@ import { useGetCategoryQuery } from "../redux/features/category/categoryApi";
 import CategoryCard from "../components/CategoryCard";
 import ProductCard from "./../components/ProductCard";
 import { addToCart } from "../redux/features/cart/cart";
+import { Loader } from "../components/Loader";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -35,7 +36,7 @@ const ProductDetails = () => {
     }
   }, [product]);
 
-  if (isLoading) return <p className="text-center mt-20">Loading...</p>;
+  if (isLoading) return <Loader />;
   if (isError)
     return (
       <p className="text-center mt-20 text-red-500">Something went wrong!</p>

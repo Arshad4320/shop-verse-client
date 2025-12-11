@@ -6,6 +6,7 @@ import {
   useUpdateCategoryMutation,
 } from "../../redux/features/category/categoryApi";
 import { toast } from "react-toastify";
+import { Loader } from "../../components/Loader";
 
 const EditCategory = () => {
   const { id } = useParams();
@@ -42,7 +43,7 @@ const EditCategory = () => {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader />;
 
   const inputClass =
     "w-full border border-accent p-2 rounded transition-all focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none text-text";

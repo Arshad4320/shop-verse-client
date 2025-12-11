@@ -10,13 +10,19 @@ import {
   Pie,
   Cell,
 } from "recharts";
-
+import { useGetAllOrdersQuery } from "../redux/features/order/order";
+import { useGetAllUserQuery } from "../redux/features/auth/authApi";
+import { useGetProductQuery } from "../redux/features/product/productApi";
+import { Loader } from "../components/Loader";
 const Dashboard = () => {
+  const { data: products, isLoading } = useGetProductQuery();
+  const { data: user } = useGetAllUserQuery();
+  const { data: order } = useGetAllOrdersQuery();
   // Bar Chart Data
   const barData = [
-    { name: "Users", value: 120 },
-    { name: "Products", value: 85 },
-    { name: "Orders", value: 50 },
+    { name: "Users", value: user?.data?.length },
+    { name: "Products", value: products?.data?.length },
+    { name: "Orders", value: order?.data?.length },
     { name: "Revenue", value: 10000 },
   ];
 
@@ -28,7 +34,7 @@ const Dashboard = () => {
   ];
 
   const COLORS = ["#22c55e", "#0ea5e9", "#f97316"];
-
+  if (isLoading) return <Loader />;
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Welcome to Dashboard</h2>
@@ -37,17 +43,17 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div className="p-5 bg-green-500 text-white shadow rounded-lg text-center">
           <h3 className="text-lg">Total Users</h3>
-          <p className="text-3xl font-bold">120</p>
+          <p className="text-3xl font-bold">{user?.data?.length}</p>
         </div>
 
         <div className="p-5 bg-blue-500 text-white shadow rounded-lg text-center">
           <h3 className="text-lg">Products</h3>
-          <p className="text-3xl font-bold">85</p>
+          <p className="text-3xl font-bold">{products?.data?.length}</p>
         </div>
 
         <div className="p-5 bg-orange-500 text-white shadow rounded-lg text-center">
           <h3 className="text-lg">Orders</h3>
-          <p className="text-3xl font-bold">50</p>
+          <p className="text-3xl font-bold">{order?.data?.length}</p>
         </div>
 
         <div className="p-5 bg-purple-600 text-white shadow rounded-lg text-center">

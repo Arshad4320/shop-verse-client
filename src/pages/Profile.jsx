@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useGetAllOrdersQuery } from "../redux/features/order/order";
 import ProductViewModal from "../components/ProductViewModal";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { Loader } from "../components/Loader";
 
 const Profile = () => {
   const { data, isLoading } = useGetAllOrdersQuery();
@@ -23,12 +24,11 @@ const Profile = () => {
       return false;
     }) || [];
 
-  console.log(orders);
   const openModal = (order) => {
     setSelectedOrder(order);
     setIsOpen(true);
   };
-
+  if (isLoading) return <Loader />;
   return (
     <div className="mx-auto max-w-5xl my-10 p-5 space-y-4">
       <div className="bg-white p-6 rounded-xl shadow-sm ">

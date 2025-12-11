@@ -8,7 +8,6 @@ import img3 from "../assets/electronics.jpg";
 import img4 from "../assets/man.jpg";
 import img5 from "../assets/women.jpg";
 import Button from "./Button";
-import SecondaryButton from "./SecondaryButton";
 import { Link } from "react-router";
 
 const HomeHeader = () => {
@@ -39,28 +38,26 @@ const HomeHeader = () => {
       text: "Elegant and stylish outfits for every occasion.",
     },
   ];
-  return (
-    <div className="w-full ">
-      {/* mt-[70px] navbar overlap fix (if navbar is fixed) */}
 
+  return (
+    <div className="w-full">
       <Carousel
-        className=""
         showArrows={true}
         autoPlay={true}
         infiniteLoop={true}
-        interval={2500}
+        interval={3000}
         showThumbs={false}
         showStatus={false}
         showIndicators={false}
+        dynamicHeight={false}
       >
         {slides.map((slide, index) => (
           <div key={index} className="relative">
             {/* Image */}
-
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full  max-h-[45vh] sm:max-h-[55vh] md:max-h-[75vh] object-cover object-center"
+              className="w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-[80vh] object-cover object-center"
               loading="lazy"
             />
 
@@ -77,7 +74,6 @@ const HomeHeader = () => {
                 {slide.text}
               </p>
 
-              {/* Responsive Buttons */}
               <Link
                 to="/products"
                 className="flex flex-row gap-3 mt-4 w-full max-w-xs md:max-w-sm mx-auto"

@@ -7,6 +7,7 @@ import { FaRegEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import ProductViewModal from "../../components/ProductViewModal";
 import { toast } from "react-toastify";
+import { Loader } from "../../components/Loader";
 
 const OrderList = () => {
   const [deleteItem] = useDeleteOrderMutation();
@@ -45,7 +46,7 @@ const OrderList = () => {
     }
   };
 
-  if (isLoading) return <p>Loading orders...</p>;
+  if (isLoading) return <Loader />;
   if (isError) return <p>Something went wrong!</p>;
 
   return (
