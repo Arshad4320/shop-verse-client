@@ -10,6 +10,7 @@ const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const orderInfo = useSelector((state) => state.order);
 
   const orders =

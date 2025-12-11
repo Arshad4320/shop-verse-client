@@ -13,7 +13,7 @@ const Navbar = () => {
   const { totalQty, cartItems } = useSelector((state) => state.cart);
   const { user, token, isAuthenticated } = useSelector((state) => state.auth);
   const orderInfo = useSelector((state) => state.order);
-  console.log(orderInfo);
+
   const routeLinks = (
     <>
       <Link

@@ -28,8 +28,8 @@ const OrderPage = () => {
         name: user?.name || "",
         email: user?.email || "",
         phone: user?.address?.phone || "",
-        upozila: "",
-        zila: "",
+        upozila: user?.address?.upozila || "",
+        zila: user?.address?.zila || "",
       },
       paymentMethod: "COD",
     },
@@ -52,7 +52,7 @@ const OrderPage = () => {
       };
 
       const result = await createOrder(orderData).unwrap();
-
+      console.log(result);
       // Save order info to redux for guest checkout
       if (result?.data?.address) {
         dispatch(
