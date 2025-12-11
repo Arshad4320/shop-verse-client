@@ -45,7 +45,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer relative duration-300 h-[330px] md:h-[420px] flex flex-col">
+    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer relative duration-300 h-[355px] md:h-[420px] flex flex-col">
       {/* Image */}
       <Link to={`/product/details/${_id}`} className="flex-1">
         <div className="w-full h-42 md:h-56 overflow-hidden">

@@ -118,7 +118,7 @@ const OrderList = () => {
                 </td>
 
                 <td className="px-4 py-2 border border-gray-300">
-                  {(order?.address?.upozilla || order?.user?.upozilla) +
+                  {(order?.address?.upozila || order?.user?.upozila) +
                     ", " +
                     (order?.address?.zila || order?.user?.zila)}
                 </td>
