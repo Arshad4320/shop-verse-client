@@ -90,6 +90,7 @@ js-cookie (Authentication & session handling)
 ✅ Production-ready UI & UX
 
 📌 Learning Summary (What I Learned from This Project)
+
 Building this e-commerce project significantly improved my understanding of real-world web application development.
 Before starting this project, many core features such as add to cart, order placement, pagination, and search were not fully clear to me, but implementing them practically helped me understand their complete workflow.
 I gained hands-on experience with state management, routing, authentication flow, and user–admin role-based access control.
