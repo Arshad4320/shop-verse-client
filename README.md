@@ -54,27 +54,8 @@ Category list displayed on the side
 
 Frontend
 
-React 19 ,Vite,Redux Toolkit,React Router v7,Tailwind CSS,React Hook Form,Recharts,React Icons,React Toastify,State & Utilities,Redux Toolkit  ,React Redux
+React 19 ,Vite,Redux Toolkit,React Router v7,Tailwind CSS,React Hook Form,Recharts,React Icons,React Toastify,State & Utilities,Redux Toolkit ,React Redux,js-cookie (Authentication & session handling)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-js-cookie (Authentication & session handling)
 
 🚀 Project Level
 
