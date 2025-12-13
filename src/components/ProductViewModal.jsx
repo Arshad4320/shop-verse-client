@@ -1,5 +1,4 @@
 const ProductViewModal = ({ isOpen, onClose, order }) => {
-  console.log(order);
   if (!isOpen || !order) return null;
 
   return (

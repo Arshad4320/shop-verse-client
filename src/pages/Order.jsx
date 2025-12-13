@@ -52,7 +52,7 @@ const OrderPage = () => {
       };
 
       const result = await createOrder(orderData).unwrap();
-      console.log(result);
+
       // Save order info to redux for guest checkout
       if (result?.data?.address) {
         dispatch(

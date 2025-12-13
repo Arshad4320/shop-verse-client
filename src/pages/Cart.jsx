@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
@@ -25,7 +25,9 @@ const Cart = () => {
 
     dispatch(updateQty({ id, qty: newQty }));
   };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [cartItems]);
   const handleCheckout = () => {
     if (cartItems.length === 0) return;
     navigate("/order", { state: { cartItems, totalPrice, totalQty } });

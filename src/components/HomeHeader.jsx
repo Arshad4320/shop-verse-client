@@ -46,6 +46,7 @@ const HomeHeader = () => {
         autoPlay={true}
         infiniteLoop={true}
         interval={3000}
+        transitionTime={1500}
         showThumbs={false}
         showStatus={false}
         showIndicators={false}
@@ -57,7 +58,7 @@ const HomeHeader = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="w-full h-[50vh] sm:h-[60vh] md:h-[75vh] lg:h-[80vh] object-cover object-center"
+              className="w-full h-[40vh] sm:h-[55vh] md:h-[60vh] lg:h-[70vh] object-cover object-center"
               loading="lazy"
             />
 

@@ -22,7 +22,7 @@ const OrderList = () => {
     page,
     search,
   });
-  console.log(orders?.data);
+
   const totalPage = orders?.data?.meta?.totalPage;
 
   useEffect(() => {

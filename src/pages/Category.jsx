@@ -6,6 +6,7 @@ import { Loader } from "../components/Loader";
 
 const Category = () => {
   const { data, isLoading } = useGetCategoryQuery();
+
   if (isLoading) return <Loader />;
   return (
     <div className="py-6">
