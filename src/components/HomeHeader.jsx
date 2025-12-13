@@ -80,7 +80,7 @@ const HomeHeader = () => {
                 className="flex flex-row gap-3 mt-4 w-full max-w-xs md:max-w-sm mx-auto"
               >
                 <Button text={" Shop Now"} />
-                <button className="w-full md:w-auto text-sm md:text-md px-3 sm:px-4 md:px-8 py-1 md:py-2 border border-white text-white rounded font-semibold hover:bg-primary hover:text-white transition hover:border-primary cursor-pointer">
+                <button className="w-full md:w-auto text-sm md:text-md px-3 sm:px-4 md:px-8 py-1.5  md:py-2 border border-white text-white rounded font-semibold hover:bg-primary hover:text-white transition hover:border-primary cursor-pointer">
                   Collections
                 </button>
               </Link>
