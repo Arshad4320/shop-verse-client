@@ -96,7 +96,7 @@ const ProductDetails = () => {
               />
             </div>
 
-            <div className="grid grid-cols-4 gap-3 ">
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 ">
               {product.images
                 .filter((img) => img !== mainImage || [])
                 .map((img, i) => (
