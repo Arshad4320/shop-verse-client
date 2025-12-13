@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useCreateUserMutation } from "../redux/features/auth/authApi";
 import { toast } from "react-toastify";
-import logo from "../assets/logo-2.png";
+import logo from "../assets/logo-3.png";
 import bg from "../assets/bg.avif";
 const Register = () => {
   const [createUser] = useCreateUserMutation();
@@ -48,17 +48,15 @@ const Register = () => {
   "
       >
         {/* Logo */}
-        <div className="w-28 md:w-36 mx-auto col-span-1 md:col-span-2">
+        <div className="w-48 md:w-60 mx-auto col-span-1 md:col-span-2">
           <Link to="/">
             <img className="w-full h-full" src={logo} />
           </Link>
         </div>
-
         {/* Title */}
         <h2 className="text-3xl col-span-1 md:col-span-2 text-white font-bold mt-4 mb-3 text-center drop-shadow-md">
           Register
         </h2>
-
         {/* Name */}
         <div>
           <label className="font-semibold mb-1 text-white/90">Name</label>
@@ -71,7 +69,6 @@ const Register = () => {
             <p className="text-danger text-sm">{errors.name.message}</p>
           )}
         </div>
-
         {/* Email */}
         <div>
           <label className="font-semibold mb-1 text-white/90">Email</label>
@@ -90,7 +87,6 @@ const Register = () => {
             <p className="text-danger text-sm">{errors.email.message}</p>
           )}
         </div>
-
         {/* Password */}
         <div>
           <label className="font-semibold mb-1 text-white/90">Password</label>
@@ -107,7 +103,6 @@ const Register = () => {
             <p className="text-danger text-sm">{errors.password.message}</p>
           )}
         </div>
-
         {/* Phone */}
         <div>
           <label className="font-semibold mb-1 text-white/90">Phone</label>
@@ -117,7 +112,6 @@ const Register = () => {
             placeholder="Phone Number"
           />
         </div>
-
         {/* Submit */}
         <div className="col-span-1 md:col-span-2 mt-2">
           <button

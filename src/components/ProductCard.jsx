@@ -45,9 +45,9 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer relative duration-300 h-[355px] md:h-[420px] flex flex-col">
+    <div className="bg-white shadow rounded-md overflow-hidden cursor-pointer relative duration-300 h-[335px] md:h-[410px] flex flex-col">
       {/* Image */}
-      <Link to={`/product/details/${_id}`} className="flex-1">
+      <Link className="flex-1" to={`/product/details/${_id}`}>
         <div className="w-full h-42 md:h-56 overflow-hidden">
           <img
             src={images[0]}
@@ -62,9 +62,9 @@ const ProductCard = ({ product }) => {
           </div>
         )}
 
-        {/* Content */}
-        <div className="p-3">
-          <h3 className="  text-[13px] md:text-[15px] font-semibold md:font-bold text-text text-center mb-2">
+        {/* content */}
+        <div className="p-2">
+          <h3 className="  text-[13px] md:text-[15px] font-semibold md:font-bold text-text text-center mb-1">
             {name}
           </h3>
 
@@ -73,7 +73,7 @@ const ProductCard = ({ product }) => {
               className={`${
                 discountPrice > 0 && discount > 0
                   ? "line-through text-text flex gap-1 items-center"
-                  : "flex gap-1 items-center text-success text-[13px] md:text-[15px] font-bold"
+                  : "flex gap-1 items-center text-success text-[14px] md:text-[15px] font-bold"
               }`}
             >
               <FaBangladeshiTakaSign />{" "}
@@ -81,7 +81,7 @@ const ProductCard = ({ product }) => {
             </span>
 
             {discountPrice > 0 && discount > 0 && (
-              <span className="flex gap-1 items-center text-success  text-[13px] md:text-[15px] font-bold">
+              <span className="flex gap-1 items-center text-success  text-[14px] md:text-[15px] font-bold">
                 <FaBangladeshiTakaSign /> {Math.ceil(discountPrice)}
               </span>
             )}
@@ -90,7 +90,7 @@ const ProductCard = ({ product }) => {
       </Link>
 
       {/* Bottom Buttons */}
-      <div className="p-4 pt-0 flex flex-col gap-2">
+      <div className="p-2 md:p-4 pt-0 flex flex-col gap-2">
         <Button onClick={handleCheckout} text="Buy Now" />
 
         <SecondaryButton onClick={handleAddToCart} text="Add To Cart" />

@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useLoginUserMutation } from "../redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
 import { setCredential } from "../redux/features/auth/authSlice";
-import logo from "../assets/logo-2.png";
+import logo from "../assets/logo-3.png";
 import bg from "../assets/bg.avif";
 import { clearOrderInfo } from "../redux/features/order/orderSlice";
 
@@ -59,7 +59,7 @@ const Login = () => {
                    border border-white/20"
       >
         {/* Logo */}
-        <div className="w-28 md:w-36 mx-auto">
+        <div className="w-48 md:w-60 mx-auto">
           <Link to="/">
             <img className="w-full h-full object-contain" src={logo} />
           </Link>

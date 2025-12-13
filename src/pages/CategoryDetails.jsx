@@ -16,7 +16,7 @@ const CategoryDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [filteredData]);
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4">
+    <div className="max-w-7xl mx-auto py-8 ">
       {!filteredData || filteredData.length === 0 ? (
         <>
           <div className="flex flex-col justify-center items-center py-32 text-center">
@@ -35,7 +35,7 @@ const CategoryDetails = () => {
           </p> */}
         </>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mx-6 lg:mx-0">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 mx-4 lg:mx-0">
           {filteredData.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
