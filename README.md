@@ -51,31 +51,28 @@ Category list displayed on the side
 ⏳ Loading indicators for async operations
 
 🧰 Tech Stack
+
 Frontend
 
-React 19
+React 19 ,Vite,Redux Toolkit,React Router v7,Tailwind CSS,React Hook Form,Recharts,React Icons,React Toastify,State & Utilities,Redux Toolkit  ,React Redux
 
-Vite
 
-Redux Toolkit
 
-React Router v7
 
-Tailwind CSS
 
-React Hook Form
 
-Recharts
 
-React Icons
 
-React Toastify
 
-State & Utilities
 
-Redux Toolkit
 
-React Redux
+
+
+
+
+
+
+
 
 js-cookie (Authentication & session handling)
 
