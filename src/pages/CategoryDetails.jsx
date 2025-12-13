@@ -3,10 +3,11 @@ import { useGetSingleCategoryQuery } from "../redux/features/category/categoryAp
 import { Link, useParams } from "react-router";
 import { useGetProductQuery } from "../redux/features/product/productApi";
 import ProductCard from "../components/ProductCard";
+import { Loader } from "./../components/Loader";
 
 const CategoryDetails = () => {
   const { id } = useParams();
-  const { data: category } = useGetSingleCategoryQuery(id);
+  const { data: category, isLoading } = useGetSingleCategoryQuery(id);
   const { data: products } = useGetProductQuery();
 
   const filteredData = products?.data?.filter(
@@ -15,6 +16,7 @@ const CategoryDetails = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [filteredData]);
+  if (isLoading) return <Loader />;
   return (
     <div className="max-w-7xl mx-auto py-8 ">
       {!filteredData || filteredData.length === 0 ? (
