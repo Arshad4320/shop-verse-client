@@ -119,14 +119,14 @@ const Cart = () => {
                       <div>
                         {/* PRICE */}
                         <div className="flex items-center gap-1 mt-2 text-text font-medium">
-                          <span className="text-sm text-gray-500">Price:</span>
-                          <FaBangladeshiTakaSign size={14} /> {price}
+                          <span className="text-sm text-gray-500">Price:</span>৳{" "}
+                          {price}
                         </div>
 
                         {/* TOTAL */}
                         <div className="flex items-center gap-1 text-gray-900 font-medium">
-                          <span className="text-sm text-gray-500">Total:</span>
-                          <FaBangladeshiTakaSign size={14} /> {subtotal}
+                          <span className="text-sm text-gray-500">Total:</span>৳{" "}
+                          {subtotal}
                         </div>
                       </div>
                     </div>
@@ -163,12 +163,12 @@ const Cart = () => {
 
                 {/* PRICE (DESKTOP) */}
                 <div className="hidden md:flex col-span-2 items-center justify-center text-text font-semibold">
-                  <FaBangladeshiTakaSign /> {price}
+                  ৳ {price}
                 </div>
 
                 {/* TOTAL (DESKTOP) */}
                 <div className="hidden md:flex col-span-2 items-center justify-end text-gray-900 font-semibold">
-                  <FaBangladeshiTakaSign /> {subtotal.toFixed(2)}
+                  ৳ {subtotal.toFixed(2)}
                 </div>
 
                 {/* ACTION (DESKTOP) */}
@@ -190,8 +190,7 @@ const Cart = () => {
               <p className="text-[18px] font-semibold text-text flex  justify-between md:justify-end items-center gap-1 mb-4">
                 Sub Total:
                 <div className="flex items-center gap-1">
-                  <FaBangladeshiTakaSign />
-                  {totalPrice.toFixed(2)}
+                  ৳ {totalPrice.toFixed(2)}
                 </div>
               </p>
 

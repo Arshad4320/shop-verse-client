@@ -76,13 +76,12 @@ const ProductCard = ({ product }) => {
                   : "flex gap-1 items-center text-success text-[14px] md:text-[15px] font-bold"
               }`}
             >
-              <FaBangladeshiTakaSign />{" "}
-              {discountPrice ? discountPrice : Math.ceil(price)}
+              ৳ {discountPrice ? discountPrice : Math.ceil(price)}
             </span>
 
             {discountPrice > 0 && discount > 0 && (
               <span className="flex gap-1 items-center text-success  text-[14px] md:text-[15px] font-bold">
-                <FaBangladeshiTakaSign /> {Math.ceil(discountPrice)}
+                ৳ {Math.ceil(discountPrice)}
               </span>
             )}
           </div>
