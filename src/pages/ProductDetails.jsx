@@ -193,7 +193,7 @@ const ProductDetails = () => {
               <Button onClick={handleAddToCart} text="Add To Cart" />
               <button
                 onClick={handleCheckout}
-                className=" w-full  text-[12px] sm:text-sm md:text-md flex items-center justify-center px-3 sm:px-4 md:px-6 py-2  md:py-2.5 bg-success  text-white  font-semibold cursor-pointer   hover:bg-green-700 gap-2 "
+                className=" w-full  text-[12px] sm:text-sm md:text-md flex items-center justify-center px-3 sm:px-4 md:px-6 py-2  md:py-2.5 bg-success  text-white  font-semibold cursor-pointer rounded  hover:bg-green-700 gap-2 "
               >
                 Buy Now
               </button>
