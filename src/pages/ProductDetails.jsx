@@ -96,12 +96,12 @@ const ProductDetails = () => {
               />
             </div>
 
-            <div className="flex ">
+            <div className="grid grid-cols-4 gap-3 ">
               {product.images
                 .filter((img) => img !== mainImage || [])
                 .map((img, i) => (
                   <img
-                    className={`w-20 h-20 mr-2.5 sm:w-[110px] sm:h-[110] object-cover rounded cursor-pointer border ${
+                    className={` object-cover rounded cursor-pointer border ${
                       mainImage === img ? "border-primary" : "border-gray-300"
                     } transition-transform duration-200 hover:scale-105`}
                     src={img}
