@@ -83,7 +83,7 @@ const OrderPage = () => {
 
   return (
     <div className="max-w-7xl mx-auto min-h-screen">
-      <h1 className="text-3xl font-bold text-text py-10 text-center md:text-left">
+      <h1 className="text-3xl font-bold text-text py-6 text-center md:text-left">
         Checkout
       </h1>
 

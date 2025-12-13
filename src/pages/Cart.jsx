@@ -8,6 +8,7 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { IoCloseSharp } from "react-icons/io5";
+import Button from "../components/Button";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -36,10 +37,10 @@ const Cart = () => {
   return (
     <>
       {cartItems.length > 0 ? (
-        <div className="max-w-7xl mx-auto mt-20 px-3 md:px-4 lg:px-6">
+        <div className="max-w-7xl mx-auto mt-20 px-3 md:px-6">
           {/* Title */}
-          <div className="flex justify-between">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+          <div className="flex justify-between py-7">
+            <h1 className="text-2xl md:text-3xl font-bold text-text ">
               Shopping Cart
             </h1>
             <button
@@ -184,24 +185,17 @@ const Cart = () => {
           })}
 
           {/* Summary */}
-          <div className="flex justify-end  mt-7 ">
+          <div className="flex justify-end mt-2">
             <div className="text-right w-full md:w-auto">
-              <p className="text-lg font-semibold text-text flex justify-end items-center gap-1">
+              <p className="text-[18px] font-semibold text-text flex  justify-between md:justify-end items-center gap-1 mb-4">
                 Sub Total:
-                <FaBangladeshiTakaSign />
-                {totalPrice.toFixed(2)}
+                <div className="flex items-center gap-1">
+                  <FaBangladeshiTakaSign />
+                  {totalPrice.toFixed(2)}
+                </div>
               </p>
 
-              <p className="text-xs mt-1 text-gray-500">
-                Excl. Tax and Delivery charge
-              </p>
-
-              <button
-                onClick={handleCheckout}
-                className="mt-3 px-6 py-3 w-auto bg-primary text-white rounded-md hover:bg-indigo-700 font-semibold"
-              >
-                GO TO CHECKOUT
-              </button>
+              <Button onClick={handleCheckout} text="GO TO CHECKOUT" />
             </div>
           </div>
         </div>
