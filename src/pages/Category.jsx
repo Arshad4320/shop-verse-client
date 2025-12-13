@@ -9,12 +9,12 @@ const Category = () => {
 
   if (isLoading) return <Loader />;
   return (
-    <div className="py-6">
+    <div className="py-4">
       {data?.data?.length > 0 && (
         <>
           <Heading text={"Categories"} />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4  mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4  mt-4">
             {data?.data?.map((item) => (
               <CategoryCard key={item._id} item={item} />
             ))}
