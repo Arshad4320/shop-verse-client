@@ -25,7 +25,7 @@ const Register = () => {
       reset();
     } catch (err) {
       console.log(err);
-      toast.error(err.message || "something went wrong");
+      toast.error(err.data.message || "something went wrong");
     }
   };
 
@@ -107,10 +107,16 @@ const Register = () => {
         <div>
           <label className="font-semibold mb-1 text-white/90">Phone</label>
           <input
-            {...register("address.phone")}
+            {...register("phone.."),{ required: "Phone is required",pattern: {
+                value: /^(01[3-9]\d{8})$/,
+                message: "Please enter a valid Bangladeshi phone number",
+              },}}
             className={inputClass}
             placeholder="Phone Number"
-          />
+          />{" "}
+          {errors.password && (
+            <p className="text-danger text-sm">{errors.phone.message}</p>
+          )}
         </div>
         {/* Submit */}
         <div className="col-span-1 md:col-span-2 mt-2">
