@@ -107,14 +107,17 @@ const Register = () => {
         <div>
           <label className="font-semibold mb-1 text-white/90">Phone</label>
           <input
-            {...register("phone.."),{ required: "Phone is required",pattern: {
+            {...register("phone", {
+              required: "Phone is required",
+              pattern: {
                 value: /^(01[3-9]\d{8})$/,
                 message: "Please enter a valid Bangladeshi phone number",
-              },}}
+              },
+            })}
             className={inputClass}
             placeholder="Phone Number"
-          />{" "}
-          {errors.password && (
+          />
+          {errors.phone && (
             <p className="text-danger text-sm">{errors.phone.message}</p>
           )}
         </div>
