@@ -3,8 +3,8 @@ import Cookies from "js-cookie";
 
 // const BASE_URL = "https://shop-verse-server.vercel.app/api/v1";
 // const BASE_URL = "https://shopverse-server-8q9e.onrender.com/api/v1";
-// const BASE_URL = "https://shopverse-server-production.up.railway.app/api/v1";
-const BASE_URL = "http://localhost:5000/api/v1/";
+const BASE_URL = "https://shopverse-server-production.up.railway.app/api/v1";
+// const BASE_URL = "http://localhost:5000/api/v1/";
 
 const customBaseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
