@@ -24,6 +24,7 @@ import OrderPage from "../pages/Order";
 // import Electronics from "../components/categoryProduct/Electronics";
 import UserList from "../dashboard/user/UserList";
 import OrderList from "../dashboard/order/OrderList";
+import EditUser from "../dashboard/user/EditUser";
 
 const routes = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const routes = createBrowserRouter([
       {
         path: "users",
         element: <UserList />,
+      },
+      {
+        path: "edit-user/:id",
+        element: <EditUser />,
       },
       {
         path: "orders",

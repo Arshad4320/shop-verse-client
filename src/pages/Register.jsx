@@ -19,7 +19,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const result = await createUser(data).unwrap();
-      console.log(result);
+
       toast.success(result.message || "user created successfully");
       navigate(location?.state || "/");
       reset();

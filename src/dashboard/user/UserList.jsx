@@ -1,12 +1,40 @@
-import React from "react";
-import { useGetAllUserQuery } from "../../redux/features/auth/authApi";
+import React, { useState } from "react";
+import {
+  useDeleteUserMutation,
+  useGetAllUserQuery,
+} from "../../redux/features/auth/authApi";
 import { Loader } from "../../components/Loader";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { Link } from "react-router";
+import DeleteModal from "../../components/DeleteModal";
+import { toast } from "react-toastify";
 
 const UserList = () => {
+  //  useUpdateUserMutation,
+  //   useDeleteUserMutation,
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(null);
+
   const { data, isLoading, isError } = useGetAllUserQuery();
+  const [deleteUser] = useDeleteUserMutation();
 
   const users = data?.data || [];
+  const openModal = (item) => {
+    setDeleteItem(item);
+    setIsOpen(true);
+  };
 
+  const confirmDelete = async () => {
+    try {
+      const result = await deleteUser(deleteItem).unwrap();
+      toast.success(result.message);
+      setIsOpen(false);
+    } catch (err) {
+      toast.error(err?.data?.message || "Something went wrong");
+    }
+  };
   if (isLoading) {
     return <Loader />;
   }
@@ -35,6 +63,8 @@ const UserList = () => {
                 <th className="text-left p-3 border-b">Email</th>
                 <th className="text-left p-3 border-b">Role</th>
                 <th className="text-left p-3 border-b">Status</th>
+                <th className="text-left p-3 border-b">Change Type</th>
+                <th className="text-center p-3 border-b">Actions</th>
               </tr>
             </thead>
 
@@ -73,12 +103,35 @@ const UserList = () => {
                       </span>
                     )}
                   </td>
+                  <td className="p-3    cursor-pointer">
+                    <Link to={`/dashboard/edit-user/${user?._id}`}>
+                      <button className="  px-2 py-1 rounded text-white bg-primary text-sm">
+                        {/* <FaEdit size={24} /> */}
+                        Make Admin
+                      </button>
+                    </Link>
+                  </td>
+                  <td className=" text-center">
+                    <button
+                      onClick={() => openModal(user?._id)}
+                      className=" py-1  text-danger cursor-pointer"
+                    >
+                      <MdDelete size={24} />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
+      <DeleteModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={confirmDelete}
+        title="Delete Confirmation"
+        message={`Are you sure you want to delete "${deleteItem}"?`}
+      />
     </div>
   );
 };

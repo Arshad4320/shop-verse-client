@@ -7,6 +7,8 @@ import { Link } from "react-router";
 import DeleteModal from "../../components/DeleteModal";
 import { toast } from "react-toastify";
 import { Loader } from "../../components/Loader";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 const CategoryList = () => {
   const { data, isLoading } = useGetCategoryQuery();
@@ -89,16 +91,16 @@ const CategoryList = () => {
                 </td>
                 <td className="space-x-2 ">
                   <Link to={`/dashboard/edit-category/${item._id}`}>
-                    <button className="px-3 py-1 text-sm bg-primary text-white rounded hover:bg-purple-700">
-                      Update
+                    <button className="   text-primary cursor-pointer">
+                      <FaEdit size={24} />
                     </button>
                   </Link>
 
                   <button
                     onClick={() => openModal(item?._id)}
-                    className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+                    className="   text-danger cursor-pointer"
                   >
-                    Delete
+                    <MdDelete size={24} />
                   </button>
                 </td>
               </tr>

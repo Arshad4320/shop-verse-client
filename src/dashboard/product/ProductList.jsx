@@ -18,6 +18,7 @@ const ProductList = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState(null);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [page]);
@@ -119,18 +120,19 @@ const ProductList = () => {
                 {/* <td className="px-4 py-2 text-gray-600 text-sm border border-gray-300">
                   {item.description.slice(0, 80) + "...."}
                 </td> */}
-                <td className=" py-2 flex justify-center items-center gap-2 ">
-                  <Link to={`/dashboard/edit-product/${item._id}`}>
-                    <button className=" text-2xl  text-primary cursor-pointer">
-                      <FaEdit />
-                    </button>
+                <td className=" py-2 flex justify-center items-center gap-1 ">
+                  <Link
+                    className="   text-primary cursor-pointer"
+                    to={`/dashboard/edit-product/${item._id}`}
+                  >
+                    <FaEdit size={24} />
                   </Link>
 
                   <button
                     onClick={() => openModal(item._id)}
-                    className=" text-2xl  text-danger cursor-pointer"
+                    className="   text-danger cursor-pointer"
                   >
-                    <MdDelete />
+                    <MdDelete size={24} />
                   </button>
                 </td>
               </tr>
@@ -168,7 +170,7 @@ const ProductList = () => {
         onClose={() => setIsOpen(false)}
         onConfirm={confirmDelete}
         title="Delete Confirmation"
-        message={`Are you sure you want to delete "${deleteItem?.name}"?`}
+        message={`Are you sure you want to delete "${deleteItem}"?`}
       />
     </div>
   );
