@@ -99,7 +99,7 @@ const ProductList = () => {
                 <td className="px-4 py-2 border border-gray-300">{i + 1}</td>
                 <td className="px-4 py-2 border border-gray-300">
                   <img
-                    src={item?.images[i]}
+                    src={item?.images[0]}
                     alt="category"
                     className="h-10 w-10 rounded object-cover border"
                   />
