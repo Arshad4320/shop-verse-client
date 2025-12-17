@@ -8,7 +8,7 @@ const Bags = () => {
   const { data } = useGetProductQuery();
 
   const filteredData = data?.data?.filter(
-    (product) => product?.categoryId?.name === "Bags & Accessories"
+    (product) => product?.categoryId?.name === "Bags & Wallets"
   );
 
   return (
