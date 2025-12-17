@@ -9,6 +9,7 @@ import { addToCart } from "../redux/features/cart/cart";
 const ProductCard = ({ product }) => {
   // console.log(product);
   const { name, discount, price, images, _id, discountPrice, sizes } = product;
+  const hasDiscount = discountPrice && discountPrice < price;
 
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -67,8 +68,24 @@ const ProductCard = ({ product }) => {
           <h3 className="  text-[13px] md:text-[15px] font-semibold md:font-bold text-text text-center mb-1">
             {name}
           </h3>
-
           <div className="flex gap-2 justify-center items-center">
+            {hasDiscount ? (
+              <>
+                <p className="text-success font-bold text-[14px] md:text-[15px]">
+                  ৳ {Math.ceil(product.discountPrice)}
+                </p>
+                <p className="line-through text-gray-400 text-[14px] md:text-[15px]">
+                  ৳ {Math.ceil(product.price)}
+                </p>
+              </>
+            ) : (
+              <p className="text-success font-bold text-[14px] md:text-[15px]">
+                ৳ {Math.ceil(product.price)}
+              </p>
+            )}
+          </div>
+
+          {/* <div className="flex gap-2 justify-center items-center">
             <span
               className={`${
                 discountPrice > 0 && discount > 0
@@ -84,7 +101,7 @@ const ProductCard = ({ product }) => {
                 ৳ {Math.ceil(discountPrice)}
               </span>
             )}
-          </div>
+          </div> */}
         </div>
       </Link>
 

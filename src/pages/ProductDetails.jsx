@@ -101,7 +101,7 @@ const ProductDetails = () => {
                 .filter((img) => img !== mainImage || [])
                 .map((img, i) => (
                   <img
-                    className={` object-cover rounded cursor-pointer border ${
+                    className={` object-cover rounded cursor-pointer border h-20 w-full ${
                       mainImage === img ? "border-primary" : "border-gray-300"
                     } transition-transform duration-200 hover:scale-105`}
                     src={img}
@@ -173,19 +173,21 @@ const ProductDetails = () => {
               <p>
                 <span className="font-semibold">Tags:</span> {product?.tags}
               </p>
-              <span className="flex mt-3 gap-2">
-                {product?.sizes.map((s, i) => (
-                  <span
-                    className={`border  text-md px-2 cursor-pointer ${
-                      size === s && "border-2 border-primary  bg-gray-300"
-                    }`}
-                    onClick={() => setSize(s)}
-                    key={i}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </span>
+              {product?.sizes.length > 0 && (
+                <span className="flex mt-3 gap-2">
+                  {product?.sizes.map((s, i) => (
+                    <span
+                      className={`border  text-md px-2 cursor-pointer ${
+                        size === s && "border-2 border-primary  bg-gray-300"
+                      }`}
+                      onClick={() => setSize(s)}
+                      key={i}
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </span>
+              )}
             </div>
 
             {/* Buttons */}
